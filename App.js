@@ -20,15 +20,21 @@ const App = () => {
       setGame(newGameInstance);
     }
 
-    if(gameInstance.boardOfNextMove === -2)
-      alert(gameInstance.previousPlayer + ' WINS!');
-    else{
-      const newState = monteCarloTreeSearch(newGameInstance, 10);
-      const newGame = Game.fromState(newState); 
-      setGame(newGame);
-    }
-    
+    setTimeout(() => {
+      // Trigger AI move after a delay
+      AIMove();
+    }, 500); // 500 milliseconds delay as an example    
   }
+
+  const AIMove = async () => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    setGame(prevGame => {
+      const newState = monteCarloTreeSearch(prevGame, 10);
+      const newGame = Game.fromState(newState);
+      return newGame;
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
