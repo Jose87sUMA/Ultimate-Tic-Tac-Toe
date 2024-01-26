@@ -3,18 +3,19 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Cell from './Cell';
 
-const SmallBoard = ({ smallBoard, smallBoardIndex, winnerBoard, nextMoveHere, onPressCell }) => {
+const SmallBoard = (props) => {
   return (
-    winnerBoard[smallBoardIndex] === ' ' ?
+    props.winnerBoard[props.smallBoardIndex] === ' ' ?
     <View style={styles.smallBoard}>
       {[0, 1, 2].map((row) => (
         <View key={row} style={styles.rowOfCells}>
           {[0, 1, 2].map((col) => (
             <Cell
               key={row * 3 + col}
-              value={smallBoard[row * 3 + col]}
-              nextMoveHere={nextMoveHere}
-              onPressCell={() => onPressCell(smallBoardIndex, row * 3 + col)}
+              value={props.smallBoard[row * 3 + col]}
+              nextMoveHere={props.nextMoveHere}
+              onPressCell={() => props.onPressCell(props.smallBoardIndex, row * 3 + col)}
+              AITurn={props.AITurn}
             />
           ))}
         </View>
@@ -22,8 +23,8 @@ const SmallBoard = ({ smallBoard, smallBoardIndex, winnerBoard, nextMoveHere, on
     </View>:
     <View style={styles.finishedCell}>
         <Cell
-        key={smallBoardIndex}
-        value={winnerBoard[smallBoardIndex]}
+        key={props.smallBoardIndex}
+        value={props.winnerBoard[props.smallBoardIndex]}
         nextMoveHere={false}
         onPressCell={null}
         />

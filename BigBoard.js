@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import SmallBoard from './SmallBoard';
 
-const BigBoard = ({ bigBoard, winnerBoard, boardOfNextMove, onPressCell }) => {
+const BigBoard = (props) => {
   return (
     <View style={styles.bigBoard}>
       {[0, 1, 2].map((row) => (
@@ -11,11 +11,12 @@ const BigBoard = ({ bigBoard, winnerBoard, boardOfNextMove, onPressCell }) => {
           {[0, 1, 2].map((col) => (
             <SmallBoard
               key={row * 3 + col}
-              smallBoard={bigBoard[row * 3 + col]}
+              smallBoard={props.bigBoard[row * 3 + col]}
               smallBoardIndex={row * 3 + col}
-              winnerBoard={winnerBoard}
-              nextMoveHere={boardOfNextMove === row * 3 + col || boardOfNextMove === -1}
-              onPressCell={onPressCell}
+              winnerBoard={props.winnerBoard}
+              nextMoveHere={props.boardOfNextMove === row * 3 + col || props.boardOfNextMove === -1}
+              onPressCell={props.onPressCell}
+              AITurn={props.AITurn}
             />
           ))}
         </View>

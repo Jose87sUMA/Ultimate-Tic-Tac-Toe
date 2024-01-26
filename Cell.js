@@ -2,10 +2,10 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
-const Cell = ({ value, nextMoveHere, onPressCell }) => {
+const Cell = (props) => {
   return (
-    <TouchableOpacity style={[styles.cell, nextMoveHere ? styles.cellAvailable : null]} onPress={onPressCell}>
-      <Text style={styles.cellText}>{value}</Text>
+    <TouchableOpacity style={[styles.cell, props.nextMoveHere ? styles.cellAvailable : null]} onPress={props.onPressCell} disabled = {props.AITurn}>
+      <Text style={styles.cellText}>{props.value}</Text>
     </TouchableOpacity>
   );
 };

@@ -1,133 +1,151 @@
 // Game.js
-import React, { useState } from 'react';
-import { View, SafeAreaView, StyleSheet, Text, Alert} from 'react-native';
-import BigBoard from './BigBoard';
-import { Button } from 'react-native-paper';
-import Orientation from 'react-native-orientation-locker';
 
-const Game = () => {
-  const [bigBoard, setBoard] = useState(Array(9).fill(Array(9).fill(' ')));
-  const [winnerBoard, setWinnerBoard] = useState(Array(9).fill(' '));
-  const [boardOfNextMove, setBoardOfNextMove] = useState(-1);
-  const [currentPlayer, setCurrentPlayer] = useState('X');
-
-const onPressCell = (smallBoardIndex, pos) => {
-  console.log(`Cell pressed: smallBoardIndex=${smallBoardIndex}, pos=${pos}`);
-
-  if(smallBoardIndex === 0 && pos === 0) {
-    winnerBoard[0] = 'X';
+class Game {
+  constructor(AI) {
+    this.bigBoard = Array(9).fill(Array(9).fill(' '));
+    this.winnerBoard = Array(9).fill(' ');
+    this.boardOfNextMove = -1;
+    this.currentPlayer = 'X';
+    this.previousPlayer = 'O';
+    this.AISymbol = AI;
+    this.AITurn = AI === this.currentPlayer;
   }
 
-  if((boardOfNextMove !== -1 && boardOfNextMove !== smallBoardIndex) || boardOfNextMove === -2) {
-    return;
-  }
-  if (bigBoard[smallBoardIndex][pos] !== ' ') {
-    return;
-  }
-
-  // Create a copy of the bigBoard array
-  const newBigBoard = bigBoard.map(row => [...row]);
-
-  // Update the specific small board
-  newBigBoard[smallBoardIndex][pos] = currentPlayer;
-
-  if(checkWinnerBoard(newBigBoard[smallBoardIndex]) !== null) {
-    winnerBoard[smallBoardIndex] = currentPlayer;
+  static fromState(obj) {
+    const newGame = new Game(obj.AISymbol);
+    newGame.bigBoard = obj.bigBoard.map((smallBoard) => [...smallBoard]);
+    newGame.winnerBoard = [...obj.winnerBoard];
+    newGame.boardOfNextMove = obj.boardOfNextMove;
+    newGame.currentPlayer = obj.currentPlayer;
+    newGame.previousPlayer = obj.previousPlayer;
+    newGame.AITurn = obj.AITurn;
+    return newGame;
   }
 
-  if(!boardAvailable(newBigBoard[pos])) {
-    pos = -1;
+  boardAvailable(board) {
+    return board.includes(' ');
   }
 
-  if(checkWinnerBoard(winnerBoard) !== null) {
-    Alert.alert('', currentPlayer + ' WINS!',);
-    pos = -2;
-  }
-  
-  // Update the state with the modified bigBoard and switch players
-  setBoard(newBigBoard);
-  setWinnerBoard(winnerBoard);
-  setBoardOfNextMove(pos);
-  setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
-};
-
-const boardAvailable = (smallBoard) => {
-    // Otherwise, the board is not available
-    return smallBoard.includes(' ');
-}
-
-const checkWinnerBoard = (board) => {
-    // Check rows, columns, and diagonals for a winner
+  checkWinnerBoard(board) {
     for (let i = 0; i < 3; i++) {
-        
-      // Check rows
       if (
         board[i * 3] === board[i * 3 + 1] &&
         board[i * 3] === board[i * 3 + 2] &&
         board[i * 3] !== ' '
-      ) 
-      {
+      ) {
         return board.fill(board[i * 3]);
       }
-  
-      // Check columns
+
       if (
         board[i] === board[i + 3] &&
         board[i] === board[i + 6] &&
         board[i] !== ' '
-      ) 
-      {
+      ) {
         return board.fill(board[i]);
       }
     }
-  
-    // Check diagonals
+
     if (
       (board[0] === board[4] && board[0] === board[8] && board[0] !== ' ') ||
       (board[2] === board[4] && board[2] === board[6] && board[2] !== ' ')
-    ) 
-    {
+    ) {
       return board.fill(board[4]);
     }
-  
-    // No winner
+
     return null;
+  }
+
+  getLegalMoves() {
+
+    const legalMoves = [];
+    const smallBoard = this.boardOfNextMove;
+
+    if (smallBoard === -1) 
+    {
+      // If no small board restriction, all empty positions are legal moves
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+          if (this.bigBoard[i][j] === ' ') {
+            legalMoves.push({ smallBoard: i, pos: j });
+          }
+        }
+      }
+    }
+    else
+    {
+      for (let j = 0; j < 9; j++) {
+        if (this.bigBoard[smallBoard][j] === ' ') {
+          legalMoves.push({ smallBoard: smallBoard, pos: j });
+        }
+      }
+    }
+
+    return legalMoves;
+
+  }
+
+  makeMove(smallBoardIndex, pos) {
+
+    // CHECK RESTRICTIONS
+    if ((this.boardOfNextMove !== -1 && this.boardOfNextMove !== smallBoardIndex) || this.boardOfNextMove === -2) 
+    {
+      return false;
+    }
+
+    // CHECK AVAILABILITY
+    if (this.bigBoard[smallBoardIndex][pos] !== ' ') {
+      return false;
+    }
+
+    // MAKE MOVE
+    this.bigBoard[smallBoardIndex][pos] = this.currentPlayer;
+
+    // CHECK SMALL BOARD WINNER
+    if (this.checkWinnerBoard(this.bigBoard[smallBoardIndex]) !== null) {
+      this.winnerBoard[smallBoardIndex] = this.currentPlayer;
+    }
+
+    // SET NEW RESTRICTION
+    if (!this.boardAvailable(this.bigBoard[pos])) {
+      pos = -1;
+    }
+
+    // CHECK BIG BOARD WINNER
+    if (this.isTerminal()) {
+      pos = -2;
+    }
+
+    // UPDATE VALUES
+    this.boardOfNextMove = pos
+    this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+    this.previousPlayer = this.previousPlayer === 'X' ? 'O' : 'X';
+    this.AITurn = !this.AITurn;
+
+    return true;
+  }
+
+  isTerminal() {
+    return this.checkWinnerBoard(this.winnerBoard) !== null || this.bigBoard.every(smallBoard => !this.boardAvailable(smallBoard));
+  }
+
+  getWinner() {
+    return this.checkWinnerBoard(this.winnerBoard);
+  }
+
+  clone() {
+    const clonedBoard = this.bigBoard.map((smallBoard) => [...smallBoard]);
+    const clonedWinnerBoard = [...this.winnerBoard];
+    let newGame = new Game(this.AI);
+    newGame.bigBoard = clonedBoard;
+    newGame.winnerBoard = clonedWinnerBoard;
+    newGame.boardOfNextMove = this.boardOfNextMove;
+    newGame.currentPlayer = this.currentPlayer;
+    newGame.previousPlayer = this.previousPlayer;
+    newGame.AITurn = this.AITurn;
+    return newGame;
+  }
+
 }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Ultimate Tic-Tac-Toe</Text>
-      <BigBoard bigBoard={bigBoard} winnerBoard={winnerBoard} boardOfNextMove={boardOfNextMove} onPressCell={onPressCell} />
-      
-      <Button mode="contained" onPress={() => {
-        setBoard(Array(9).fill(Array(9).fill(' '))); 
-        setWinnerBoard(Array(9).fill(' ')); 
-        setBoardOfNextMove(-1); 
-        setCurrentPlayer('X');}}>Reset</Button>
-
-      <Button mode="contained" onPress={() => {
-        fillLeft = Array(9).fill(' ');
-        fillLeft[0] = 'X';
-        fillLeft[3] = 'O';
-        fillLeft[6] = 'X';
-        setWinnerBoard(fillLeft); 
-        }}>fill Left</Button>
-    </SafeAreaView> 
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-});
-
 export default Game;
+
