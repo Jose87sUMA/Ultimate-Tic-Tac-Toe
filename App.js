@@ -20,33 +20,13 @@ const App = () => {
       setGame(newGameInstance);
     }
 
-    if (gameInstance.boardOfNextMove === -2) {
+    if(gameInstance.boardOfNextMove === -2)
       alert(gameInstance.previousPlayer + ' WINS!');
-      return;
+    else{
+      const newState = monteCarloTreeSearch(newGameInstance, 10);
+      const newGame = Game.fromState(newState); 
+      setGame(newGame);
     }
-
-    setTimeout(() => {
-      // Trigger AI move after a delay
-      AIMove();
-    }, 500); // 500 milliseconds delay as an example
-
-    if (gameInstance.boardOfNextMove === -2) {
-      alert(gameInstance.previousPlayer + ' WINS!');
-      return;
-    }
-  }
-
-  const AIMove = async () => {
-     
-    // Simulate AI thinking by delaying the move
-    // You can adjust the delay based on your preference
-    // For example, you can use await new Promise(resolve => setTimeout(resolve, 1000));
-    const currentGameInstance = gameInstance.clone();
-
-    await new Promise(resolve => setTimeout(resolve, 500));
-    const newState = monteCarloTreeSearch(currentGameInstance, 10);
-    const newGame = Game.fromState(newState);
-    setGame(newGame);
     
   }
 

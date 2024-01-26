@@ -4,7 +4,7 @@ import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 const Cell = (props) => {
   return (
-    <TouchableOpacity style={[styles.cell, props.nextMoveHere ? styles.cellAvailable : null]} onPress={props.onPressCell} disabled = {props.AITurn}>
+    <TouchableOpacity style={[styles.cell, props.nextMoveHere ? styles.cellAvailable : null]} onPress={props.onPressCell} disabled = {props.AITurn || props.value !== ' ' || props.nextMoveHere}>
       <Text style={styles.cellText}>{props.value}</Text>
     </TouchableOpacity>
   );
