@@ -40,7 +40,7 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Ultimate Tic-Tac-Toe</Text>
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
-      
+      <Text style={styles.title}>Menu</Text>
       
     </SafeAreaView> 
   );
