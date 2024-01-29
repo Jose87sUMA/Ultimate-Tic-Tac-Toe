@@ -1,11 +1,12 @@
-import React from 'react';
+import {React} from 'react';
 import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button } from 'react-native';
 
 import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
 import ButtonComponent from "./homeComponents/ButtonComponent";
-import TabComponent from "./homeComponents/TabComponent";
+
 
 const HomeScreen = ({navigation}) => {
+  
     return (
   <SafeAreaView style={styles.container}>
        
@@ -57,13 +58,13 @@ const styles = StyleSheet.create({
      
     },
     HomeTitleComponent: {
-      marginTop: "40%"
+      marginTop: "30%"
       
     },
     buttons: {
       flexDirection: "column",
       alignSelf: "center",
-      marginTop: "10%"
+      marginTop: "20%"
       
     },
     sideButton: {

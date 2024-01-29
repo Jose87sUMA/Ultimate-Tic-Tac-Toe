@@ -1,7 +1,23 @@
-import React, { Component } from "react";
+import {React,useEffect, useState} from 'react';
 import { StyleSheet, View, Text } from "react-native";
 
+import * as Font from 'expo-font';
+
 function HomeTitleComponent(props) {
+  /*state={
+    isReady: false
+  }
+  useEffect(() => {
+    // Load custom font asynchronously
+    const loadFonts = async () => {
+      await Font.loadAsync({
+        'ArchivoBlack Regular': require('../../assets/fonts/ArchivoBlack Regular.ttf'),
+        // Add more fonts if needed
+      });
+      this.setState({isReady:true})
+    };
+
+    loadFonts(); }, []);*/
   return (
     <View style={[styles.container, props.style]}>
       <Text style={styles.ultimate}>ULTIMATE</Text>
@@ -17,30 +33,35 @@ function HomeTitleComponent(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {flexDirection: "column", alignItems: "center"},
+  container: {flexDirection: "column", alignItems: "center",},
   tic: {
   //  fontFamily: "roboto-700",
     color: "#007aff",
-    fontSize: 40,
-    marginRight: 10
+    fontSize: 50,
+    marginRight: 10,
+    fontWeight: "bold"
   },
   tac: {
-    
+    //fontFamily: 'ArchivoBlack Regular',
     //fontFamily: "roboto-700",
     color: "rgba(250,2,6,1)",
-    fontSize: 40,
+    fontSize: 50,
+    fontWeight: "bold"
     
   },
   toe: {
     //  fontFamily: "roboto-700",
     color: "#007aff",
-    fontSize: 40,
-    marginLeft: 10
+    fontSize: 50,
+    marginLeft: 10,
+    fontWeight: "bold"
+    
 
   },
   tictactoe: {
     flexDirection: "row",
     alignItems: "center",
+    
 
   },
 
@@ -48,7 +69,8 @@ const styles = StyleSheet.create({
     //fontFamily: "roboto-700",
     color: "rgba(34,5,5,1)",
     fontSize: 28,
-    alignSelf: "center"
+    alignSelf: "center",
+    fontWeight: "bold"
     
   }
 });
