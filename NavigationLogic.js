@@ -12,6 +12,8 @@ import RulesScreen from './RulesScreen';
 import TutorialScreen from './TutorialScreen';
 import GamePlayScreen from './GamePlayScreen';
 
+import { Ionicons } from '@expo/vector-icons';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,8 +31,27 @@ const NavigationLogic = () => {
 
 const TabNavigator = () => {
   return (
-        <Tab.Navigator screenOptions={{ headerShown: false}}>
-          <Tab.Screen  name='Home' component={HomeStack} />
+    <Tab.Navigator screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+        if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
+        } if (route.name === 'Settings') {
+            iconName = focused ? 'settings' : 'settings-outline';
+        }
+        if (route.name === 'Statistics') {
+            iconName = focused ? 'stats-chart' : 'stats-chart-outline';
+        }
+        if (route.name === 'Rules') {
+            iconName = focused ? 'book' : 'book-outline';
+        }
+        return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "#FF3B30",
+        tabBarInactiveTintColor: "#007AFF",
+        })}>
+
+          <Tab.Screen  name='Home' component={HomeStack} options={{ headerShown: false }}/>
           <Tab.Screen name='Rules' component={RulesScreen}/>
           <Tab.Screen name='Statistics' component={StatisticsScreen}/>
           <Tab.Screen name='Settings' component={SettingsScreen}/>
@@ -55,10 +76,4 @@ const HomeStack = () => {
 
 export default NavigationLogic;
 
-/*<Stack.Navigator>
-         <Stack.Screen name="Home" component={HomeScreen} />
-         <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }}/>
-         <Stack.Screen name="Tic_Tac_Toe" component={GamePlayScreen} options={{ title: 'Tic Tac Toe' }}/> 
-         <Stack.Screen name="Tutorial" component={TutorialScreen} options={{ title: 'Tutorial' }}/>
-         <Stack.Screen name="Statistics" component={StatisticsScreen} options={{ title: 'Statistics' }}/>
-      </Stack.Navigator>*/
+     

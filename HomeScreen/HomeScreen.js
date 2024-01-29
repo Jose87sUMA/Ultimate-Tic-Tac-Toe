@@ -8,7 +8,7 @@ import TabComponent from "./homeComponents/TabComponent";
 const HomeScreen = ({navigation}) => {
     return (
   <SafeAreaView style={styles.container}>
-        <View style={styles.homeComponents}>
+       
           <HomeTitleComponent style={styles.HomeTitleComponent}></HomeTitleComponent>
           <View style={styles.buttons}>
             <ButtonComponent
@@ -33,7 +33,6 @@ const HomeScreen = ({navigation}) => {
             style={styles.image}
           ></Image>
        
-        </View>
         <View style={styles.homeComponentsFiller}></View>
         
   </SafeAreaView>  
@@ -58,14 +57,13 @@ const styles = StyleSheet.create({
      
     },
     HomeTitleComponent: {
-      
+      marginTop: "40%"
       
     },
     buttons: {
       flexDirection: "column",
       alignSelf: "center",
-      marginBottom: "25%",
-      marginTop: "25%"
+      marginTop: "10%"
       
     },
     sideButton: {
@@ -83,7 +81,7 @@ const styles = StyleSheet.create({
     image: {
       height: 300,
       width: 300,
-      
+      marginTop: "5%",
       alignSelf: "center"
     },
     homeComponentsFiller: {
