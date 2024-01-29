@@ -1,40 +1,47 @@
 import React from 'react';
-import { SafeAreaView, View, StyleSheet, Text, Button } from 'react-native';
+import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button } from 'react-native';
 
-import HomeTitle from "../components/HomeTitle";
-import CupertinoButtonInfo from "../components/CupertinoButtonInfo";
-import CupertinoButtonDanger from "../components/CupertinoButtonDanger";
-import CupertinoFooter1 from "../components/CupertinoFooter1";
+import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
+import PlayButtonComponent from "./homeComponents/PlayButtonComponent";
+import TutorialButtonComponent from "./homeComponents/TutorialButtonComponent";
+import TabComponent from "./homeComponents/TabComponent";
 
-const HomeScreen = (props) => {
+const HomeScreen = () => {
     return (
-        <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
+
+  
+  <SafeAreaView style={styles.container}>
         <View style={styles.homeComponents}>
-          <HomeTitle style={styles.homeTitle}></HomeTitle>
+          <HomeTitleComponent style={styles.HomeTitleComponent}></HomeTitleComponent>
           <View style={styles.buttons}>
-            <CupertinoButtonInfo
-              style={styles.cupertinoButtonInfo}
-            ></CupertinoButtonInfo>
-            <CupertinoButtonDanger
-              style={styles.cupertinoButtonDanger}
-            ></CupertinoButtonDanger>
+            <PlayButtonComponent
+              style={styles.playButtonComponent}
+            ></PlayButtonComponent>
+            <TutorialButtonComponent
+              style={styles.tutorialButtonComponent}
+            ></TutorialButtonComponent>
           </View>
           <Image
-            source={require("../assets/images/HomeImage_h3Y6..png")}
+            source={require("../assets/images/HomeImage.png")}
             resizeMode="contain"
             style={styles.image}
           ></Image>
+          <TabComponent style={styles.tabComponent}></TabComponent> 
         </View>
         <View style={styles.homeComponentsFiller}></View>
-        <CupertinoFooter1 style={styles.cupertinoFooter1}></CupertinoFooter1>
-      </View>
+        
+      </SafeAreaView>  
+
+
+     
     ); 
 };
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1
+      flex: 1,
+      backgroundColor: "white"
+      
     },
     homeComponents: {
       width: 241,
@@ -42,21 +49,18 @@ const styles = StyleSheet.create({
       marginTop: 105,
       alignSelf: "center"
     },
-    homeTitle: {
-      height: 97,
-      width: 237
+    HomeTitleComponent: {
+     
     },
     buttons: {
-      width: 190,
-      height: 128,
-      marginTop: 62,
-      marginLeft: 24
+      alignSelf: "center",
+      marginTop: 40
     },
-    cupertinoButtonInfo: {
+    playButtonComponent: {
       height: 44,
       width: 190
     },
-    cupertinoButtonDanger: {
+    tutorialButtonComponent: {
       height: 44,
       width: 190,
       marginTop: 40
@@ -64,22 +68,22 @@ const styles = StyleSheet.create({
     image: {
       height: 200,
       width: 200,
-      marginTop: 16,
-      marginLeft: 19
+      marginTop: 20,
+      alignSelf: "center"
     },
     homeComponentsFiller: {
       flex: 1
     },
-    cupertinoFooter1: {
-      height: 49,
-      width: 360,
-      marginBottom: 31,
-      marginLeft: 8
+    tabComponent: {
+      width: 350,
+
     }
   });
 
 
 export default HomeScreen;
+
+
 
 
 /*<SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

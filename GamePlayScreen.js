@@ -1,4 +1,4 @@
-// App.js
+// GameplayScreen.js
 import {React, useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, Button } from 'react-native';
 import BigBoard from './BigBoard.js';
@@ -7,7 +7,7 @@ import monteCarloTreeSearch from './MonteCarloTreeSearch.js';
 
 
 
-const GameplayScreen = () => {
+const GamePlayScreen = () => {
   const initialGame = new Game('O');
   const [gameInstance, setGame] = useState(initialGame);
 
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameplayScreen;
+export default GamePlayScreen;
