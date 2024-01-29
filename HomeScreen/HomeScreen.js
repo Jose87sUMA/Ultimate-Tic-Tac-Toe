@@ -2,29 +2,37 @@ import React from 'react';
 import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button } from 'react-native';
 
 import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
-import PlayButtonComponent from "./homeComponents/PlayButtonComponent";
-import TutorialButtonComponent from "./homeComponents/TutorialButtonComponent";
+import ButtonComponent from "./homeComponents/ButtonComponent";
 import TabComponent from "./homeComponents/TabComponent";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     return (
   <SafeAreaView style={styles.container}>
         <View style={styles.homeComponents}>
           <HomeTitleComponent style={styles.HomeTitleComponent}></HomeTitleComponent>
           <View style={styles.buttons}>
-            <PlayButtonComponent
-              style={styles.playButtonComponent}
-            ></PlayButtonComponent>
-            <TutorialButtonComponent
-              style={styles.tutorialButtonComponent}
-            ></TutorialButtonComponent>
+            <ButtonComponent
+              style={styles.sideButton}
+              text={"PLAY"}
+              onPress={() => navigation.navigate('Tic_Tac_Toe')}
+            ></ButtonComponent>
+            <ButtonComponent
+              style={styles.middleButton}
+              text={"CONTINUE"}
+              onPress={() => navigation.navigate('Tic_Tac_Toe')}
+            ></ButtonComponent>
+            <ButtonComponent
+              style={styles.sideButton}
+              text={"TUTORIAL"}
+              onPress={() => navigation.navigate('Tutorial')}
+            ></ButtonComponent>
           </View>
           <Image
             source={require("../assets/images/HomeImage.png")}
             resizeMode="contain"
             style={styles.image}
           ></Image>
-          <TabComponent style={styles.tabComponent}></TabComponent> 
+       
         </View>
         <View style={styles.homeComponentsFiller}></View>
         
@@ -38,35 +46,44 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "white"
+      backgroundColor: "white",
+      
       
     },
     homeComponents: {
       width: 241,
       height: 522,
       marginTop: 105,
-      alignSelf: "center"
-    },
-    HomeTitleComponent: {
+      alignSelf: "center",
      
     },
+    HomeTitleComponent: {
+      
+      
+    },
     buttons: {
+      flexDirection: "column",
       alignSelf: "center",
-      marginTop: 40
+      marginBottom: "25%",
+      marginTop: "25%"
+      
     },
-    playButtonComponent: {
-      height: 44,
-      width: 190
-    },
-    tutorialButtonComponent: {
+    sideButton: {
       height: 44,
       width: 190,
-      marginTop: 40
+      backgroundColor: "#007AFF",
+    },
+    middleButton: {
+      height: 44,
+      width: 190,
+      backgroundColor: "#FF3B30",
+      marginTop: 40,
+      marginBottom: 40
     },
     image: {
-      height: 200,
-      width: 200,
-      marginTop: 20,
+      height: 300,
+      width: 300,
+      
       alignSelf: "center"
     },
     homeComponentsFiller: {

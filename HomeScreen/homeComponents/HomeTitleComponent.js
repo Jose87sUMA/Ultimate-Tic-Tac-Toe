@@ -17,7 +17,7 @@ function HomeTitleComponent(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {flexDirection: "column",},
+  container: {flexDirection: "column", alignItems: "center"},
   tic: {
   //  fontFamily: "roboto-700",
     color: "#007aff",
