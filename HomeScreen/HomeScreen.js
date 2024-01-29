@@ -8,8 +8,6 @@ import TabComponent from "./homeComponents/TabComponent";
 
 const HomeScreen = () => {
     return (
-
-  
   <SafeAreaView style={styles.container}>
         <View style={styles.homeComponents}>
           <HomeTitleComponent style={styles.HomeTitleComponent}></HomeTitleComponent>
@@ -30,7 +28,7 @@ const HomeScreen = () => {
         </View>
         <View style={styles.homeComponentsFiller}></View>
         
-      </SafeAreaView>  
+  </SafeAreaView>  
 
 
      
