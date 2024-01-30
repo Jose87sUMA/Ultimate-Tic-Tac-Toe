@@ -27,8 +27,6 @@ const NavigationLogic = () => {
 
 };
 
-
-
 const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
@@ -70,7 +68,6 @@ const HomeStack = () => {
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="Tic_Tac_Toe" component={GamePlayScreen} options={{ title: 'Tic Tac Toe' }}/> 
       <Stack.Screen name="Tutorial" component={TutorialScreen} options={{ title: 'Tutorial' }}/> 
-       
     </Stack.Navigator>
   )
 }

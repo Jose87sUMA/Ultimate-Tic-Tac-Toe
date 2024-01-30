@@ -1,24 +1,45 @@
 // GameplayScreen.js
-import {React, useState} from 'react';
-import { SafeAreaView, StyleSheet, Text, Button } from 'react-native';
+import {React, useState, useEffect} from 'react';
+import { SafeAreaView, StyleSheet, Text, Button} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import BigBoard from './BigBoard.js';
 import Game from './Game.js';
 import monteCarloTreeSearch from './MonteCarloTreeSearch.js';
 
+const GamePlayScreen = ({route, navigation}) => {
 
-
-const GamePlayScreen = () => {
-  const initialGame = new Game('O');
+  const { continuingGame, AIMoveSymbol } = route.params;
+  console.log('GamePlayScreen props:', continuingGame);
+  const initialGame = new Game(AIMoveSymbol);
   const [gameInstance, setGame] = useState(initialGame);
+
+  if(continuingGame){
+    useEffect(() => {
+      const getGameFromStorage = async () => {
+        try {
+          const storedGame = await AsyncStorage.getItem('game');
+          const parsedGame = storedGame ? Game.fromState(JSON.parse(storedGame)) : null;
+          setGame(parsedGame);
+        } catch (error) {
+          console.error('Error retrieving game from AsyncStorage:', error);
+        }
+      };
+    
+      getGameFromStorage();
+    
+    }, []);
+  }    
 
   const onPressCell = (smallBoardIndex, pos) => {
     console.log(`Cell pressed: smallBoardIndex=${smallBoardIndex}, pos=${pos}`);
 
     let newGameInstance = gameInstance.clone();
 
-    if (newGameInstance.makeMove(smallBoardIndex, pos)){
+    if (newGameInstance.makeMove(smallBoardIndex, pos)) {
       setGame(newGameInstance);
-    }else{
+      AsyncStorage.setItem('game', JSON.stringify(newGameInstance));
+    } else {
       return;
     }
 
@@ -26,6 +47,7 @@ const GamePlayScreen = () => {
       // Trigger AI move after a delay
       AIMove();
     }, 500); // 500 milliseconds delay as an example    
+
   }
 
   const AIMove = async () => {
@@ -34,6 +56,7 @@ const GamePlayScreen = () => {
     setGame(prevGame => {
       const newState = monteCarloTreeSearch(prevGame, 10);
       const newGame = Game.fromState(newState);
+      AsyncStorage.setItem('game', JSON.stringify(newGame));
       return newGame;
     });
   };
