@@ -1,40 +1,56 @@
-import {React, useState} from 'react';
-import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme, AsyncStorage } from 'react-native';
-
+import {React, useState, useEffect} from 'react';
+import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 //const colorScheme = useColorScheme();
   //const state = colorScheme === 'dark'? true: false;
 
 const SettingsScreen = () => {
-  const defaultMode = false;
-  _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('THEME');
-      if (value !== null) {
-        defaultMode = value;
-      }else{
-        
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
+  const colorScheme = useColorScheme();
+  const defaultTheme = colorScheme === 'dark'? true: false;
+
+  const [isDarkMode, setisDarkMode] = useState(defaultTheme);
   
-  const [isDarkMode, setisDarkMode] = useState(defaultMode);
-  const toggleSwitch = () => setisDarkMode(
-    _storeData = async () => {
+  useEffect(() => {
+    const getThemeFromStorage = async () => {
       try {
-        isDarkMode = !isDarkMode;
-        await AsyncStorage.setItem(
-          'THEME',
-          isDarkMode,
-        );
+        const value = await AsyncStorage.getItem('THEME'); 
+        if (value !== null) {
+          setisDarkMode(JSON.parse(value));
+          console.log('Theme ' + value);
+        }else{
+  
+        }
+        
       } catch (error) {
-        // Error saving data
+        console.error('Error retrieving game from AsyncStorage:', error);
       }
+    };
+  
+    getThemeFromStorage();
+  
+  }, []);
+  
+  
+  const toggleSwitch = () => {
+    console.log("Theme before toggle: " + isDarkMode);
+    const currentTheme = isDarkMode;
+    setisDarkMode(!isDarkMode);
+    _storeData = async () => {
+         try {
+          await AsyncStorage.setItem(
+            'THEME',
+            JSON.stringify(!currentTheme),
+          )
+        } catch (error) {
+          // Error saving data
+        }
     }
-  );
+    _storeData();
+   // AsyncStorage.setItem('THEME', JSON.stringify(!currentTheme));
+
+  }
   return (
   <SafeAreaView style={styles.container}>
     <Text>Welcome to the settings 
@@ -55,7 +71,7 @@ const SettingsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  
+    
   },
   themeMode: {
    flexDirection: "row",
@@ -68,4 +84,5 @@ const styles = StyleSheet.create({
 });
 
 export default SettingsScreen;
+export const isDarkMode;
 
