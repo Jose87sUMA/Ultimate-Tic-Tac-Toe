@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import SettingsScreen from './SettingsScreen';
+import SettingsScreen from './SettingsScreen/SettingsScreen';
 
 import HomeScreen from './HomeScreen/HomeScreen';
 import StatisticsScreen from './StatisticsScreen';
