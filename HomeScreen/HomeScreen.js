@@ -1,46 +1,43 @@
-import {React} from 'react';
-import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button } from 'react-native';
+import React from 'react';
+import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button} from 'react-native';
 
 import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
 import ButtonComponent from "./homeComponents/ButtonComponent";
 
-
 const HomeScreen = ({navigation}) => {
-  
-    return (
-  <SafeAreaView style={styles.container}>
-       
-          <HomeTitleComponent style={styles.HomeTitleComponent}></HomeTitleComponent>
-          <View style={styles.buttons}>
-            <ButtonComponent
-              style={styles.sideButton}
-              text={"PLAY"}
-              onPress={() => navigation.navigate('Tic_Tac_Toe')}
-            ></ButtonComponent>
-            <ButtonComponent
-              style={styles.middleButton}
-              text={"CONTINUE"}
-              onPress={() => navigation.navigate('Tic_Tac_Toe')}
-            ></ButtonComponent>
-            <ButtonComponent
-              style={styles.sideButton}
-              text={"TUTORIAL"}
-              onPress={() => navigation.navigate('Tutorial')}
-            ></ButtonComponent>
-          </View>
-          <Image
-            source={require("../assets/images/HomeImage.png")}
-            resizeMode="contain"
-            style={styles.image}
-          ></Image>
-       
-        <View style={styles.homeComponentsFiller}></View>
+
+  return (
+    <SafeAreaView style={styles.container}>
         
-  </SafeAreaView>  
+      <HomeTitleComponent style={styles.HomeTitleComponent}></HomeTitleComponent>
+      <View style={styles.buttons}>
+        <ButtonComponent
+          style={styles.sideButton}
+          text={"NEW GAME"}
+          onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMove: 'O'})}
+        ></ButtonComponent>
+        <ButtonComponent
+          style={styles.middleButton}
+          text={"CONTINUE"}
+          onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: true})}
+        ></ButtonComponent>
+        <ButtonComponent
+          style={styles.sideButton}
+          text={"TUTORIAL"}
+          onPress={() => navigation.navigate('Tutorial')}
+        ></ButtonComponent>
+      </View>
+      <Image
+        source={require("../assets/images/HomeImage.png")}
+        resizeMode="contain"
+        style={styles.image}
+      ></Image>
+    
+      <View style={styles.homeComponentsFiller}></View>
+          
+    </SafeAreaView>  
 
-
-     
-    ); 
+  ); 
 };
 
 const styles = StyleSheet.create({
