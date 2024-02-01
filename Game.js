@@ -19,6 +19,7 @@ class Game {
     newGame.currentPlayer = obj.currentPlayer;
     newGame.previousPlayer = obj.previousPlayer;
     newGame.AITurn = obj.AITurn;
+    newGame.AISymbol = this.AISymbol;
     return newGame;
   }
 
@@ -119,7 +120,7 @@ class Game {
     this.boardOfNextMove = pos
     this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
     this.previousPlayer = this.previousPlayer === 'X' ? 'O' : 'X';
-    this.AITurn = !this.AITurn;
+    this.AITurn = this.AISymbol === this.currentPlayer;
 
     return true;
   }
@@ -142,6 +143,7 @@ class Game {
     newGame.currentPlayer = this.currentPlayer;
     newGame.previousPlayer = this.previousPlayer;
     newGame.AITurn = this.AITurn;
+    newGame.AISymbol = this.AISymbol;
     return newGame;
   }
 

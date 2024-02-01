@@ -10,7 +10,7 @@ import monteCarloTreeSearch from './MonteCarloTreeSearch.js';
 const GamePlayScreen = ({route, navigation}) => {
 
   const { continuingGame, AIMoveSymbol } = route.params;
-  console.log('GamePlayScreen props:', continuingGame);
+
   const initialGame = new Game(AIMoveSymbol);
   const [gameInstance, setGame] = useState(initialGame);
 
@@ -29,7 +29,11 @@ const GamePlayScreen = ({route, navigation}) => {
       getGameFromStorage();
     
     }, []);
-  }    
+  }else if(AIMoveSymbol === 'X'){
+    useEffect(() => {
+      AIMove();
+    }, []);
+  }
 
   const onPressCell = (smallBoardIndex, pos) => {
     console.log(`Cell pressed: smallBoardIndex=${smallBoardIndex}, pos=${pos}`);
@@ -43,11 +47,12 @@ const GamePlayScreen = ({route, navigation}) => {
       return;
     }
 
-    setTimeout(() => {
-      // Trigger AI move after a delay
-      AIMove();
-    }, 500); // 500 milliseconds delay as an example    
-
+    if(gameInstance.AISymbol !== ' '){
+      setTimeout(() => {
+        // Trigger AI move after a delay
+        AIMove();
+      }, 500); // 500 milliseconds delay as an example    
+    }
   }
 
   const AIMove = async () => {
