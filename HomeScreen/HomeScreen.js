@@ -5,6 +5,8 @@ import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
 import ButtonComponent from "./homeComponents/ButtonComponent";
 import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
 import * as Font from 'expo-font';
+import { useTheme } from '@react-navigation/native';
+//import { useTheme } from 'react-native-paper';
 
 const loadFonts = async () => {
   await Font.loadAsync({
@@ -13,6 +15,7 @@ const loadFonts = async () => {
 };
 
 const HomeScreen = ({navigation}) => {
+  const {colors} = useTheme();
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [AIEnabled, setAIEnabled] = useState(false);
@@ -33,8 +36,10 @@ const HomeScreen = ({navigation}) => {
     return null; // You can render a loading component or return null until the fonts are loaded
   }
 
+ 
+ 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container,{backgroundColor: colors.background},]}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -88,7 +93,7 @@ const HomeScreen = ({navigation}) => {
         </View>
       </Modal>
 
-      <HomeTitleComponent style={styles.HomeTitleComponent}></HomeTitleComponent>
+      <HomeTitleComponent style={[styles.HomeTitleComponent, {color: colors.text}]}></HomeTitleComponent>
       <View style={styles.buttons}>
         <ButtonComponent
           style={styles.sideButton}
@@ -111,6 +116,7 @@ const HomeScreen = ({navigation}) => {
         resizeMode="contain"
         style={styles.image}
       ></Image>
+      
     
       <View style={styles.homeComponentsFiller}></View>
           
@@ -122,7 +128,7 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "white",
+     
     },
     centeredView: {
       flex: 1,

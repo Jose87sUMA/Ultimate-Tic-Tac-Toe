@@ -45,7 +45,7 @@ useEffect(() => {
  
   return (
    
-    <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer theme={theme === 'dark' ? DarkTheme : MyLightTheme}>
       <ThemeContext.Provider value={themeData}>
         <NavigationLogic/>
       </ThemeContext.Provider>

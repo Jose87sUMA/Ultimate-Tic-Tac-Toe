@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
-const StatisticsScreen = () => {
+const RulesScreen = () => {
+  const {colors} = useTheme();
   return (
-  <SafeAreaView style={styles.container}>
-    <Text style ={styles.text}>
+  <SafeAreaView style={[styles.container, {backgroundColor : colors.background}]}>
+    <Text style ={[styles.text, {color : colors.text}]}>
       Each small 3 × 3 tic-tac-toe board is referred to as a local board, and the larger 3 × 3 board is referred to as the global board.
       {'\n'}
       {'\n'}
@@ -28,7 +30,6 @@ const StatisticsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
   },
   text: {
     marginLeft: 30,
@@ -46,5 +47,5 @@ const styles = StyleSheet.create({
 
   
 
-export default StatisticsScreen;
+export default RulesScreen;
 

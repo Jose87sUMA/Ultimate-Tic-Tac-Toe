@@ -26,8 +26,8 @@ function HomeTitleComponent(props) {
   }
 
   return (
-    <View style={[styles.container, props.style]}>
-      <Text style={styles.ultimate}>ULTIMATE</Text>
+    <View style={[styles.container]}>
+      <Text style={[styles.ultimate, props.style]}>ULTIMATE</Text>
 
       <View style={styles.tictactoe}>
         <Text style={styles.tic}>TIC</Text>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   ultimate: {
     fontFamily: 'Acme',
-    color: 'rgba(34,5,5,1)',
+    //color: 'rgba(34,5,5,1)',
     fontSize: 50,
     alignSelf: 'center',
   },
