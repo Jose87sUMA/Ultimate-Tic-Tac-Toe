@@ -15,6 +15,7 @@ const BigBoard = (props) => {
               smallBoardIndex={row * 3 + col}
               winnerBoard={props.winnerBoard}
               nextMoveHere={props.boardOfNextMove === row * 3 + col || props.boardOfNextMove === -1}
+              currentPlayer={props.currentPlayer}
               onPressCell={props.onPressCell}
               AITurn={props.AITurn}
             />
@@ -37,11 +38,11 @@ const styles = StyleSheet.create({
     width: '75%',
   },
   rowOfSmallBoards: {
-    flex: 1,
+    flex: 3,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    maxHeight: isTablet ? '20%' : '15%', // Adjust the maxHeight based on the device type
+    maxHeight: '15%',
   },
 });
 

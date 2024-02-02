@@ -14,6 +14,7 @@ const SmallBoard = (props) => {
               key={row * 3 + col}
               value={props.smallBoard[row * 3 + col]}
               nextMoveHere={props.nextMoveHere}
+              currentPlayer={props.currentPlayer}
               onPressCell={() => props.onPressCell(props.smallBoardIndex, row * 3 + col)}
               AITurn={props.AITurn}
             />
@@ -23,10 +24,12 @@ const SmallBoard = (props) => {
     </View>:
     <View style={styles.finishedCell}>
         <Cell
-        key={props.smallBoardIndex}
-        value={props.winnerBoard[props.smallBoardIndex]}
-        nextMoveHere={false}
-        onPressCell={null}
+          key={props.smallBoardIndex}
+          value={props.winnerBoard[props.smallBoardIndex]}
+          nextMoveHere={false}
+          currentPlayer={props.currentPlayer}
+          onPressCell={null}
+          AITurn={props.AITurn}
         />
     </View>
   );

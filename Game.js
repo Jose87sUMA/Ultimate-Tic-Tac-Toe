@@ -1,4 +1,5 @@
 // Game.js
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Game {
   constructor(AI) {
@@ -9,6 +10,8 @@ class Game {
     this.previousPlayer = 'O';
     this.AISymbol = AI;
     this.AITurn = AI === this.currentPlayer;
+    this.moves = [];
+    this.currentMove = -1;
   }
 
   static fromState(obj) {
@@ -18,13 +21,15 @@ class Game {
     newGame.boardOfNextMove = obj.boardOfNextMove;
     newGame.currentPlayer = obj.currentPlayer;
     newGame.previousPlayer = obj.previousPlayer;
+    newGame.moves = [...obj.moves];
+    newGame.currentMove = obj.currentMove;
     newGame.AITurn = obj.AITurn;
     newGame.AISymbol = this.AISymbol;
     return newGame;
   }
 
   boardAvailable(board) {
-    return board.includes(' ');
+    return this.checkWinnerBoard(board) === null && board.some((cell) => cell === ' ');
   }
 
   checkWinnerBoard(board) {
@@ -34,7 +39,7 @@ class Game {
         board[i * 3] === board[i * 3 + 2] &&
         board[i * 3] !== ' '
       ) {
-        return board.fill(board[i * 3]);
+        return board[i * 3];
       }
 
       if (
@@ -42,7 +47,7 @@ class Game {
         board[i] === board[i + 6] &&
         board[i] !== ' '
       ) {
-        return board.fill(board[i]);
+        return board[i * 3];
       }
     }
 
@@ -50,7 +55,7 @@ class Game {
       (board[0] === board[4] && board[0] === board[8] && board[0] !== ' ') ||
       (board[2] === board[4] && board[2] === board[6] && board[2] !== ' ')
     ) {
-      return board.fill(board[4]);
+      return board[i * 3];
     }
 
     return null;
@@ -97,7 +102,7 @@ class Game {
     if (this.bigBoard[smallBoardIndex][pos] !== ' ') {
       return false;
     }
-
+    this.moves.push({ smallBoard: smallBoardIndex, pos: pos });
     // MAKE MOVE
     this.bigBoard[smallBoardIndex][pos] = this.currentPlayer;
 
@@ -114,12 +119,25 @@ class Game {
     // CHECK BIG BOARD WINNER
     if (this.isTerminal()) {
       pos = -2;
+
+      //Save the game to the list of finished games
+      AsyncStorage.getItem('finishedGames').then((value) => {
+        if(value === null){
+          AsyncStorage.setItem('finishedGames', JSON.stringify([this]));
+        }
+        else{
+          let finishedGames = JSON.parse(value);
+          finishedGames.push(this);
+          AsyncStorage.setItem('finishedGames', JSON.stringify(finishedGames));
+        }
+      });
     }
 
     // UPDATE VALUES
     this.boardOfNextMove = pos
     this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
     this.previousPlayer = this.previousPlayer === 'X' ? 'O' : 'X';
+    this.currentMove++;
     this.AITurn = this.AISymbol === this.currentPlayer;
 
     return true;
@@ -142,9 +160,66 @@ class Game {
     newGame.boardOfNextMove = this.boardOfNextMove;
     newGame.currentPlayer = this.currentPlayer;
     newGame.previousPlayer = this.previousPlayer;
+    newGame.moves = [...this.moves];
+    newGame.currentMove = this.currentMove;
     newGame.AITurn = this.AITurn;
     newGame.AISymbol = this.AISymbol;
     return newGame;
+  }
+
+  positionOneMoveBack() {
+    if (this.currentMove === -1) {
+      return;
+    }
+    const lastMove = this.moves[this.currentMove];
+    console.log(lastMove);
+    this.bigBoard[lastMove.smallBoard][lastMove.pos] = ' ';
+
+    // CHECK SMALL BOARD WINNER
+    if (this.checkWinnerBoard(this.bigBoard[lastMove.smallBoard]) === null) {
+      this.winnerBoard[lastMove.smallBoard] = ' ';
+    }
+    
+    // SET NEW RESTRICTION
+    if (this.currentMove === 0 || !this.boardAvailable(this.bigBoard[this.moves[this.currentMove-1].pos])) {
+      this.boardOfNextMove = -1;
+    }
+    else{
+      this.boardOfNextMove = this.moves[this.currentMove-1].pos;
+    }
+
+    this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+    this.previousPlayer = this.previousPlayer === 'X' ? 'O' : 'X';
+    this.currentMove--;
+    this.AITurn = this.AISymbol === this.currentPlayer;
+
+  }
+
+  positionOneMoveForward() {
+    if (this.currentMove === this.moves.length-1) {
+      return;
+    }
+    this.currentMove++;
+    const nextMove = this.moves[this.currentMove];
+    this.bigBoard[nextMove.smallBoard][nextMove.pos] = this.currentPlayer;
+
+    // CHECK SMALL BOARD WINNER
+    if (this.checkWinnerBoard(this.bigBoard[nextMove.smallBoard]) !== null) {
+      this.winnerBoard[nextMove.smallBoard] = this.currentPlayer;
+    }
+
+    // SET NEW RESTRICTION
+    if (!this.boardAvailable(this.bigBoard[nextMove.pos])) {
+      this.boardOfNextMove = -1;
+    }
+    else{
+      this.boardOfNextMove = nextMove.pos;
+    }
+
+    this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+    this.previousPlayer = this.previousPlayer === 'X' ? 'O' : 'X';
+    this.AITurn = this.AISymbol === this.currentPlayer;
+
   }
 
 }
