@@ -1,13 +1,13 @@
 // App.js
 
-import NavigationLogic from './NavigationLogic';
+import ThemeLogic from './ThemeLogic';
 import * as Font from 'expo-font';
 import { useState, useEffect } from 'react';
 
 const App = () => {
   return (
     
-    <NavigationLogic/>
+    <ThemeLogic/>
     );
 
 };
