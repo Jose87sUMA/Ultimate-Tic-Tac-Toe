@@ -1,33 +1,16 @@
 import {React, useState, useEffect, useContext} from 'react';
 import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme, Appearance } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { useTheme } from '@react-navigation/native';
 
 import { ThemeContext } from '../ThemeContext';
 
 
 
 
-/*const SettingsScreen = ({navigation}) =>  {
-  const { setTheme, theme } = useContext(ThemeContext);
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button
-        title="Switch Theme"
-        onPress={() => {setTheme(theme === 'Light' ? 'Dark' : 'Light'); alert("Previously " + theme)}}
-      />
-    </View>
-  );
-}
-
-export default SettingsScreen;*/
-
-
-
-
 
 const SettingsScreen = ({navigation}) => {
+  const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
 
   const toggleSwitch = () => {
@@ -44,8 +27,6 @@ const SettingsScreen = ({navigation}) => {
         }
 
     Appearance.setColorScheme(changedTheme);
-     
-    alert("Actual theme " + changedTheme);
     }
     _storeData();
 
@@ -53,16 +34,16 @@ const SettingsScreen = ({navigation}) => {
 
   return (
   <SafeAreaView style={styles.container}>
-    <Text>Welcome to the settings 
+    <Text style={{color: colors.text}}>Welcome to the settings 
     Foto perfil, Cambio de idiomas, modo oscuro/claro, , posibilidad de deshacer movimiento, !</Text>
     <View style={styles.themeMode}>
-       <Text style={styles.text}>Theme</Text> 
+       <Text style={[styles.text, {color: colors.text}]}>Theme</Text> 
        <Switch trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={theme == 'dark' ? '#f5dd4b' : '#f4f3f4'}
+        thumbColor={theme == 'dark' ? "#007AFF" : '#f4f3f4'}
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
         value={theme == 'dark'? true: false}/>
-        <Text style={styles.text}> Theme: {theme}</Text>
+        <Text style={[styles.text, {color: colors.text}]}> Theme: {theme}</Text>
      </View>
   </SafeAreaView>
 
