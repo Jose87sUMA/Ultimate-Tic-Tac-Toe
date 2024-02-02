@@ -5,7 +5,10 @@ import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/na
 import NavigationLogic from './NavigationLogic';
 import { ThemeContext } from './ThemeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import lightTheme from './styles/MyLightTheme';
+import darkTheme from './styles/MyLightTheme';
+import MyDarkTheme from './styles/MyDarkTheme';
+import MyLightTheme from './styles/MyLightTheme';
 
 const ThemeLogic = () => {
 
@@ -41,11 +44,13 @@ useEffect(() => {
 
  
   return (
-    <ThemeContext.Provider value={themeData}>
+   
     <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
-    <NavigationLogic/>
+      <ThemeContext.Provider value={themeData}>
+        <NavigationLogic/>
+      </ThemeContext.Provider>
     </NavigationContainer>
-    </ThemeContext.Provider>
+    
     );
 
 };
