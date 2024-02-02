@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react';
-import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme } from 'react-native';
+import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme, Appearance } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -11,16 +11,29 @@ const SettingsScreen = () => {
   const defaultTheme = colorScheme === 'dark'? true: false;
 
   const [isDarkMode, setisDarkMode] = useState(defaultTheme);
-  
+
+  if (colorScheme === 'dark') {
+    console.log('dark');
+  }else{
+    console.log('light');
+  }
   useEffect(() => {
     const getThemeFromStorage = async () => {
       try {
         const value = await AsyncStorage.getItem('THEME'); 
         if (value !== null) {
+          const iniTheme = JSON.parse(value)? 'dark' : 'light'
           setisDarkMode(JSON.parse(value));
           console.log('Theme ' + value);
+          Appearance.setColorScheme('dark');
+          console.log("Initial theme " + iniTheme);
+          const help = Appearance.getColorScheme();
+          console.log("Actual initial theme " + help);
+          
         }else{
-  
+            const iniTheme = defaultTheme? 'dark' : 'light';
+            Appearance.setColorScheme('dark');
+            
         }
         
       } catch (error) {
@@ -33,19 +46,25 @@ const SettingsScreen = () => {
   }, []);
   
   
+  
   const toggleSwitch = () => {
-    console.log("Theme before toggle: " + isDarkMode);
-    const currentTheme = isDarkMode;
-    setisDarkMode(!isDarkMode);
+    //console.log("Theme before toggle: " + isDarkMode);
+    const currentTheme = !isDarkMode;
+    setisDarkMode(currentTheme);
     _storeData = async () => {
          try {
           await AsyncStorage.setItem(
             'THEME',
-            JSON.stringify(!currentTheme),
+            JSON.stringify(currentTheme),
           )
         } catch (error) {
           // Error saving data
         }
+      const theme = currentTheme? 'dark' : 'light';
+      Appearance.setColorScheme(theme);
+      alert("Entered " + theme + " mode");
+      const help = Appearance.getColorScheme();
+      console.log("Actual initial theme " + help);
     }
     _storeData();
    // AsyncStorage.setItem('THEME', JSON.stringify(!currentTheme));
@@ -84,5 +103,5 @@ const styles = StyleSheet.create({
 });
 
 export default SettingsScreen;
-export const isDarkMode;
+
 
