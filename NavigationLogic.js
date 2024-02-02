@@ -1,6 +1,7 @@
 // NavigationLogic.js
 import {React, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {useColorScheme} from 'react-native';
+import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -19,10 +20,10 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const NavigationLogic = () => {
+  //const scheme = useColorScheme();
+  const scheme = 'dark';
   return (
-    <NavigationContainer>
       <TabNavigator />
-    </NavigationContainer>
     );
 
 };
