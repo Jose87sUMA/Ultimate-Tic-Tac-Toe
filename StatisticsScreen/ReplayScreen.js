@@ -3,14 +3,14 @@ import {React, useState, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import BigBoard from './BigBoard.js';
-import Game from './Game.js';
+import BigBoard from '../GamePlayScreen/BigBoard.js';
+import Game from '../logic/Game.js';
 
 import * as Font from 'expo-font';
 
 const loadFonts = async () => {
   await Font.loadAsync({
-    Acme: require('./assets/fonts/Acme.ttf'), 
+    Acme: require('../assets/fonts/Acme.ttf'), 
   });
 };
 

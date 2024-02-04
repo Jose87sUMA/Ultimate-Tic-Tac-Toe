@@ -4,14 +4,14 @@ import { SafeAreaView, StyleSheet, Text, View, Button} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BigBoard from './BigBoard.js';
-import Game from './Game.js';
-import monteCarloTreeSearch from './MonteCarloTreeSearch.js';
+import Game from '../logic/Game.js';
+import monteCarloTreeSearch from '../logic/MonteCarloTreeSearch.js';
 
 import * as Font from 'expo-font';
 
 const loadFonts = async () => {
   await Font.loadAsync({
-    Acme: require('./assets/fonts/Acme.ttf'), 
+    Acme: require('../assets/fonts/Acme.ttf'), 
   });
 };
 
