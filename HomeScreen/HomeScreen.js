@@ -17,7 +17,7 @@ const loadFonts = async () => {
 };
 
 const HomeScreen = ({navigation}) => {
-  const {setColor, color} = useContext(ColorContext);
+  const { colorX, colorO} = useContext(ColorContext);
   const {colors} = useTheme();
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -99,17 +99,17 @@ const HomeScreen = ({navigation}) => {
       <HomeTitleComponent style={[styles.HomeTitleComponent, {color: colors.text}]}></HomeTitleComponent>
       <View style={styles.buttons}>
         <ButtonComponent
-          style={styles.sideButton}
+          style={[styles.sideButton, {backgroundColor: colorO}]}
           text={"NEW GAME"}
           onPress={() => setModalVisible(true)}
         ></ButtonComponent>
         <ButtonComponent
-          style={[styles.middleButton, {backgroundColor: color}]}
+          style={[styles.middleButton, {backgroundColor: colorX}]}
           text={"CONTINUE"}
           onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: true})}
         ></ButtonComponent>
         <ButtonComponent
-          style={styles.sideButton}
+          style={[styles.sideButton, {backgroundColor: colorO}]}
           text={"TUTORIAL"}
           onPress={() => navigation.navigate('Tutorial')}
         ></ButtonComponent>

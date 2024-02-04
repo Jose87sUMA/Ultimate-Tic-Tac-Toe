@@ -33,8 +33,9 @@ const CIRCLE_RING_SIZE = 2;
 
 
 export default function ColorPicker() {
-  const {setColor, color} = useContext(ColorContext);
+  const {setColorX, colorX, setcolorO, colorO} = useContext(ColorContext);
   const [value, setValue] = useState(0);
+  const [editing, setEditing] = useState('Y');
   const sheet = useRef();
 
   /*React.useEffect(() => {
@@ -42,13 +43,14 @@ export default function ColorPicker() {
   }, []);*/
 
 
-  console.log(color);
+  console.log(colorX);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.placeholder}>
         <View style={styles.placeholderInset}>
           {/* Replace with your content */}
-          <Button color={color}  title="OPEN BOTTOM SHEET" onPress={() => sheet.current.open()} />
+          <Button color={colorX}  title="X" onPress={() => {setEditing('X'); sheet.current.open() }} />
+          <Button color={colorO}  title="O" onPress={() => {setEditing('Y'); sheet.current.open() }} />
         </View>
       </View>
 
@@ -58,21 +60,27 @@ export default function ColorPicker() {
         openDuration={250}
         ref={sheet}>
         <View style={styles.sheetHeader}>
-          <Text style={styles.sheetHeaderTitle}>Select profile color</Text>
+          <Text style={styles.sheetHeaderTitle}>Select a color for X</Text>
         </View>
         <View style={styles.sheetBody}>
           <View style={[styles.profile, { backgroundColor: colors[value] }]}>
-            <Text style={styles.profileText}>MB</Text>
+            <Text style={styles.profileText}>X</Text>
           </View>
           <View style={styles.group}>
             {colors.map((item, index) => {
               const isActive = value === index;
+             
               return (
                 <View key={item}>
                   <TouchableWithoutFeedback
                     onPress={() => {
                       setValue(index);
-                      setColor(colors[index]);
+                      if(editing == 'X'){
+                        setColorX(colors[index]);
+                      }else  if(editing == 'Y'){
+                        setcolorO(colors[index]);
+                      }
+                      
                     }}>
                     <View
                       style={[

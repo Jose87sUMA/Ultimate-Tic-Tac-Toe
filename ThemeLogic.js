@@ -12,9 +12,10 @@ const ThemeLogic = () => {
 
 const defaultColorScheme = useColorScheme();
 const [theme, setTheme] = useState(defaultColorScheme);
-const [color, setColor] = useState('red');
+const [colorX, setColorX] = useState('#FF3B30');
+const [colorO, setcolorO] = useState('#007AFF');
 const themeData = { theme, setTheme };
-const colorData = { color, setColor };
+const colorData = { colorX, setColorX, colorO, setcolorO };
 
 
 
