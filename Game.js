@@ -25,6 +25,7 @@ class Game {
     newGame.currentMove = obj.currentMove;
     newGame.AITurn = obj.AITurn;
     newGame.AISymbol = this.AISymbol;
+    newGame.finishedDate = obj.finishedDate;
     return newGame;
   }
 
@@ -55,7 +56,7 @@ class Game {
       (board[0] === board[4] && board[0] === board[8] && board[0] !== ' ') ||
       (board[2] === board[4] && board[2] === board[6] && board[2] !== ' ')
     ) {
-      return board[i * 3];
+      return board[4];
     }
 
     return null;
@@ -65,7 +66,6 @@ class Game {
 
     const legalMoves = [];
     const smallBoard = this.boardOfNextMove;
-
     if (smallBoard === -1) 
     {
       // If no small board restriction, all empty positions are legal moves
@@ -91,7 +91,6 @@ class Game {
   }
 
   makeMove(smallBoardIndex, pos) {
-
     // CHECK RESTRICTIONS
     if ((this.boardOfNextMove !== -1 && this.boardOfNextMove !== smallBoardIndex) || this.boardOfNextMove === -2) 
     {
@@ -120,17 +119,10 @@ class Game {
     if (this.isTerminal()) {
       pos = -2;
 
+      this.finishedDate = new Date().toLocaleString();
+
       //Save the game to the list of finished games
-      AsyncStorage.getItem('finishedGames').then((value) => {
-        if(value === null){
-          AsyncStorage.setItem('finishedGames', JSON.stringify([this]));
-        }
-        else{
-          let finishedGames = JSON.parse(value);
-          finishedGames.push(this);
-          AsyncStorage.setItem('finishedGames', JSON.stringify(finishedGames));
-        }
-      });
+      this.storeFinishedGame();
     }
 
     // UPDATE VALUES
@@ -141,6 +133,19 @@ class Game {
     this.AITurn = this.AISymbol === this.currentPlayer;
 
     return true;
+  }
+
+  storeFinishedGame() {
+    AsyncStorage.getItem('finishedGames').then((value) => {
+      if (value === null) {
+        AsyncStorage.setItem('finishedGames', JSON.stringify([this]));
+      }
+      else {
+        let finishedGames = JSON.parse(value);
+        finishedGames.push(this);
+        AsyncStorage.setItem('finishedGames', JSON.stringify(finishedGames));
+      }
+    });
   }
 
   isTerminal() {
@@ -164,6 +169,7 @@ class Game {
     newGame.currentMove = this.currentMove;
     newGame.AITurn = this.AITurn;
     newGame.AISymbol = this.AISymbol;
+    newGame.finishedDate = this.finishedDate;
     return newGame;
   }
 

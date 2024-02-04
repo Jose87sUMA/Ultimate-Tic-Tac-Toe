@@ -111,7 +111,7 @@ const HomeScreen = ({navigation}) => {
         resizeMode="contain"
         style={styles.image}
       ></Image>
-    
+      
       <View style={styles.homeComponentsFiller}></View>
           
     </SafeAreaView>  

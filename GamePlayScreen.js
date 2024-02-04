@@ -1,6 +1,6 @@
 // GameplayScreen.js
 import {React, useState, useEffect} from 'react';
-import { SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Button} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BigBoard from './BigBoard.js';
@@ -68,6 +68,7 @@ const GamePlayScreen = ({route, navigation}) => {
       return;
     }
 
+    console.log(gameInstance.AISymbol);
     if(gameInstance.AISymbol !== ' '){
       setTimeout(() => {
         // Trigger AI move after a delay
@@ -89,6 +90,9 @@ const GamePlayScreen = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Button title='delete all games' onPress={() => {
+        AsyncStorage.removeItem('finishedGames');
+      }}></Button>
       <Text style={{...styles.currentPlayerText, color: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30'}}>{gameInstance.currentPlayer} turn</Text>
       <View style={{height: 2, width: '100%', backgroundColor: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30', marginBottom: 25}} />
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
