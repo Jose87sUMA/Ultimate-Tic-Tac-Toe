@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
 import { ThemeContext } from '../ThemeContext';
+import ColorPicker from './ColorPicker';
 
 
 
