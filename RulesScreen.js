@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button } from 'react-native';
+import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 const RulesScreen = () => {
   const {colors} = useTheme();
   return (
   <SafeAreaView style={[styles.container, {backgroundColor : colors.background}]}>
+    <ScrollView style ={styles.scroll}>
     <Text style ={[styles.text, {color : colors.text}]}>
       Each small 3 × 3 tic-tac-toe board is referred to as a local board, and the larger 3 × 3 board is referred to as the global board.
       {'\n'}
@@ -25,16 +26,19 @@ const RulesScreen = () => {
       {'\n'}
       Game play ends when either a player wins the global board or there are no legal moves remaining, in which case the game is a draw.
   </Text>
+  </ScrollView>
   </SafeAreaView>
 );};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scroll: {
+    flex: 1,
+  },
   text: {
-    marginLeft: 30,
-    marginRight: 30,
-    fontSize: 17,
+    marginHorizontal: 30,
+    fontSize: 19,
     marginTop: "5%"
   }
   
