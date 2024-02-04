@@ -117,7 +117,6 @@ const HomeScreen = ({navigation}) => {
         style={styles.image}
       ></Image>
       
-    
       <View style={styles.homeComponentsFiller}></View>
           
     </SafeAreaView>  

@@ -1,21 +1,37 @@
 // GameplayScreen.js
 import {React, useState, useEffect} from 'react';
-import { SafeAreaView, StyleSheet, Text, Button} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Button} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BigBoard from './BigBoard.js';
 import Game from './Game.js';
 import monteCarloTreeSearch from './MonteCarloTreeSearch.js';
 
+import * as Font from 'expo-font';
+
+const loadFonts = async () => {
+  await Font.loadAsync({
+    Acme: require('./assets/fonts/Acme.ttf'), 
+  });
+};
+
 const GamePlayScreen = ({route, navigation}) => {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const { continuingGame, AIMoveSymbol } = route.params;
 
   const initialGame = new Game(AIMoveSymbol);
   const [gameInstance, setGame] = useState(initialGame);
 
-  if(continuingGame){
-    useEffect(() => {
+  useEffect(() => {
+
+    const loadAsync = async () => {
+      await loadFonts();
+      setFontsLoaded(true);
+    };
+
+    loadAsync();
+    if(continuingGame){
       const getGameFromStorage = async () => {
         try {
           const storedGame = await AsyncStorage.getItem('game');
@@ -27,16 +43,21 @@ const GamePlayScreen = ({route, navigation}) => {
       };
     
       getGameFromStorage();
-    
-    }, []);
-  }else if(AIMoveSymbol === 'X'){
-    useEffect(() => {
-      AIMove();
-    }, []);
+    }
+    else if(AIMoveSymbol === 'X'){
+      
+      useEffect(() => {
+        AIMove();
+      }, []);
+    }
+  }, []);
+  
+
+  if (!fontsLoaded) {
+    return null; // You can render a loading component or return null until the fonts are loaded
   }
 
   const onPressCell = (smallBoardIndex, pos) => {
-    console.log(`Cell pressed: smallBoardIndex=${smallBoardIndex}, pos=${pos}`);
 
     let newGameInstance = gameInstance.clone();
 
@@ -47,6 +68,7 @@ const GamePlayScreen = ({route, navigation}) => {
       return;
     }
 
+    console.log(gameInstance.AISymbol);
     if(gameInstance.AISymbol !== ' '){
       setTimeout(() => {
         // Trigger AI move after a delay
@@ -59,7 +81,7 @@ const GamePlayScreen = ({route, navigation}) => {
     await new Promise(resolve => setTimeout(resolve, 500));
 
     setGame(prevGame => {
-      const newState = monteCarloTreeSearch(prevGame, 10);
+      const newState = monteCarloTreeSearch(prevGame, 20);
       const newGame = Game.fromState(newState);
       AsyncStorage.setItem('game', JSON.stringify(newGame));
       return newGame;
@@ -68,10 +90,12 @@ const GamePlayScreen = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Ultimate Tic-Tac-Toe</Text>
-      <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
-      <Text style={styles.menu}>Click</Text>
-      
+      <Button title='delete all games' onPress={() => {
+        AsyncStorage.removeItem('finishedGames');
+      }}></Button>
+      <Text style={{...styles.currentPlayerText, color: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30'}}>{gameInstance.currentPlayer} turn</Text>
+      <View style={{height: 2, width: '100%', backgroundColor: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30', marginBottom: 25}} />
+      <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
     </SafeAreaView> 
   );
 };
@@ -83,10 +107,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 50,
   },
-  title: {
+  currentPlayerText: {
     fontSize: 24,
-    fontWeight: 'bold',
     marginBottom: 20,
+    fontFamily: 'Acme',
   },
 });
 

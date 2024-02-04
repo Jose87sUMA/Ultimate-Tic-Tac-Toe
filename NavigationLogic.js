@@ -12,6 +12,7 @@ import StatisticsScreen from './StatisticsScreen';
 import RulesScreen from './RulesScreen';
 import TutorialScreen from './TutorialScreen';
 import GamePlayScreen from './GamePlayScreen';
+import ReplayScreen from './ReplayScreen';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -55,7 +56,7 @@ const TabNavigator = () => {
 
           <Tab.Screen  name='Home' component={HomeStack} options={{ headerShown: false }}/>
           <Tab.Screen name='Rules' component={RulesScreen}/>
-          <Tab.Screen name='Statistics' component={StatisticsScreen}/>
+          <Tab.Screen name='Statistics' component={StatisticsStack}/>
           <Tab.Screen name='Settings' component={SettingsScreen}/>
            
         </Tab.Navigator>
@@ -69,6 +70,15 @@ const HomeStack = () => {
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="Tic_Tac_Toe" component={GamePlayScreen} options={{ title: 'Tic Tac Toe' }}/> 
       <Stack.Screen name="Tutorial" component={TutorialScreen} options={{ title: 'Tutorial' }}/> 
+    </Stack.Navigator>
+  )
+}
+
+const StatisticsStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Statistics" screenOptions={{ headerShown: false}}>
+      <Stack.Screen name="StatisticsScreen" component={StatisticsScreen} />
+      <Stack.Screen name="ReplayScreen" component={ReplayScreen} options={{ title: 'Replay Screen' }}/> 
     </Stack.Navigator>
   )
 }
