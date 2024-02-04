@@ -46,6 +46,7 @@ const SettingsScreen = ({navigation}) => {
         value={theme == 'dark'? true: false}/>
         <Text style={[styles.text, {color: colors.text}]}> Theme: {theme}</Text>
      </View>
+      <ColorPicker></ColorPicker>     
   </SafeAreaView>
 
 );};

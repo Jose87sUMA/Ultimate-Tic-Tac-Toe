@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   SafeAreaView,
+  Button
 } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
@@ -31,15 +32,18 @@ export default function ColorPicker() {
   const [value, setValue] = React.useState(0);
   const sheet = React.useRef();
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     sheet.current.open();
-  }, []);
+  }, []);*/
+
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.placeholder}>
         <View style={styles.placeholderInset}>
           {/* Replace with your content */}
+          <Button title="OPEN BOTTOM SHEET" onPress={() => sheet.current.open()} />
         </View>
       </View>
 
