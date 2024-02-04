@@ -1,21 +1,20 @@
 // ThemeLogic.js
 import {React, useState, useContext, createContext, useEffect} from 'react';
 import {useColorScheme, Appearance} from 'react-native';
-import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/native';
+import {NavigationContainer, DarkTheme} from '@react-navigation/native';
 import NavigationLogic from './NavigationLogic';
 import { ThemeContext } from './ThemeContext';
+import { ColorContext } from './ColorContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import lightTheme from './styles/MyLightTheme';
-import darkTheme from './styles/MyLightTheme';
-import MyDarkTheme from './styles/MyDarkTheme';
 import MyLightTheme from './styles/MyLightTheme';
 
 const ThemeLogic = () => {
 
 const defaultColorScheme = useColorScheme();
 const [theme, setTheme] = useState(defaultColorScheme);
+const [color, setColor] = useState('red');
 const themeData = { theme, setTheme };
-
+const colorData = { color, setColor };
 
 
 
@@ -30,7 +29,6 @@ useEffect(() => {
         const value = await AsyncStorage.getItem('THEME'); 
         if (value !== null) {
           setTheme(JSON.parse(value));
-          console.log('Theme potato ' + value);
           Appearance.setColorScheme(JSON.parse(value));
         }
       } catch (error) {
@@ -47,7 +45,9 @@ useEffect(() => {
    
     <NavigationContainer theme={theme === 'dark' ? DarkTheme : MyLightTheme}>
       <ThemeContext.Provider value={themeData}>
-        <NavigationLogic/>
+        <ColorContext.Provider value={colorData}>
+          <NavigationLogic/>
+        </ColorContext.Provider>
       </ThemeContext.Provider>
     </NavigationContainer>
     

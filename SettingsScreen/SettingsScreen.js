@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
 import { ThemeContext } from '../ThemeContext';
+import { ColorContext } from '../ColorContext';
 import ColorPicker from './ColorPicker';
 
 
@@ -13,6 +14,7 @@ import ColorPicker from './ColorPicker';
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
+  const {setColor, color} = useContext(ColorContext);
 
   const toggleSwitch = () => {
     const changedTheme = theme == 'light'? 'dark':'light';

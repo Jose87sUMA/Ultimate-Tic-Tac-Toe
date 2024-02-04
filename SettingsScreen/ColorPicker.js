@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useContext, useState, useRef} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,10 +8,12 @@ import {
   SafeAreaView,
   Button
 } from 'react-native';
+import { ColorContext } from '../ColorContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 const colors = [
-  '#6874e7',
+  '#007AFF',
+  '#FF3B30',
   '#b8304f',
   '#758E4F',
   '#fa3741',
@@ -28,22 +30,25 @@ const colors = [
 const CIRCLE_SIZE = 40;
 const CIRCLE_RING_SIZE = 2;
 
+
+
 export default function ColorPicker() {
-  const [value, setValue] = React.useState(0);
-  const sheet = React.useRef();
+  const {setColor, color} = useContext(ColorContext);
+  const [value, setValue] = useState(0);
+  const sheet = useRef();
 
   /*React.useEffect(() => {
     sheet.current.open();
   }, []);*/
 
 
-
+  console.log(color);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.placeholder}>
         <View style={styles.placeholderInset}>
           {/* Replace with your content */}
-          <Button title="OPEN BOTTOM SHEET" onPress={() => sheet.current.open()} />
+          <Button color={color}  title="OPEN BOTTOM SHEET" onPress={() => sheet.current.open()} />
         </View>
       </View>
 
@@ -67,6 +72,7 @@ export default function ColorPicker() {
                   <TouchableWithoutFeedback
                     onPress={() => {
                       setValue(index);
+                      setColor(colors[index]);
                     }}>
                     <View
                       style={[
@@ -85,7 +91,7 @@ export default function ColorPicker() {
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
-              // handle onPress
+                sheet.current.close()
             }}>
             <Text style={styles.btnText}>Confirm</Text>
           </TouchableOpacity>

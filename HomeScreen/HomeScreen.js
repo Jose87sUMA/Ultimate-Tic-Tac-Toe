@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState, useEffect, useContext} from 'react';
 import { SafeAreaView, View, StyleSheet, StatusBar, Image, Text, Button, Modal, Switch} from 'react-native';
 
 import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
@@ -6,6 +6,8 @@ import ButtonComponent from "./homeComponents/ButtonComponent";
 import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
 import * as Font from 'expo-font';
 import { useTheme } from '@react-navigation/native';
+import { ColorContext } from '../ColorContext';
+
 //import { useTheme } from 'react-native-paper';
 
 const loadFonts = async () => {
@@ -15,6 +17,7 @@ const loadFonts = async () => {
 };
 
 const HomeScreen = ({navigation}) => {
+  const {setColor, color} = useContext(ColorContext);
   const {colors} = useTheme();
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -101,7 +104,7 @@ const HomeScreen = ({navigation}) => {
           onPress={() => setModalVisible(true)}
         ></ButtonComponent>
         <ButtonComponent
-          style={styles.middleButton}
+          style={[styles.middleButton, {backgroundColor: color}]}
           text={"CONTINUE"}
           onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: true})}
         ></ButtonComponent>
@@ -211,42 +214,3 @@ const styles = StyleSheet.create({
 export default HomeScreen;
 
 
-
-
-/*<SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={styles.bigBlue}>Tic Tac Toe</Text>
-        
-        <Button
-          title="Play"
-          onPress={() => navigation.navigate('Tic_Tac_Toe')}
-        />
-        <Button
-          title="Tutorial"
-          onPress={() => navigation.navigate('Tutorial')}
-        />
-        <Button
-          title="Settings"
-          onPress={() => navigation.navigate('Settings')}
-        />
-        <Button
-          title="Statistics"
-          onPress={() => navigation.navigate('Statistics')}
-        />
-        
-      </SafeAreaView> 
-      
-      
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 50,
-        alignItems: 'center',
-    },
-    bigBlue: {
-        color: 'blue',
-        fontWeight: 'bold',
-        fontSize: 30,
-    },
-        red: {
-        color: 'red'
-    },
-});*/
