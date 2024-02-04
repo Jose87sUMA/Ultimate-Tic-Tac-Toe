@@ -1,4 +1,4 @@
-import {React, useContext, useState, useRef} from 'react';
+import {React, useContext, useState, useRef, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,22 +10,9 @@ import {
 } from 'react-native';
 import { ColorContext } from '../ColorContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ColorsPalette from '../ColorsPalette.js';
 
-const colors = [
-  '#007AFF',
-  '#FF3B30',
-  '#b8304f',
-  '#758E4F',
-  '#fa3741',
-  '#F26419',
-  '#F6AE2D',
-  '#DFAEB4',
-  '#7A93AC',
-  '#33658A',
-  '#3d2b56',
-  '#42273B',
-  '#171A21',
-];
 
 const CIRCLE_SIZE = 40;
 const CIRCLE_RING_SIZE = 2;
@@ -33,14 +20,36 @@ const CIRCLE_RING_SIZE = 2;
 
 
 export default function ColorPicker() {
+    useEffect(() => {
+        const getColorFromStorage = async () => {
+          try {
+            const valueX = await AsyncStorage.getItem('COLORX'); 
+            const valueY = await AsyncStorage.getItem('COLORO'); 
+            if (valueX !== null ) {
+              setvalueX(JSON.parse(valueX));
+                
+            }
+            if (valueY !== null ){
+                setvalueO(JSON.parse(valueY));
+                console.log('retrieving index' + valueY);
+            }
+          } catch (error) {
+            console.error('Error retrieving game from AsyncStorage:', error);
+          }
+        };
+      
+        getColorFromStorage();
+    }, []);
+
+
+    
   const {setColorX, colorX, setcolorO, colorO} = useContext(ColorContext);
-  const [value, setValue] = useState(0);
+  const [valueX, setvalueX] = useState(valueX === null? 0 : valueX);
+  const [valueY, setvalueO] = useState(valueY === null? 0 : valueY);
   const [editing, setEditing] = useState('Y');
   const sheet = useRef();
 
-  /*React.useEffect(() => {
-    sheet.current.open();
-  }, []);*/
+ 
 
 
   console.log(colorX);
@@ -48,7 +57,6 @@ export default function ColorPicker() {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.placeholder}>
         <View style={styles.placeholderInset}>
-          {/* Replace with your content */}
           <Button color={colorX}  title="X" onPress={() => {setEditing('X'); sheet.current.open() }} />
           <Button color={colorO}  title="O" onPress={() => {setEditing('Y'); sheet.current.open() }} />
         </View>
@@ -60,36 +68,66 @@ export default function ColorPicker() {
         openDuration={250}
         ref={sheet}>
         <View style={styles.sheetHeader}>
-          <Text style={styles.sheetHeaderTitle}>Select a color for X</Text>
+          <Text style={styles.sheetHeaderTitle}>{editing === 'X'? 'Select a color for X' : 'Select a color for O'} </Text>
         </View>
         <View style={styles.sheetBody}>
-          <View style={[styles.profile, { backgroundColor: colors[value] }]}>
-            <Text style={styles.profileText}>X</Text>
+          <View style={[styles.profile,
+            editing === 'X' && { backgroundColor: ColorsPalette[valueX] },
+            editing === 'Y' && { backgroundColor: ColorsPalette[valueY] }]}>
+            <Text style={styles.profileText}>{editing === 'X'? 'X' : 'O'}</Text>
           </View>
           <View style={styles.group}>
-            {colors.map((item, index) => {
-              const isActive = value === index;
-             
+            {ColorsPalette.map((item, index) => {
+              const isActive = editing === 'X'? valueX === index : valueY === index ;
+              const isInactive = editing === 'X'? valueY === index : valueX === index ;
               return (
                 <View key={item}>
                   <TouchableWithoutFeedback
+
                     onPress={() => {
-                      setValue(index);
-                      if(editing == 'X'){
-                        setColorX(colors[index]);
-                      }else  if(editing == 'Y'){
-                        setcolorO(colors[index]);
-                      }
+                        if(!isInactive){
+                            
+                            if(editing == 'X'){
+                                setvalueX(index);
+                                setColorX(ColorsPalette[index]);
+                                _storeData = async () => {
+                                    try {
+                                     await AsyncStorage.setItem(
+                                       'COLORX',
+                                       JSON.stringify(index),
+                                     )
+                                   } catch (error) {
+                                     // Error saving data
+                                   }};
+                                   _storeData();
+                            }else  if(editing == 'Y'){
+                                setvalueO(index);
+                                setcolorO(ColorsPalette[index]);
+                                _storeData = async () => {
+                                    try {
+                                     await AsyncStorage.setItem(
+                                       'COLORO',
+                                       JSON.stringify(index),
+                                     )
+                                   } catch (error) {
+                                     // Error saving data
+                                   }};
+                                   _storeData();
+                                   
+                            }  
+                        }
+                      
                       
                     }}>
                     <View
                       style={[
                         styles.circle,
                         isActive && { borderColor: item },
+                       
                       ]}>
                       <View
-                        style={[styles.circleInside, { backgroundColor: item }]}
-                      />
+                        style={[styles.circleInside, !isInactive && { backgroundColor: item }]}/>
+                        <Text style={[styles.circleText, {color: item }]}>{isInactive ? editing === 'X'? 'O' : 'X' : ''}</Text>
                     </View>
                   </TouchableWithoutFeedback>
                 </View>
@@ -194,6 +232,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: CIRCLE_RING_SIZE,
     left: CIRCLE_RING_SIZE,
+    
+    
+  },
+  circleText: {
+    fontSize: CIRCLE_SIZE*0.75,
+    fontWeight: 'bold',
+    color: 'white',
+    alignSelf : 'center',
+    color: 'black'
+    
+   
   },
   /** Button */
   btn: {
@@ -210,5 +259,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#fff',
-  },
+  }, 
+  
 });
