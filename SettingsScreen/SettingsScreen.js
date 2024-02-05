@@ -5,10 +5,6 @@ import { useTheme } from '@react-navigation/native';
 
 import { ThemeContext } from '../ThemeContext';
 
-
-
-
-
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
