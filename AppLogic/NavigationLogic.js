@@ -51,7 +51,7 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: "#007AFF",
         tabBarStyle: { height: 60 }, // Adjust the height as needed
         labelStyle: { fontSize: 14 },
-        //headerShown:false
+        headerShown:false,
         })}>
 
           <Tab.Screen  name='Home' component={HomeStack} options={{ headerShown: false }}/>
