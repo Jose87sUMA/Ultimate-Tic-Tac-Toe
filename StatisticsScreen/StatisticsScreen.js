@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, Button, SafeAreaView, StyleSheet, FlatList, LayoutAnimation } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Game from '../logic/Game.js';
+import Game from '../GameLogic/Game.js';
 
 import * as Font from 'expo-font';
 

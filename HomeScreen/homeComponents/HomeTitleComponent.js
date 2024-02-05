@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import * as Font from 'expo-font';
-import { ColorContext } from '../../ColorContext';
-import ColorsPalette from '../../ColorsPalette';
+import { ColorContext } from '../../styles/contexts/ColorContext';
+import ColorsPalette from '../../styles/colorsPalettes/ColorsPalette';
 
 // Function to load custom font
 const loadFonts = async () => {

@@ -3,14 +3,14 @@ import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
-import { ThemeContext } from '../ThemeContext';
-import { ColorContext } from '../ColorContext';
+import { ThemeContext } from '../styles/contexts/ThemeContext';
+import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorPicker from './ColorPicker';
 
 
 
-import ColorsPalette from '../ColorsPalette';
-import ColorsPaletteSoft from '../ColorsPaletteSoft';
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
+import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
 
 
 const SettingsScreen = ({navigation}) => {

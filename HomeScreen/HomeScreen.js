@@ -6,8 +6,8 @@ import ButtonComponent from "./homeComponents/ButtonComponent";
 import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
 import * as Font from 'expo-font';
 import { useTheme } from '@react-navigation/native';
-import { ColorContext } from '../ColorContext';
-import ColorsPalette from '../ColorsPalette';
+import { ColorContext } from '../styles/contexts/ColorContext';
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 
 //import { useTheme } from 'react-native-paper';
 

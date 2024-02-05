@@ -1,6 +1,6 @@
 // App.js
 
-import ThemeLogic from './ThemeLogic';
+import ThemeLogic from './AppLogic/ThemeLogic';
 import * as Font from 'expo-font';
 import { useState, useEffect } from 'react';
 

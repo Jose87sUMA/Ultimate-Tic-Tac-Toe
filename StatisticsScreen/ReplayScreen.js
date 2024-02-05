@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity} from 'react-nat
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import BigBoard from '../GamePlayScreen/BigBoard.js';
-import Game from '../logic/Game.js';
+import Game from '../GameLogic/Game.js';
 
 import * as Font from 'expo-font';
 

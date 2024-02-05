@@ -3,10 +3,10 @@ import {React, useState, useContext, createContext, useEffect} from 'react';
 import {useColorScheme, Appearance} from 'react-native';
 import {NavigationContainer, DarkTheme} from '@react-navigation/native';
 import NavigationLogic from './NavigationLogic';
-import { ThemeContext } from './ThemeContext';
-import { ColorContext } from './ColorContext';
+import { ThemeContext } from '../styles/contexts/ThemeContext';
+import { ColorContext } from '../styles/contexts/ColorContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MyLightTheme from './styles/MyLightTheme';
+import MyLightTheme from '../styles/themes/MyLightTheme';
 
 const ThemeLogic = () => {
 

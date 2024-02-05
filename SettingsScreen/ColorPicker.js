@@ -8,11 +8,11 @@ import {
   SafeAreaView,
   Button
 } from 'react-native';
-import { ColorContext } from '../ColorContext';
+import { ColorContext } from '../styles/contexts/ColorContext.js';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ColorsPalette from '../ColorsPalette.js';
-import ColorsPaletteSoft from '../ColorsPaletteSoft.js';
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
+import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js';
 import { useTheme } from '@react-navigation/native';
 
 
