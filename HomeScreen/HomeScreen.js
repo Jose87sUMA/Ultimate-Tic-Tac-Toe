@@ -7,6 +7,7 @@ import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button"
 import * as Font from 'expo-font';
 import { useTheme } from '@react-navigation/native';
 import { ColorContext } from '../ColorContext';
+import ColorsPalette from '../ColorsPalette';
 
 //import { useTheme } from 'react-native-paper';
 
@@ -17,7 +18,7 @@ const loadFonts = async () => {
 };
 
 const HomeScreen = ({navigation}) => {
-  const { colorX, colorO} = useContext(ColorContext);
+  const { valueX, valueO} = useContext(ColorContext);
   const {colors} = useTheme();
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -99,17 +100,17 @@ const HomeScreen = ({navigation}) => {
       <HomeTitleComponent style={[styles.HomeTitleComponent, {color: colors.text}]}></HomeTitleComponent>
       <View style={styles.buttons}>
         <ButtonComponent
-          style={[styles.sideButton, {backgroundColor: colorO}]}
+          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueO]}]}
           text={"NEW GAME"}
           onPress={() => setModalVisible(true)}
         ></ButtonComponent>
         <ButtonComponent
-          style={[styles.middleButton, {backgroundColor: colorX}]}
+          style={[styles.middleButton, {backgroundColor: ColorsPalette[valueX]}]}
           text={"CONTINUE"}
           onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: true})}
         ></ButtonComponent>
         <ButtonComponent
-          style={[styles.sideButton, {backgroundColor: colorO}]}
+          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueO]}]}
           text={"TUTORIAL"}
           onPress={() => navigation.navigate('Tutorial')}
         ></ButtonComponent>

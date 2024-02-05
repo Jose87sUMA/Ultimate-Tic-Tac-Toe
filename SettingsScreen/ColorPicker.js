@@ -12,6 +12,8 @@ import { ColorContext } from '../ColorContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ColorsPalette from '../ColorsPalette.js';
+import ColorsPaletteSoft from '../ColorsPaletteSoft.js';
+import { useTheme } from '@react-navigation/native';
 
 
 const CIRCLE_SIZE = 40;
@@ -20,45 +22,26 @@ const CIRCLE_RING_SIZE = 2;
 
 
 export default function ColorPicker() {
-    useEffect(() => {
-        const getColorFromStorage = async () => {
-          try {
-            const valueX = await AsyncStorage.getItem('COLORX'); 
-            const valueY = await AsyncStorage.getItem('COLORO'); 
-            if (valueX !== null ) {
-              setvalueX(JSON.parse(valueX));
-                
-            }
-            if (valueY !== null ){
-                setvalueO(JSON.parse(valueY));
-                console.log('retrieving index' + valueY);
-            }
-          } catch (error) {
-            console.error('Error retrieving game from AsyncStorage:', error);
-          }
-        };
-      
-        getColorFromStorage();
-    }, []);
+   
 
-
+  const {colors} = useTheme();
     
-  const {setColorX, colorX, setcolorO, colorO} = useContext(ColorContext);
-  const [valueX, setvalueX] = useState(valueX === null? 0 : valueX);
-  const [valueY, setvalueO] = useState(valueY === null? 0 : valueY);
-  const [editing, setEditing] = useState('Y');
+  const {valueX, setvalueX, valueO, setvalueO} = useContext(ColorContext);
+  
+  const [editing, setEditing] = useState('O');
   const sheet = useRef();
 
  
 
 
-  console.log(colorX);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.placeholder}>
         <View style={styles.placeholderInset}>
-          <Button color={colorX}  title="X" onPress={() => {setEditing('X'); sheet.current.open() }} />
-          <Button color={colorO}  title="O" onPress={() => {setEditing('Y'); sheet.current.open() }} />
+          <Text style={{color: colors.text}}>Personalise colors</Text>  
+          <Button color={ColorsPalette[valueX]}  title="X" onPress={() => {setEditing('X'); sheet.current.open() }} />
+          <Button color={ColorsPalette[valueO]}  title="O" onPress={() => {setEditing('O'); sheet.current.open() }} />
         </View>
       </View>
 
@@ -67,19 +50,19 @@ export default function ColorPicker() {
         height={440}
         openDuration={250}
         ref={sheet}>
-        <View style={styles.sheetHeader}>
+        <View style={[styles.sheetHeader, editing === 'X' && {backgroundColor: ColorsPalette[valueX]}, editing === 'O' && {backgroundColor: ColorsPalette[valueO]}]}>
           <Text style={styles.sheetHeaderTitle}>{editing === 'X'? 'Select a color for X' : 'Select a color for O'} </Text>
         </View>
-        <View style={styles.sheetBody}>
-          <View style={[styles.profile,
+        <View style={[styles.sheetBody, editing === 'X' && {backgroundColor : ColorsPaletteSoft[valueX]}, editing === 'O' && {backgroundColor : ColorsPaletteSoft[valueO]}]}>
+          <View style={[styles. mainSymbole,
             editing === 'X' && { backgroundColor: ColorsPalette[valueX] },
-            editing === 'Y' && { backgroundColor: ColorsPalette[valueY] }]}>
-            <Text style={styles.profileText}>{editing === 'X'? 'X' : 'O'}</Text>
+            editing === 'O' && { backgroundColor: ColorsPalette[valueO] }]}>
+            <Text style={styles. mainSymboleText}>{editing === 'X'? 'X' : 'O'}</Text>
           </View>
           <View style={styles.group}>
             {ColorsPalette.map((item, index) => {
-              const isActive = editing === 'X'? valueX === index : valueY === index ;
-              const isInactive = editing === 'X'? valueY === index : valueX === index ;
+              const isActive = editing === 'X'? valueX === index : valueO === index ;
+              const isInactive = editing === 'X'? valueO === index : valueX === index ;
               return (
                 <View key={item}>
                   <TouchableWithoutFeedback
@@ -89,7 +72,6 @@ export default function ColorPicker() {
                             
                             if(editing == 'X'){
                                 setvalueX(index);
-                                setColorX(ColorsPalette[index]);
                                 _storeData = async () => {
                                     try {
                                      await AsyncStorage.setItem(
@@ -100,9 +82,8 @@ export default function ColorPicker() {
                                      // Error saving data
                                    }};
                                    _storeData();
-                            }else  if(editing == 'Y'){
+                            }else  if(editing == 'O'){
                                 setvalueO(index);
-                                setcolorO(ColorsPalette[index]);
                                 _storeData = async () => {
                                     try {
                                      await AsyncStorage.setItem(
@@ -135,11 +116,11 @@ export default function ColorPicker() {
             })}
           </View>
           <TouchableOpacity
-            style={styles.btn}
+            style={[styles.btn, editing === 'X' && {backgroundColor: ColorsPalette[valueX]}, editing === 'O' && {backgroundColor: ColorsPalette[valueO]}]}
             onPress={() => {
                 sheet.current.close()
             }}>
-            <Text style={styles.btnText}>Confirm</Text>
+            <Text style={[styles.btnText]}>Done</Text>
           </TouchableOpacity>
         </View>
       </RBSheet>
@@ -169,9 +150,10 @@ const styles = StyleSheet.create({
     borderColor: '#e5e7eb',
     borderStyle: 'dashed',
     borderRadius: 9,
-    flexGrow: 1,
+    flexGrow: 0.25,
     flexShrink: 1,
     flexBasis: 0,
+    flexDirection: 'row'
   },
   /** Sheet */
   sheet: {
@@ -187,12 +169,13 @@ const styles = StyleSheet.create({
   sheetHeaderTitle: {
     fontSize: 20,
     fontWeight: '600',
+    color: 'white'
   },
   sheetBody: {
     padding: 24,
   },
-  /** Profile */
-  profile: {
+  /**  mainSymbole */
+   mainSymbole: {
     alignSelf: 'center',
     width: 100,
     height: 100,
@@ -209,7 +192,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 7,
   },
-  profileText: {
+   mainSymboleText: {
     fontSize: 34,
     fontWeight: '600',
     color: 'white',
@@ -219,7 +202,7 @@ const styles = StyleSheet.create({
     width: CIRCLE_SIZE + CIRCLE_RING_SIZE * 4,
     height: CIRCLE_SIZE + CIRCLE_RING_SIZE * 4,
     borderRadius: 9999,
-    backgroundColor: 'white',
+    
     borderWidth: CIRCLE_RING_SIZE,
     borderColor: 'transparent',
     marginRight: 8,
@@ -238,11 +221,7 @@ const styles = StyleSheet.create({
   circleText: {
     fontSize: CIRCLE_SIZE*0.75,
     fontWeight: 'bold',
-    color: 'white',
     alignSelf : 'center',
-    color: 'black'
-    
-   
   },
   /** Button */
   btn: {
@@ -251,7 +230,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 14,
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: '#fff',
     backgroundColor: '#000',
     marginBottom: 12,
   },

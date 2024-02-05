@@ -11,10 +11,11 @@ import ColorPicker from './ColorPicker';
 
 
 
+
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
-  const {setColorX, colorX} = useContext(ColorContext);
+
 
   const toggleSwitch = () => {
     const changedTheme = theme == 'light'? 'dark':'light';

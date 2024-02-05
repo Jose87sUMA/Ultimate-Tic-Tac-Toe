@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import * as Font from 'expo-font';
 import { ColorContext } from '../../ColorContext';
+import ColorsPalette from '../../ColorsPalette';
 
 // Function to load custom font
 const loadFonts = async () => {
@@ -12,7 +13,7 @@ const loadFonts = async () => {
 
 function HomeTitleComponent(props) {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const {colorX, colorO} = useContext(ColorContext);
+  const {valueX, valueO} = useContext(ColorContext);
 
   useEffect(() => {
     const loadAsync = async () => {
@@ -32,9 +33,9 @@ function HomeTitleComponent(props) {
       <Text style={[styles.ultimate, props.style]}>ULTIMATE</Text>
 
       <View style={styles.tictactoe}>
-        <Text style={[styles.tic, {color : colorO}]}>TIC</Text>
-        <Text style={[styles.tac, {color : colorX}]}>TAC</Text>
-        <Text style={[styles.toe, {color : colorO}]}>TOE</Text>
+        <Text style={[styles.tic, {color : ColorsPalette[valueO]}]}>TIC</Text>
+        <Text style={[styles.tac, {color : ColorsPalette[valueX]}]}>TAC</Text>
+        <Text style={[styles.toe, {color : ColorsPalette[valueO]}]}>TOE</Text>
       </View>
     </View>
   );
