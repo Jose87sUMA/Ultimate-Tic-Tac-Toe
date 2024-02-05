@@ -37,13 +37,17 @@ export default function ColorPicker() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.placeholder}>
-        <View style={styles.placeholderInset}>
-          <Text style={{color: colors.text}}>Personalise colors</Text>  
-          <Button color={ColorsPalette[valueX]}  title="X" onPress={() => {setEditing('X'); sheet.current.open() }} />
-          <Button color={ColorsPalette[valueO]}  title="O" onPress={() => {setEditing('O'); sheet.current.open() }} />
+        <Text style={[styles.personaliseText,{color: colors.text}]}>Personalise colors</Text> 
+        <View style={styles.container}>
+          <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueX]}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
+            <Text style = {styles.btnText}>X</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueO]}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
+            <Text style = {styles.btnText}>O</Text>
+          </TouchableOpacity>
         </View>
-      </View>
+        <View style={styles.separator} />
+ 
 
       <RBSheet
         customStyles={{ container: styles.sheet }}
@@ -136,24 +140,36 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   /** Placeholder */
-  placeholder: {
-    flexGrow: 1,
+  container: {
+    //borderWidth: 4,
+    //borderColor: '#e5e7eb',
+    //borderStyle: 'dashed',
+    //borderRadius: 9,
+    /*flexGrow: 1,
     flexShrink: 1,
-    flexBasis: 0,
-    height: 400,
-    marginTop: 0,
-    padding: 24,
-    backgroundColor: 'transparent',
+    flexBasis: 0,*/
+    flexDirection: 'row',
+    alignSelf : 'center',
+    padding:'5%'
+
+   
   },
-  placeholderInset: {
-    borderWidth: 4,
-    borderColor: '#e5e7eb',
-    borderStyle: 'dashed',
-    borderRadius: 9,
-    flexGrow: 0.25,
-    flexShrink: 1,
-    flexBasis: 0,
-    flexDirection: 'row'
+  buttonSelection :{
+    alignSelf: 'center',
+    width: 70,
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginHorizontal: 20, 
+  
+
+   
+    },
+  personaliseText :{
+      marginRight: 10,
+      alignSelf: 'center',
+      fontSize: 30
   },
   /** Sheet */
   sheet: {
@@ -239,5 +255,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#fff',
   }, 
+  separator:{
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb', // Color of the separator
+    marginVertical: 10, // Adjust the vertical spacing as needed
+  },
   
 });

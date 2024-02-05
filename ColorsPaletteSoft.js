@@ -3,7 +3,7 @@ export default ColorsPaletteSoft = [
     '#B8DAFF',
     '#eebec9',
     '#cbd8b8',
-    '#fdaaae',
+    '#ffa6d3',
     '#fac8ae',
     '#fce1b1',
     '#d1c5e2',

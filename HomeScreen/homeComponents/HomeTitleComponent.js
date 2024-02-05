@@ -33,9 +33,9 @@ function HomeTitleComponent(props) {
       <Text style={[styles.ultimate, props.style]}>ULTIMATE</Text>
 
       <View style={styles.tictactoe}>
-        <Text style={[styles.tic, {color : ColorsPalette[valueO]}]}>TIC</Text>
-        <Text style={[styles.tac, {color : ColorsPalette[valueX]}]}>TAC</Text>
-        <Text style={[styles.toe, {color : ColorsPalette[valueO]}]}>TOE</Text>
+        <Text style={[styles.tic, {color : ColorsPalette[valueX]}]}>TIC</Text>
+        <Text style={[styles.tac, {color : ColorsPalette[valueO]}]}>TAC</Text>
+        <Text style={[styles.toe, {color : ColorsPalette[valueX]}]}>TOE</Text>
       </View>
     </View>
   );
