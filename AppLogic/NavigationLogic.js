@@ -5,14 +5,14 @@ import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/na
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import SettingsScreen from './SettingsScreen/SettingsScreen';
+import SettingsScreen from '../SettingsScreen/SettingsScreen';
 
-import HomeScreen from './HomeScreen/HomeScreen';
-import StatisticsScreen from './StatisticsScreen';
-import RulesScreen from './RulesScreen';
-import TutorialScreen from './TutorialScreen';
-import GamePlayScreen from './GamePlayScreen';
-import ReplayScreen from './ReplayScreen';
+import HomeScreen from '../HomeScreen/HomeScreen';
+import StatisticsScreen from '../StatisticsScreen/StatisticsScreen';
+import RulesScreen from '../RulesScreen';
+import TutorialScreen from '../TutorialScreen';
+import GamePlayScreen from '../GamePlayScreen/GamePlayScreen';
+import ReplayScreen from '../StatisticsScreen/ReplayScreen';
 
 import { Ionicons } from '@expo/vector-icons';
 
