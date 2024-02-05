@@ -4,14 +4,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
 import { ThemeContext } from '../ThemeContext';
+import { ColorContext } from '../ColorContext';
+import ColorPicker from './ColorPicker';
 
 
 
+import ColorsPalette from '../ColorsPalette';
+import ColorsPaletteSoft from '../ColorsPaletteSoft';
 
 
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
+  const{valueO, valueX} = useContext(ColorContext);
+
 
   const toggleSwitch = () => {
     const changedTheme = theme == 'light'? 'dark':'light';
@@ -33,175 +39,91 @@ const SettingsScreen = ({navigation}) => {
   }
 
   return (
-  <SafeAreaView style={styles.container}>
-    <Text style={{color: colors.text}}>Welcome to the settings 
-    Foto perfil, Cambio de idiomas, modo oscuro/claro, , posibilidad de deshacer movimiento, !</Text>
-    <View style={styles.themeMode}>
-       <Text style={[styles.text, {color: colors.text}]}>Theme</Text> 
-       <Switch trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={theme == 'dark' ? "#007AFF" : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={theme == 'dark'? true: false}/>
-        <Text style={[styles.text, {color: colors.text}]}> Theme: {theme}</Text>
+  <View style={styles.container}>
+    <SafeAreaView style={{flex : 1}}>
+    <View style ={styles.containerInset}>
+
+    <View style={styles.separator} />
+    <View style={styles.themeModeContainer}>
+   
+       <Text style={[styles.textLeft, {color: colors.text}]}>Theme</Text> 
+       <View style={styles.themeMode}>
+        <Switch trackColor={{false: '#767577', true: ColorsPaletteSoft[valueO]}}
+          thumbColor={theme == 'dark' ? ColorsPaletteSoft[valueX] : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={theme == 'dark'? true: false}
+          style={{ transform: [{ scaleX: 1.5 }, { scaleY:   1.5}] }}
+          />
+      </View>
      </View>
-  </SafeAreaView>
+     <View style={styles.separator} />
+      <ColorPicker></ColorPicker> 
+      
+     
+    </View>    
+    </SafeAreaView>
+  </View>
 
 );};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
+    height: 400,
+    marginTop: 0,
+    padding: 24,
+    backgroundColor: 'transparent',
+    //borderWidth: 4,
+    //borderColor: '#e5e7eb',
+    borderStyle: 'dashed',
     
   },
-  themeMode: {
-   flexDirection: "row",
+  containerInset: {
+   // borderWidth: 4,
+    //borderColor: '#e5e7eb',
+    borderStyle: 'dashed',
+    borderRadius: 9,
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
    
-
   },
-  text: {
-    margin: 16
-  }
+  themeModeContainer: {
+   flexDirection: "row",
+   alignSelf: 'center',    
+   justifyContent: 'space-around',
+   width: '50%'
+
+  
+  },
+  themeMode: {
+    
+   },
+  textLeft: {
+    //margin: 16
+    alignSelf: 'center',
+    fontSize: 30
+  },
+  textRight: {
+    //margin: 16
+    alignSelf: 'center',
+    fontSize: 30,
+    marginLeft: 30
+    
+  },
+  separator:{
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb', // Color of the separator
+    marginVertical: 10, // Adjust the vertical spacing as needed
+  },
 });
 
 export default SettingsScreen;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//const colorScheme = useColorScheme();
-  //const state = colorScheme === 'dark'? true: false;
-
-/*const SettingsScreen = () => {
-  const colorScheme = useColorScheme();
-  const defaultTheme = colorScheme === 'dark'? true: false;
-
-  const [isDarkMode, setisDarkMode] = useState(defaultTheme);
-
-  if (colorScheme === 'dark') {
-    console.log('dark');
-  }else{
-    console.log('light');
-  }
-  useEffect(() => {
-    const getThemeFromStorage = async () => {
-      try {
-        const value = await AsyncStorage.getItem('THEME'); 
-        if (value !== null) {
-          const iniTheme = JSON.parse(value)? 'dark' : 'light'
-          setisDarkMode(JSON.parse(value));
-          console.log('Theme ' + value);
-          Appearance.setColorScheme('dark');
-          console.log("Initial theme " + iniTheme);
-          const help = Appearance.getColorScheme();
-          console.log("Actual initial theme " + help);
-          
-        }else{
-            const iniTheme = defaultTheme? 'dark' : 'light';
-            Appearance.setColorScheme('dark');
-            
-        }
-        
-      } catch (error) {
-        console.error('Error retrieving game from AsyncStorage:', error);
-      }
-    };
-  
-    getThemeFromStorage();
-  
-  }, []);
-  
-  
-  
-  const toggleSwitch = () => {
-    //console.log("Theme before toggle: " + isDarkMode);
-    const currentTheme = !isDarkMode;
-    setisDarkMode(currentTheme);
-    _storeData = async () => {
-         try {
-          await AsyncStorage.setItem(
-            'THEME',
-            JSON.stringify(currentTheme),
-          )
-        } catch (error) {
-          // Error saving data
-        }
-      const theme = currentTheme? 'dark' : 'light';
-      Appearance.setColorScheme(theme);
-      alert("Entered " + theme + " mode");
-      const help = Appearance.getColorScheme();
-      console.log("Actual initial theme " + help);
-    }
-    _storeData();
-   // AsyncStorage.setItem('THEME', JSON.stringify(!currentTheme));
-
-  }
-  return (
-  <SafeAreaView style={styles.container}>
-    <Text>Welcome to the settings 
-    Foto perfil, Cambio de idiomas, modo oscuro/claro, , posibilidad de deshacer movimiento, !</Text>
-    <View style={styles.themeMode}>
-       <Text style={styles.text}>Theme</Text> 
-       <Switch trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isDarkMode}/>
-        <Text style={styles.text}>{isDarkMode? 'Dark' : 'Light'}</Text>
-     </View>
-  </SafeAreaView>
-
-);};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    
-  },
-  themeMode: {
-   flexDirection: "row",
-   
-
-  },
-  text: {
-    margin: 16
-  }
-});
-
-export default SettingsScreen;*/
-
-
+//<View style={styles.placeholder}> 
+/*<Text style={{color: colors.text}}>Welcome to the settings 
+Foto perfil, Cambio de idiomas, modo oscuro/claro, , posibilidad de deshacer movimiento, !</Text>*/

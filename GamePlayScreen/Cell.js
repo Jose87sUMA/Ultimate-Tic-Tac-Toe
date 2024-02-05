@@ -2,6 +2,7 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
+
 const Cell = (props) => {
   const colorBackground = props.nextMoveHere ? props.currentPlayer === 'X' ? '#B8DAFF':'#FFAAA6':null;
   const colorBorderAndText = props.value !== ' ' ? props.value === 'X' ? '#007AFF':'#FF3B30':'#000000';

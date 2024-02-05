@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-function PlayButtonComponent(props) {
+function ButtonComponent(props) {
   return (
     <TouchableOpacity style={[styles.container, props.style]} onPress={props.onPress}>
-      <Text style={styles.play}>{props.text }</Text>
+      <Text style={styles.text}>{props.text }</Text>
     </TouchableOpacity>
   );
 }
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
   },
-  play: {
+  text: {
     color: "#fff",
     fontSize: 17
   }
 });
 
-export default PlayButtonComponent;
+export default ButtonComponent;

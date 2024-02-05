@@ -1,0 +1,264 @@
+import {React, useContext, useState, useRef, useEffect} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  SafeAreaView,
+  Button
+} from 'react-native';
+import { ColorContext } from '../ColorContext';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ColorsPalette from '../ColorsPalette.js';
+import ColorsPaletteSoft from '../ColorsPaletteSoft.js';
+import { useTheme } from '@react-navigation/native';
+
+
+const CIRCLE_SIZE = 40;
+const CIRCLE_RING_SIZE = 2;
+
+
+
+export default function ColorPicker() {
+   
+
+  const {colors} = useTheme();
+    
+  const {valueX, setvalueX, valueO, setvalueO} = useContext(ColorContext);
+  
+  const [editing, setEditing] = useState('O');
+  const sheet = useRef();
+
+ 
+
+
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+        <Text style={[styles.personaliseText,{color: colors.text}]}>Personalise colors</Text> 
+        <View style={styles.container}>
+          <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueX]}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
+            <Text style = {styles.btnText}>X</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueO]}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
+            <Text style = {styles.btnText}>O</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.separator} />
+ 
+
+      <RBSheet
+        customStyles={{ container: styles.sheet }}
+        height={440}
+        openDuration={250}
+        ref={sheet}>
+        <View style={[styles.sheetHeader, editing === 'X' && {backgroundColor: ColorsPalette[valueX]}, editing === 'O' && {backgroundColor: ColorsPalette[valueO]}]}>
+          <Text style={styles.sheetHeaderTitle}>{editing === 'X'? 'Select a color for X' : 'Select a color for O'} </Text>
+        </View>
+        <View style={[styles.sheetBody, editing === 'X' && {backgroundColor : ColorsPaletteSoft[valueX]}, editing === 'O' && {backgroundColor : ColorsPaletteSoft[valueO]}]}>
+          <View style={[styles. mainSymbole,
+            editing === 'X' && { backgroundColor: ColorsPalette[valueX] },
+            editing === 'O' && { backgroundColor: ColorsPalette[valueO] }]}>
+            <Text style={styles. mainSymboleText}>{editing === 'X'? 'X' : 'O'}</Text>
+          </View>
+          <View style={styles.group}>
+            {ColorsPalette.map((item, index) => {
+              const isActive = editing === 'X'? valueX === index : valueO === index ;
+              const isInactive = editing === 'X'? valueO === index : valueX === index ;
+              return (
+                <View key={item}>
+                  <TouchableWithoutFeedback
+
+                    onPress={() => {
+                        if(!isInactive){
+                            
+                            if(editing == 'X'){
+                                setvalueX(index);
+                                _storeData = async () => {
+                                    try {
+                                     await AsyncStorage.setItem(
+                                       'COLORX',
+                                       JSON.stringify(index),
+                                     )
+                                   } catch (error) {
+                                     // Error saving data
+                                   }};
+                                   _storeData();
+                            }else  if(editing == 'O'){
+                                setvalueO(index);
+                                _storeData = async () => {
+                                    try {
+                                     await AsyncStorage.setItem(
+                                       'COLORO',
+                                       JSON.stringify(index),
+                                     )
+                                   } catch (error) {
+                                     // Error saving data
+                                   }};
+                                   _storeData();
+                                   
+                            }  
+                        }
+                      
+                      
+                    }}>
+                    <View
+                      style={[
+                        styles.circle,
+                        isActive && { borderColor: item },
+                       
+                      ]}>
+                      <View
+                        style={[styles.circleInside, !isInactive && { backgroundColor: item }]}/>
+                        <Text style={[styles.circleText, {color: item }]}>{isInactive ? editing === 'X'? 'O' : 'X' : ''}</Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </View>
+              );
+            })}
+          </View>
+          <TouchableOpacity
+            style={[styles.btn, editing === 'X' && {backgroundColor: ColorsPalette[valueX]}, editing === 'O' && {backgroundColor: ColorsPalette[valueO]}]}
+            onPress={() => {
+                sheet.current.close()
+            }}>
+            <Text style={[styles.btnText]}>Done</Text>
+          </TouchableOpacity>
+        </View>
+      </RBSheet>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  group: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    marginBottom: 12,
+  },
+  /** Placeholder */
+  container: {
+    //borderWidth: 4,
+    //borderColor: '#e5e7eb',
+    //borderStyle: 'dashed',
+    //borderRadius: 9,
+    /*flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,*/
+    flexDirection: 'row',
+    alignSelf : 'center',
+    padding:'5%'
+
+   
+  },
+  buttonSelection :{
+    alignSelf: 'center',
+    width: 70,
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginHorizontal: 20, 
+  
+
+   
+    },
+  personaliseText :{
+      marginRight: 10,
+      alignSelf: 'center',
+      fontSize: 30
+  },
+  /** Sheet */
+  sheet: {
+    borderTopLeftRadius: 14,
+    borderTopRightRadius: 14,
+  },
+  sheetHeader: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#efefef',
+    paddingHorizontal: 24,
+    paddingVertical: 14,
+  },
+  sheetHeaderTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'white'
+  },
+  sheetBody: {
+    padding: 24,
+  },
+  /**  mainSymbole */
+   mainSymbole: {
+    alignSelf: 'center',
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 9999,
+    marginBottom: 24,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
+   mainSymboleText: {
+    fontSize: 34,
+    fontWeight: '600',
+    color: 'white',
+  },
+  /** Circle */
+  circle: {
+    width: CIRCLE_SIZE + CIRCLE_RING_SIZE * 4,
+    height: CIRCLE_SIZE + CIRCLE_RING_SIZE * 4,
+    borderRadius: 9999,
+    
+    borderWidth: CIRCLE_RING_SIZE,
+    borderColor: 'transparent',
+    marginRight: 8,
+    marginBottom: 12,
+  },
+  circleInside: {
+    width: CIRCLE_SIZE,
+    height: CIRCLE_SIZE,
+    borderRadius: 9999,
+    position: 'absolute',
+    top: CIRCLE_RING_SIZE,
+    left: CIRCLE_RING_SIZE,
+    
+    
+  },
+  circleText: {
+    fontSize: CIRCLE_SIZE*0.75,
+    fontWeight: 'bold',
+    alignSelf : 'center',
+  },
+  /** Button */
+  btn: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 6,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: '#fff',
+    backgroundColor: '#000',
+    marginBottom: 12,
+  },
+  btnText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#fff',
+  }, 
+  separator:{
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb', // Color of the separator
+    marginVertical: 10, // Adjust the vertical spacing as needed
+  },
+  
+});
