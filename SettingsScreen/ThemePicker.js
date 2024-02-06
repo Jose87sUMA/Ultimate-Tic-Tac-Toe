@@ -12,7 +12,7 @@ import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
 
 
-const ThemePicker = ({navigation}) => {
+const ThemePicker = (props) => {
   const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
   const{valueO, valueX} = useContext(ColorContext);
@@ -38,15 +38,15 @@ const ThemePicker = ({navigation}) => {
   }
 
   return (
-    <View style={styles.themeModeContainer}>
-       <Text style={[styles.text, {color: colors.text}]}>Theme</Text> 
+    <View style={[styles.themeModeContainer, props.styleContainer]}>
+       <Text style={[styles.text, props.styleText]}>Theme</Text> 
        <View style={styles.themeMode}>
-        <Switch trackColor={{false: '#767577', true: ColorsPaletteSoft[valueO]}}
-          thumbColor={theme == 'dark' ? ColorsPaletteSoft[valueX] : '#f4f3f4'}
+        <Switch trackColor={{false: '#767577', true: '#E8E8E8'}}
+          thumbColor={theme == 'dark' ? '#606060' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={theme == 'dark'? true: false}
-          style={{ transform: [{ scaleX: 1.5 }, { scaleY:   1.5}] }}
+          style={{ transform: [{ scaleX: 1}, { scaleY:   1}] }}
           />
         </View>
     </View>
@@ -57,14 +57,24 @@ const styles = StyleSheet.create({
   themeModeContainer: {
    flexDirection: "row",
    alignSelf: 'center',    
-   justifyContent: 'space-around',
-   width: '50%'
+   //justifyContent: 'space-around',
+   width: '50%',
+   backgroundColor: 'gray',
+   borderWidth: 4,
+   borderRadius: 9,
+  
+
+   
+  }, 
+  themeMode: {
+    marginLeft:  '45%',
+   
+
+    
   },
   text :{
 
-    alignSelf: 'center',
-    fontSize: 30
-},
+    },
 });
 
 export default ThemePicker;

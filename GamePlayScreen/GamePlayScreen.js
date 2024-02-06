@@ -90,9 +90,7 @@ const GamePlayScreen = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button title='delete all games' onPress={() => {
-        AsyncStorage.removeItem('finishedGames');
-      }}></Button>
+    
       <Text style={{...styles.currentPlayerText, color: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30'}}>{gameInstance.currentPlayer} turn</Text>
       <View style={{height: 2, width: '100%', backgroundColor: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30', marginBottom: 25}} />
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>

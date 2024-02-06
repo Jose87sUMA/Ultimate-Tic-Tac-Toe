@@ -100,17 +100,17 @@ const HomeScreen = ({navigation}) => {
       <HomeTitleComponent style={[styles.HomeTitleComponent, {color: colors.text}]}></HomeTitleComponent>
       <View style={styles.buttons}>
         <ButtonComponent
-          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX]}]}
+          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
           text={"NEW GAME"}
           onPress={() => setModalVisible(true)}
         ></ButtonComponent>
         <ButtonComponent
-          style={[styles.middleButton, {backgroundColor: ColorsPalette[valueO]}]}
+          style={[styles.middleButton, {backgroundColor: ColorsPalette[valueO], borderColor: colors.text}]}
           text={"CONTINUE"}
           onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: true})}
         ></ButtonComponent>
         <ButtonComponent
-          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX]}]}
+          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
           text={"TUTORIAL"}
           onPress={() => navigation.navigate('Tutorial')}
         ></ButtonComponent>

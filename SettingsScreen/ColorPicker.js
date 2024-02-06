@@ -21,12 +21,12 @@ const CIRCLE_RING_SIZE = 2;
 
 
 
-export default function ColorPicker() {
+export default function ColorPicker(props) {
    
 
   const {colors} = useTheme();
     
-  const {valueX, setvalueX, valueO, setvalueO} = useContext(ColorContext);
+  const {valueX, setValueX, valueO, setValueO} = useContext(ColorContext);
   
   const [editing, setEditing] = useState('O');
   const sheet = useRef();
@@ -36,13 +36,13 @@ export default function ColorPicker() {
 
 
   return (
-    <SafeAreaView >
-        <Text style={[styles.personaliseText,{color: colors.text}]}>Personalise colors</Text> 
-        <View style={styles.container}>
-          <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueX]}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
+    <SafeAreaView style={[styles.container, props.styleContainer]}>
+        <Text style={[props.styleText, styles.personaliseText]}>Personalise colors</Text> 
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueX], borderColor:  colors.text}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
             <Text style = {styles.btnText}>X</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueO]}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
+          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueO], borderColor:  colors.text}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
             <Text style = {styles.btnText}>O</Text>
           </TouchableOpacity>
         </View>
@@ -75,7 +75,7 @@ export default function ColorPicker() {
                         if(!isInactive){
                             
                             if(editing == 'X'){
-                                setvalueX(index);
+                                setValueX(index);
                                 _storeData = async () => {
                                     try {
                                      await AsyncStorage.setItem(
@@ -87,7 +87,7 @@ export default function ColorPicker() {
                                    }};
                                    _storeData();
                             }else  if(editing == 'O'){
-                                setvalueO(index);
+                                setValueO(index);
                                 _storeData = async () => {
                                     try {
                                      await AsyncStorage.setItem(
@@ -138,9 +138,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexWrap: 'wrap',
     marginBottom: 12,
+
   },
   /** Placeholder */
   container: {
+    borderWidth: 4,
+    //borderColor: '#e5e7eb',
+    //borderStyle: 'dashed',
+    borderRadius: 9,
+    /*flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,*/
+    flexDirection: 'column',
+    alignSelf : 'center',
+    backgroundColor: 'gray',
+    
+    
+  },
+  buttonContainer: {
     //borderWidth: 4,
     //borderColor: '#e5e7eb',
     //borderStyle: 'dashed',
@@ -150,23 +165,21 @@ const styles = StyleSheet.create({
     flexBasis: 0,*/
     flexDirection: 'row',
     alignSelf : 'center',
-    padding:'5%'
-
-   
+    padding:'10%',
   },
-  buttonSelection :{
+  buttonSelColor :{
     alignSelf: 'center',
     width: 70,
     height: 70,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 5,
     marginHorizontal: 20, 
+    borderRadius: 5,
+    borderWidth: 1,
     },
   personaliseText :{
-      marginRight: 10,
-      alignSelf: 'center',
-      fontSize: 30
+      
+     
   },
   /** Sheet */
   sheet: {
@@ -229,8 +242,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: CIRCLE_RING_SIZE,
     left: CIRCLE_RING_SIZE,
-    
-    
   },
   circleText: {
     fontSize: CIRCLE_SIZE*0.75,

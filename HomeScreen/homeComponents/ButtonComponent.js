@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 16,
     paddingRight: 16,
+    borderRadius: 5,
+    borderWidth: 1,
     
   },
   text: {

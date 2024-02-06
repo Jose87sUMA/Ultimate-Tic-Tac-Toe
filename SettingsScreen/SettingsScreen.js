@@ -7,6 +7,7 @@ import { ThemeContext } from '../styles/contexts/ThemeContext';
 import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorPicker from './ColorPicker';
 import ThemePicker from './ThemePicker';
+import ResetColorTheme from './ResetColorTheme';
 import * as Font from 'expo-font';
 
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
@@ -27,15 +28,14 @@ const SettingsScreen = ({navigation}) => {
   return (
   <View style={styles.container}>
     <SafeAreaView style={{flex : 1}}>
-    <View style ={styles.containerInset}>
     <Text style={[styles.headerTitle, {color: colors.text}]}>Settings</Text>
 
     <View style={{...styles.separator}} />
-   
-    <ThemePicker></ThemePicker> 
-     <View style={styles.separator} />
-      <ColorPicker></ColorPicker> 
-      <View style={styles.separator} />
+    <View style ={styles.containerInset}>
+    <ThemePicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer = {{...styles.boxOptions, backgroundColor: colors.border}}></ThemePicker> 
+    <ColorPicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}}></ColorPicker> 
+    <ResetColorTheme styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}}></ResetColorTheme> 
+     
     </View>    
     </SafeAreaView>
   </View>
@@ -47,24 +47,25 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
-    
     backgroundColor: 'transparent',
     //borderWidth: 4,
     //borderColor: '#e5e7eb',
-    borderStyle: 'dashed',
+    //borderStyle: 'dashed',
 
     
   },
   containerInset: {
    // borderWidth: 4,
     //borderColor: '#e5e7eb',
-    borderStyle: 'dashed',
+    //borderStyle: 'dashed',
     borderRadius: 9,
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
     alignSelf: 'center',
-    width: '100%'
+    width: '100%',
+    justifyContent: 'center'
+    
    
   },
   headerTitle: {
@@ -81,11 +82,29 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'gray', 
   },
+  textOptions:{
+    
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
+    marginLeft: 10,
+    borderColor: 'black',
+    
+    fontFamily: 'Acme',
+    
+    
+  },
+  boxOptions:{
+    width: '75%',
+    justifyContent: 'left',
+    borderWidth: 0,
+    margin: 5,
+    paddingVertical: '5%',
+    backgroundColor: '#B8DAFF'
+    
+  },
 });
 
 export default SettingsScreen;
 
 
-//<View style={styles.placeholder}> 
-/*<Text style={{color: colors.text}}>Welcome to the settings 
-Foto perfil, Cambio de idiomas, modo oscuro/claro, , posibilidad de deshacer movimiento, !</Text>*/

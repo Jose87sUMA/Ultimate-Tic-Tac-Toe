@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 
 import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import * as Font from 'expo-font';
 import ParsedText from 'react-native-parsed-text';
 import { ColorContext } from './styles/contexts/ColorContext';
 import ColorsPalette from './styles/colorsPalettes/ColorsPalette';
 import ButtonComponent from './HomeScreen/homeComponents/ButtonComponent';
-
+import * as Font from 'expo-font';
 
 const loadFonts = async () => {
   await Font.loadAsync({
@@ -34,14 +33,15 @@ const {colors} = useTheme();
 return (
   <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
     <Text style={[styles.headerTitle, { color: colors.text }]}>Rules</Text>
+    <View style = {styles.separator}></View>
     <ScrollView style={styles.scroll}>
       {paragraphs.map((paragraph, index) => (
         <ParsedText
           key={index}
           style={[styles.text, { color: colors.text }]}
           parse={[
-            { pattern: /\bX\b/, style: { color: ColorsPalette[valueX], fontWeight: 'bold' } },
-            { pattern: /\bO\b/, style: { color: ColorsPalette[valueO], fontWeight: 'bold' } },
+            { pattern: /\bX\b/, style: { color: ColorsPalette[valueX] } },
+            { pattern: /\bO\b/, style: { color: ColorsPalette[valueO] } },
           ]}
         >
           {paragraph}
@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     fontSize: 19,
     marginTop: "5%", 
-    textAlign: 'justify'
+    textAlign: 'justify',
+    fontWeight: 'bold',
 
   }, 
   headerTitle: {
@@ -94,6 +95,12 @@ const styles = StyleSheet.create({
     marginVertical: 20,
    
 
+  },
+  separator: {
+    height: 2, 
+  
+    width: '100%',
+    backgroundColor: 'gray', 
   },
   
   
