@@ -135,9 +135,9 @@ const TutorialScreen = ({navigation}) => {
       <WinnerModal modalVisible={modalVisible} winner={winner} setModalVisible={setModalVisible} navigation={navigation}/>
       <Text style={{...styles.currentPlayerText, color: currentPlayerColor}}>{gameInstance.currentPlayer} turn</Text>
       <View style={{...styles.separator, backgroundColor: currentPlayerColor,}}/>
-      {<View style={{alignItems: 'center', marginBottom: 20}}>
-        <Progress.Bar progress={progress/100} width={200} color={gameInstance.AISymbol === 'X' ? '#007AFF' : '#FF3B30'}/>
-      </View>}
+      <View style={{alignItems: 'center', marginBottom: 20}}>
+        <Progress.Bar progress={progress/100} width={400} color={gameInstance.AISymbol === 'X' ? '#007AFF' : '#FF3B30'}/>
+      </View>
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
 
       <RBSheet

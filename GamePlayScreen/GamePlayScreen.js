@@ -41,6 +41,7 @@ const GamePlayScreen = ({route, navigation}) => {
 
     if(newGameInstance.getWinner() !== null){
       setModalVisible(true);
+      newGameInstance.storeFinishedGame();
       AsyncStorage.removeItem('game');
       return;
     }

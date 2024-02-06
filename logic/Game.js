@@ -120,9 +120,6 @@ class Game {
       pos = -2;
 
       this.finishedDate = new Date().toLocaleString();
-
-      //Save the game to the list of finished games
-      this.storeFinishedGame();
     }
 
     // UPDATE VALUES
