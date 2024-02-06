@@ -8,8 +8,8 @@ import * as Progress from 'react-native-progress';
 
 import BigBoard from './GamePlayScreen/BigBoard';
 import WinnerModal from './GamePlayScreen/WinnerModal.js';
-import Game from './logic/Game';
-import monteCarloTreeSearch from './logic/MonteCarloTreeSearch.js';
+import Game from './GameLogic/Game.js';
+import monteCarloTreeSearch from './GameLogic/MonteCarloTreeSearch.js';
 
 
 const loadFonts = async () => {
