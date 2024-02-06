@@ -10,18 +10,21 @@ import MyLightTheme from '../styles/themes/MyLightTheme';
 
 const ThemeLogic = () => {
 
-
+const [valueX, setValueX] = useState(1);
+const [valueO, setValueO] = useState(0);
 useEffect(() => {
   const getColorFromStorage = async () => {
     try {
       const valueX = await AsyncStorage.getItem('COLORX'); 
       const valueO = await AsyncStorage.getItem('COLORO'); 
       if (valueX !== null ) {
-        setvalueX(JSON.parse(valueX));
+        setValueX(JSON.parse(valueX));
+       
           
       }
       if (valueO !== null ){
-          setvalueO(JSON.parse(valueO));
+          setValueO(JSON.parse(valueO));
+          
       }
     } catch (error) {
       console.error('Error retrieving game from AsyncStorage:', error);
@@ -30,9 +33,8 @@ useEffect(() => {
 
   getColorFromStorage();
 }, []);
-const [valueX, setvalueX] = useState(valueX === null? 0 : valueX);
-const [valueO, setvalueO] = useState(valueO === null? 0 : valueO);
-const colorData = { valueX, setvalueX, valueO, setvalueO };
+
+const colorData = { valueX, setValueX, valueO, setValueO };
 
 const defaultColorScheme = useColorScheme();
 const [theme, setTheme] = useState(defaultColorScheme);

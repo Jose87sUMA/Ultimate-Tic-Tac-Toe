@@ -21,12 +21,12 @@ const CIRCLE_RING_SIZE = 2;
 
 
 
-export default function ColorPicker() {
+export default function ColorPicker(props) {
    
 
   const {colors} = useTheme();
     
-  const {valueX, setvalueX, valueO, setvalueO} = useContext(ColorContext);
+  const {valueX, setValueX, valueO, setValueO} = useContext(ColorContext);
   
   const [editing, setEditing] = useState('O');
   const sheet = useRef();
@@ -36,21 +36,21 @@ export default function ColorPicker() {
 
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-        <Text style={[styles.personaliseText,{color: colors.text}]}>Personalise colors</Text> 
-        <View style={styles.container}>
-          <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueX]}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
+    <SafeAreaView style={[styles.container, props.styleContainer]}>
+        <Text style={[props.styleText, styles.personaliseText]}>Personalise colors</Text> 
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueX], borderColor:  colors.text}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
             <Text style = {styles.btnText}>X</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueO]}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
+          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueO], borderColor:  colors.text}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
             <Text style = {styles.btnText}>O</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.separator} />
+        
  
 
       <RBSheet
-        customStyles={{ container: styles.sheet }}
+        customStyles={{ container: { ...styles.sheet, backgroundColor: editing === 'X'? ColorsPaletteSoft[valueX] : ColorsPaletteSoft[valueO] } }}
         height={440}
         openDuration={250}
         ref={sheet}>
@@ -75,7 +75,7 @@ export default function ColorPicker() {
                         if(!isInactive){
                             
                             if(editing == 'X'){
-                                setvalueX(index);
+                                setValueX(index);
                                 _storeData = async () => {
                                     try {
                                      await AsyncStorage.setItem(
@@ -87,7 +87,7 @@ export default function ColorPicker() {
                                    }};
                                    _storeData();
                             }else  if(editing == 'O'){
-                                setvalueO(index);
+                                setValueO(index);
                                 _storeData = async () => {
                                     try {
                                      await AsyncStorage.setItem(
@@ -138,9 +138,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexWrap: 'wrap',
     marginBottom: 12,
+
   },
   /** Placeholder */
   container: {
+    borderWidth: 4,
+    //borderColor: '#e5e7eb',
+    //borderStyle: 'dashed',
+    borderRadius: 9,
+    /*flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,*/
+    flexDirection: 'column',
+    alignSelf : 'center',
+    backgroundColor: 'gray',
+    
+    
+  },
+  buttonContainer: {
     //borderWidth: 4,
     //borderColor: '#e5e7eb',
     //borderStyle: 'dashed',
@@ -150,31 +165,27 @@ const styles = StyleSheet.create({
     flexBasis: 0,*/
     flexDirection: 'row',
     alignSelf : 'center',
-    padding:'5%'
-
-   
+    padding:'10%',
   },
-  buttonSelection :{
+  buttonSelColor :{
     alignSelf: 'center',
     width: 70,
     height: 70,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 5,
     marginHorizontal: 20, 
-  
-
-   
+    borderRadius: 5,
+    borderWidth: 1,
     },
   personaliseText :{
-      marginRight: 10,
-      alignSelf: 'center',
-      fontSize: 30
+      
+     
   },
   /** Sheet */
   sheet: {
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
+    backgroundColor: 'red',
   },
   sheetHeader: {
     borderBottomWidth: 1,
@@ -231,8 +242,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: CIRCLE_RING_SIZE,
     left: CIRCLE_RING_SIZE,
-    
-    
   },
   circleText: {
     fontSize: CIRCLE_SIZE*0.75,
@@ -251,14 +260,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   btnText: {
-    fontSize: 16,
+    fontSize: 30,
     fontWeight: '600',
     color: '#fff',
   }, 
-  separator:{
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb', // Color of the separator
-    marginVertical: 10, // Adjust the vertical spacing as needed
-  },
+  
   
 });

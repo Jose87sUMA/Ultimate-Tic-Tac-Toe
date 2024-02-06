@@ -1,5 +1,5 @@
 // NavigationLogic.js
-import {React, useState} from 'react';
+import {React, useState, useContext} from 'react';
 import {useColorScheme} from 'react-native';
 import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -14,15 +14,20 @@ import TutorialScreen from '../TutorialScreen';
 import GamePlayScreen from '../GamePlayScreen/GamePlayScreen';
 import ReplayScreen from '../StatisticsScreen/ReplayScreen';
 
+import { ColorContext } from '../styles/contexts/ColorContext';
+
 import { Ionicons } from '@expo/vector-icons';
 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+
+
 const NavigationLogic = () => {
   //const scheme = useColorScheme();
-  const scheme = 'dark';
+  
+
   return (
       <TabNavigator />
     );
@@ -30,6 +35,7 @@ const NavigationLogic = () => {
 };
 
 const TabNavigator = () => {
+  const {valueX, valueO} = useContext(ColorContext);
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -47,8 +53,8 @@ const TabNavigator = () => {
         }
         return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: "#FF3B30",
-        tabBarInactiveTintColor: "#007AFF",
+        tabBarActiveTintColor: ColorsPalette[valueO],
+        tabBarInactiveTintColor:  ColorsPalette[valueX],
         tabBarStyle: { height: 60 }, // Adjust the height as needed
         labelStyle: { fontSize: 14 },
         headerShown:false,

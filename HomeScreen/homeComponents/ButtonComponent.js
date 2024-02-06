@@ -18,10 +18,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 16,
     paddingRight: 16,
+    borderRadius: 5,
+    borderWidth: 1,
+    
   },
   text: {
     color: "#fff",
-    fontSize: 17
+    fontSize: 17,
+    fontWeight: 'bold'
   }
 });
 

@@ -7,7 +7,7 @@ import ColorsPalette from '../../styles/colorsPalettes/ColorsPalette';
 // Function to load custom font
 const loadFonts = async () => {
   await Font.loadAsync({
-    Acme: require('../../assets/fonts/Acme.ttf'), 
+    Acme: require('../../assets/fonts/ArchivoBlack Regular.ttf'), 
   });
 };
 

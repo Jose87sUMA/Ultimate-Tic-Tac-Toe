@@ -6,9 +6,18 @@ import { useTheme } from '@react-navigation/native';
 import { ThemeContext } from '../styles/contexts/ThemeContext';
 import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorPicker from './ColorPicker';
+import ThemePicker from './ThemePicker';
+import ResetColorTheme from './ResetColorTheme';
+import * as Font from 'expo-font';
 
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
+
+const loadFonts = async () => {
+  await Font.loadAsync({
+    Acme: require('../assets/fonts/Acme.ttf'), 
+  });
+};
 
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
@@ -16,47 +25,16 @@ const SettingsScreen = ({navigation}) => {
   const{valueO, valueX} = useContext(ColorContext);
 
 
-  const toggleSwitch = () => {
-    const changedTheme = theme == 'light'? 'dark':'light';
-    setTheme(changedTheme);
-    _storeData = async () => {
-         try {
-          await AsyncStorage.setItem(
-            'THEME',
-            JSON.stringify(changedTheme),
-          )
-        } catch (error) {
-          // Error saving data
-        }
-
-    Appearance.setColorScheme(changedTheme);
-    }
-    _storeData();
-
-  }
-
   return (
   <View style={styles.container}>
     <SafeAreaView style={{flex : 1}}>
-    <View style ={styles.containerInset}>
+    <Text style={[styles.headerTitle, {color: colors.text}]}>Settings</Text>
 
-    <View style={styles.separator} />
-    <View style={styles.themeModeContainer}>
-   
-       <Text style={[styles.textLeft, {color: colors.text}]}>Theme</Text> 
-       <View style={styles.themeMode}>
-        <Switch trackColor={{false: '#767577', true: ColorsPaletteSoft[valueO]}}
-          thumbColor={theme == 'dark' ? ColorsPaletteSoft[valueX] : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={theme == 'dark'? true: false}
-          style={{ transform: [{ scaleX: 1.5 }, { scaleY:   1.5}] }}
-          />
-      </View>
-     </View>
-     <View style={styles.separator} />
-      <ColorPicker></ColorPicker> 
-      
+    <View style={{...styles.separator}} />
+    <View style ={styles.containerInset}>
+    <ThemePicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer = {{...styles.boxOptions, backgroundColor: colors.border}}></ThemePicker> 
+    <ColorPicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}}></ColorPicker> 
+    <ResetColorTheme styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}}></ResetColorTheme> 
      
     </View>    
     </SafeAreaView>
@@ -69,58 +47,64 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
-    height: 400,
-    marginTop: 0,
-    padding: 24,
     backgroundColor: 'transparent',
     //borderWidth: 4,
     //borderColor: '#e5e7eb',
-    borderStyle: 'dashed',
+    //borderStyle: 'dashed',
+
     
   },
   containerInset: {
    // borderWidth: 4,
     //borderColor: '#e5e7eb',
-    borderStyle: 'dashed',
+    //borderStyle: 'dashed',
     borderRadius: 9,
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
+    alignSelf: 'center',
+    width: '100%',
+    justifyContent: 'center'
+    
    
   },
-  themeModeContainer: {
-   flexDirection: "row",
-   alignSelf: 'center',    
-   justifyContent: 'space-around',
-   width: '50%'
+  headerTitle: {
+    fontSize: 50,
+    fontFamily: 'Acme',
+    marginTop: 20,
+    marginBottom: 20,
+    alignSelf: 'center'
 
-  
   },
-  themeMode: {
+  separator: {
+    height: 2, 
+    marginVertical: 10,
+    width: '100%',
+    backgroundColor: 'gray', 
+  },
+  textOptions:{
     
-   },
-  textLeft: {
-    //margin: 16
-    alignSelf: 'center',
-    fontSize: 30
-  },
-  textRight: {
-    //margin: 16
-    alignSelf: 'center',
-    fontSize: 30,
-    marginLeft: 30
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
+    marginLeft: 10,
+    borderColor: 'black',
+    
+    fontFamily: 'Acme',
+    
     
   },
-  separator:{
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb', // Color of the separator
-    marginVertical: 10, // Adjust the vertical spacing as needed
+  boxOptions:{
+    width: '75%',
+    justifyContent: 'left',
+    borderWidth: 0,
+    margin: 5,
+    paddingVertical: '5%',
+    backgroundColor: '#B8DAFF'
+    
   },
 });
 
 export default SettingsScreen;
 
 
-//<View style={styles.placeholder}> 
-/*<Text style={{color: colors.text}}>Welcome to the settings 
-Foto perfil, Cambio de idiomas, modo oscuro/claro, , posibilidad de deshacer movimiento, !</Text>*/
