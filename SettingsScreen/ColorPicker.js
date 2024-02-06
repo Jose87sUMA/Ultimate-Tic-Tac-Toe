@@ -36,7 +36,7 @@ export default function ColorPicker() {
 
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView >
         <Text style={[styles.personaliseText,{color: colors.text}]}>Personalise colors</Text> 
         <View style={styles.container}>
           <TouchableOpacity style={[styles.buttonSelection, {backgroundColor: ColorsPalette[valueX]}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
@@ -46,11 +46,11 @@ export default function ColorPicker() {
             <Text style = {styles.btnText}>O</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.separator} />
+        
  
 
       <RBSheet
-        customStyles={{ container: styles.sheet }}
+        customStyles={{ container: { ...styles.sheet, backgroundColor: editing === 'X'? ColorsPaletteSoft[valueX] : ColorsPaletteSoft[valueO] } }}
         height={440}
         openDuration={250}
         ref={sheet}>
@@ -162,9 +162,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 5,
     marginHorizontal: 20, 
-  
-
-   
     },
   personaliseText :{
       marginRight: 10,
@@ -175,6 +172,7 @@ const styles = StyleSheet.create({
   sheet: {
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
+    backgroundColor: 'red',
   },
   sheetHeader: {
     borderBottomWidth: 1,
@@ -251,14 +249,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   btnText: {
-    fontSize: 16,
+    fontSize: 30,
     fontWeight: '600',
     color: '#fff',
   }, 
-  separator:{
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb', // Color of the separator
-    marginVertical: 10, // Adjust the vertical spacing as needed
-  },
+  
   
 });

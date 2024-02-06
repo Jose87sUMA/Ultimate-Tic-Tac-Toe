@@ -6,12 +6,17 @@ import { useTheme } from '@react-navigation/native';
 import { ThemeContext } from '../styles/contexts/ThemeContext';
 import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorPicker from './ColorPicker';
-
-
+import ThemePicker from './ThemePicker';
+import * as Font from 'expo-font';
 
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
 
+const loadFonts = async () => {
+  await Font.loadAsync({
+    Acme: require('../assets/fonts/Acme.ttf'), 
+  });
+};
 
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
@@ -19,48 +24,18 @@ const SettingsScreen = ({navigation}) => {
   const{valueO, valueX} = useContext(ColorContext);
 
 
-  const toggleSwitch = () => {
-    const changedTheme = theme == 'light'? 'dark':'light';
-    setTheme(changedTheme);
-    _storeData = async () => {
-         try {
-          await AsyncStorage.setItem(
-            'THEME',
-            JSON.stringify(changedTheme),
-          )
-        } catch (error) {
-          // Error saving data
-        }
-
-    Appearance.setColorScheme(changedTheme);
-    }
-    _storeData();
-
-  }
-
   return (
   <View style={styles.container}>
     <SafeAreaView style={{flex : 1}}>
     <View style ={styles.containerInset}>
+    <Text style={[styles.headerTitle, {color: colors.text}]}>Settings</Text>
 
-    <View style={styles.separator} />
-    <View style={styles.themeModeContainer}>
+    <View style={{...styles.separator}} />
    
-       <Text style={[styles.textLeft, {color: colors.text}]}>Theme</Text> 
-       <View style={styles.themeMode}>
-        <Switch trackColor={{false: '#767577', true: ColorsPaletteSoft[valueO]}}
-          thumbColor={theme == 'dark' ? ColorsPaletteSoft[valueX] : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={theme == 'dark'? true: false}
-          style={{ transform: [{ scaleX: 1.5 }, { scaleY:   1.5}] }}
-          />
-      </View>
-     </View>
+    <ThemePicker></ThemePicker> 
      <View style={styles.separator} />
       <ColorPicker></ColorPicker> 
-      
-     
+      <View style={styles.separator} />
     </View>    
     </SafeAreaView>
   </View>
@@ -72,13 +47,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
-    height: 400,
-    marginTop: 0,
-    padding: 24,
+    
     backgroundColor: 'transparent',
     //borderWidth: 4,
     //borderColor: '#e5e7eb',
     borderStyle: 'dashed',
+
     
   },
   containerInset: {
@@ -89,35 +63,23 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
+    alignSelf: 'center',
+    width: '100%'
    
   },
-  themeModeContainer: {
-   flexDirection: "row",
-   alignSelf: 'center',    
-   justifyContent: 'space-around',
-   width: '50%'
+  headerTitle: {
+    fontSize: 50,
+    fontFamily: 'Acme',
+    marginTop: 20,
+    marginBottom: 20,
+    alignSelf: 'center'
 
-  
   },
-  themeMode: {
-    
-   },
-  textLeft: {
-    //margin: 16
-    alignSelf: 'center',
-    fontSize: 30
-  },
-  textRight: {
-    //margin: 16
-    alignSelf: 'center',
-    fontSize: 30,
-    marginLeft: 30
-    
-  },
-  separator:{
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb', // Color of the separator
-    marginVertical: 10, // Adjust the vertical spacing as needed
+  separator: {
+    height: 2, 
+    marginVertical: 10,
+    width: '100%',
+    backgroundColor: 'gray', 
   },
 });
 

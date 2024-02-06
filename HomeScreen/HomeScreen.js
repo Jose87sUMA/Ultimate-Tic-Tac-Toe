@@ -115,11 +115,7 @@ const HomeScreen = ({navigation}) => {
           onPress={() => navigation.navigate('Tutorial')}
         ></ButtonComponent>
       </View>
-      <Image
-        source={require("../assets/images/HomeImage.png")}
-        resizeMode="contain"
-        style={styles.image}
-      ></Image>
+    
       
       <View style={styles.homeComponentsFiller}></View>
           
@@ -215,3 +211,8 @@ const styles = StyleSheet.create({
 export default HomeScreen;
 
 
+/*  <Image
+        source={require("../assets/images/tic_tac_toe.png")}
+        resizeMode="contain"
+        style={styles.image}
+      ></Image>  */
