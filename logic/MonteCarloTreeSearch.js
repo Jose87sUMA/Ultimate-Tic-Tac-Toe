@@ -31,7 +31,7 @@ class Node {
 }
 
 
-function monteCarloTreeSearch(rootState, iterations) {
+async function monteCarloTreeSearch(rootState, iterations, setProgress) {
     const rootNode = new Node(rootState);
 
     for (let i = 0; i < iterations; i++) {
@@ -57,6 +57,11 @@ function monteCarloTreeSearch(rootState, iterations) {
 
         // Backpropagation phase
         backpropagate(node, simulationResult);
+
+        if([0,2,4].includes(i)){
+            await new Promise(resolve => setTimeout(resolve, 1800));
+            setProgress((i+1)*100/iterations);
+        }
     }
 
     const bestChild = rootNode.children.reduce((best, child) => (child.visits > best.visits ? child : best), { visits: -Infinity });

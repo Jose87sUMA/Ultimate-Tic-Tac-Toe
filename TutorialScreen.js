@@ -4,8 +4,10 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
 import * as Font from 'expo-font';
 import { useTheme } from '@react-navigation/native';
+import * as Progress from 'react-native-progress';
 
 import BigBoard from './GamePlayScreen/BigBoard';
+import WinnerModal from './GamePlayScreen/WinnerModal.js';
 import Game from './logic/Game';
 import monteCarloTreeSearch from './logic/MonteCarloTreeSearch.js';
 
@@ -22,6 +24,7 @@ const TutorialScreen = ({navigation}) => {
   const initialGame = new Game('O');
   const [gameInstance, setGame] = useState(initialGame);
   const [modalVisible, setModalVisible] = useState(false);
+  const [progress, setProgress] = useState(100);
 
   const refRBSheet = useRef();
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
@@ -67,7 +70,7 @@ const TutorialScreen = ({navigation}) => {
 
       if(gameInstance.AISymbol === gameInstance.currentPlayer){
         setTimeout(() => {
-          AIMove();
+          AIMove(gameInstance);
         }, 500); // 500 milliseconds delay as an example
       }
     }
@@ -89,9 +92,12 @@ const TutorialScreen = ({navigation}) => {
 
     let newGameInstance = gameInstance.clone();
 
-    if (newGameInstance.makeMove(smallBoardIndex, pos)) {
+    if (newGameInstance.makeMove(smallBoardIndex, pos)) 
+    {
       setGame(newGameInstance);
-    } else {
+    } 
+    else 
+    {
       return;
     }
     
@@ -108,55 +114,30 @@ const TutorialScreen = ({navigation}) => {
     if(gameInstance.AISymbol !== ' '){
       setTimeout(() => {
         // Trigger AI move after a delay
-        AIMove();
-      }, 0); // 500 milliseconds delay as an example    
+        AIMove(newGameInstance);
+      }, 500); // 500 milliseconds delay as an example    
     }
   };
 
-  const AIMove = async () => {
-    await new Promise(resolve => setTimeout(resolve, 0));
-
-    setGame(prevGame => {
-      const newState = monteCarloTreeSearch(prevGame, 20);
+  const AIMove = async (newGameInstance) => {
+    setProgress(0);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await monteCarloTreeSearch(newGameInstance, 5, setProgress).then((newState) => {
       const newGame = Game.fromState(newState);
-      return newGame;
+      setGame(newGame);
     });
   };
 
-
   const winner = gameInstance.getWinner();
+  const currentPlayerColor = gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30';
   return (
     <SafeAreaView style={styles.container}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={{...styles.modalContainer}}>
-            <Text style={{
-              ...styles.modalText, 
-              color: winner === ' ' ? colors.text : winner === 'X' ? '#007AFF' : '#FF3B30'
-            }}>{winner === ' ' ? 'It\'s a tie!' : winner + ' wins!'}</Text>
-            <AwesomeButton 
-              borderWidth= {2}
-              backgroundColor={winner === ' ' ? colors.text : winner === 'X' ? '#007AFF' : '#FF3B30'}
-              borderColor='#000000'
-              backgroundDarker='#000000'
-              textColor='#FBFBFB'
-              raiseLevel={2}
-              onPress={() => {
-                setModalVisible(false);
-                navigation.navigate('HomeScreen');
-            }}
-            >Go Home</AwesomeButton>
-          </View>
-        </View>
-      </Modal>
-      <Text style={{...styles.currentPlayerText, color: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30'}}>{gameInstance.currentPlayer} turn</Text>
-      <View style={{height: 2, width: '100%', backgroundColor: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30', marginBottom: 25}} />
+      <WinnerModal modalVisible={modalVisible} winner={winner} setModalVisible={setModalVisible} navigation={navigation}/>
+      <Text style={{...styles.currentPlayerText, color: currentPlayerColor}}>{gameInstance.currentPlayer} turn</Text>
+      <View style={{...styles.separator, backgroundColor: currentPlayerColor,}}/>
+      {<View style={{alignItems: 'center', marginBottom: 20}}>
+        <Progress.Bar progress={progress/100} width={200} color={gameInstance.AISymbol === 'X' ? '#007AFF' : '#FF3B30'}/>
+      </View>}
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
 
       <RBSheet
@@ -197,34 +178,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 50,
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContainer: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    height: '20%',
-    width: '50%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalText: {
+  separator:{
+    height: 2,
+    alignSelf: 'center',
     width: '100%',
-    fontSize: 42,
-    textAlign: 'center',
-    fontFamily: 'Acme',
+    marginBottom: 25
   },
   currentPlayerText: {
     fontSize: 24,
