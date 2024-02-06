@@ -75,7 +75,7 @@ const StatisticsScreen = ({ navigation }) => {
     const isExpanded = expandedIndex === index;
 
     return (
-      <View
+      <SafeAreaView
         key={index}
         style={{...styles.statisticsButtonView, }}
       >
@@ -115,7 +115,7 @@ const StatisticsScreen = ({ navigation }) => {
               </View>
           )}
         </View>
-      </View>
+      </SafeAreaView>
     );
   };
 
@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
   headerView: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 30,
   },
   headerTitle: {
     fontSize: 50,
