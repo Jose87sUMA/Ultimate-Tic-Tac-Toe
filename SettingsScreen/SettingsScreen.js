@@ -7,11 +7,8 @@ import { ThemeContext } from '../styles/contexts/ThemeContext';
 import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorPicker from './ColorPicker';
 
-
-
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
-
 
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();

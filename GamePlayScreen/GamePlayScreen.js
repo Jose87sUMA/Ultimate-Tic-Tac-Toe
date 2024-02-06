@@ -2,10 +2,14 @@
 import {React, useState, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Button} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTheme } from '@react-navigation/native';
+import * as Progress from 'react-native-progress';
 
 import BigBoard from './BigBoard.js';
+import WinnerModal from './WinnerModal.js';
 import Game from '../GameLogic/Game.js';
 import monteCarloTreeSearch from '../GameLogic/MonteCarloTreeSearch.js';
+
 
 import * as Font from 'expo-font';
 
@@ -22,6 +26,42 @@ const GamePlayScreen = ({route, navigation}) => {
 
   const initialGame = new Game(AIMoveSymbol);
   const [gameInstance, setGame] = useState(initialGame);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [progress, setProgress] = useState(100);
+
+  const onPressCell = (smallBoardIndex, pos) => {
+
+    let newGameInstance = gameInstance.clone();
+
+    if (newGameInstance.makeMove(smallBoardIndex, pos)) {
+      setGame(newGameInstance);
+      AsyncStorage.setItem('game', JSON.stringify(newGameInstance));
+    } else {
+      return;
+    }
+
+    if(newGameInstance.getWinner() !== null){
+      setModalVisible(true);
+      newGameInstance.storeFinishedGame();
+      AsyncStorage.removeItem('game');
+      return;
+    }
+
+    if(gameInstance.AISymbol !== ' '){
+      AIMove(newGameInstance);
+    }
+  }
+
+  const AIMove = async (newGameInstance) => {
+    setProgress(0);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await monteCarloTreeSearch(newGameInstance, 5, setProgress).then((newState) => {
+      const newGame = Game.fromState(newState);
+      AsyncStorage.setItem('game', JSON.stringify(newGame));
+      setGame(newGame);
+    });
+  };
+
 
   useEffect(() => {
 
@@ -31,6 +71,7 @@ const GamePlayScreen = ({route, navigation}) => {
     };
 
     loadAsync();
+    
     if(continuingGame){
       const getGameFromStorage = async () => {
         try {
@@ -45,56 +86,28 @@ const GamePlayScreen = ({route, navigation}) => {
       getGameFromStorage();
     }
     else if(AIMoveSymbol === 'X'){
-      
-      useEffect(() => {
-        AIMove();
-      }, []);
+      AIMove(gameInstance);
     }
   }, []);
-  
 
   if (!fontsLoaded) {
     return null; // You can render a loading component or return null until the fonts are loaded
   }
 
-  const onPressCell = (smallBoardIndex, pos) => {
-
-    let newGameInstance = gameInstance.clone();
-
-    if (newGameInstance.makeMove(smallBoardIndex, pos)) {
-      setGame(newGameInstance);
-      AsyncStorage.setItem('game', JSON.stringify(newGameInstance));
-    } else {
-      return;
-    }
-
-    console.log(gameInstance.AISymbol);
-    if(gameInstance.AISymbol !== ' '){
-      setTimeout(() => {
-        // Trigger AI move after a delay
-        AIMove();
-      }, 500); // 500 milliseconds delay as an example    
-    }
-  }
-
-  const AIMove = async () => {
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    setGame(prevGame => {
-      const newState = monteCarloTreeSearch(prevGame, 20);
-      const newGame = Game.fromState(newState);
-      AsyncStorage.setItem('game', JSON.stringify(newGame));
-      return newGame;
-    });
-  };
-
+  const winner = gameInstance.getWinner();
+  const currentPlayerColor = gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30';
   return (
     <SafeAreaView style={styles.container}>
+      <WinnerModal modalVisible={modalVisible} winner={winner} setModalVisible={setModalVisible} navigation={navigation}/>
       <Button title='delete all games' onPress={() => {
         AsyncStorage.removeItem('finishedGames');
       }}></Button>
-      <Text style={{...styles.currentPlayerText, color: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30'}}>{gameInstance.currentPlayer} turn</Text>
-      <View style={{height: 2, width: '100%', backgroundColor: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30', marginBottom: 25}} />
+      <Text style={{...styles.currentPlayerText, color: currentPlayerColor}}>{gameInstance.currentPlayer} turn</Text>
+      <View style={{...styles.separator, backgroundColor: currentPlayerColor,}}/>
+      {gameInstance.AISymbol !== ' ' && 
+      <View style={{alignItems: 'center', marginBottom: 20}}>
+        <Progress.Bar progress={progress/100} width={400} color={gameInstance.AISymbol === 'X' ? '#007AFF' : '#FF3B30'}/>
+      </View>}
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
     </SafeAreaView> 
   );
@@ -106,12 +119,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
-  },
+  },  
   currentPlayerText: {
     fontSize: 24,
     marginBottom: 20,
     fontFamily: 'Acme',
   },
+  separator:{
+    height: 2,
+    alignSelf: 'center',
+    width: '100%',
+    marginBottom: 25
+  }
 });
 
 export default GamePlayScreen;

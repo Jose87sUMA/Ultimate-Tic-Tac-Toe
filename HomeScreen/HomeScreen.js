@@ -1,5 +1,5 @@
 import {React, useState, useEffect, useContext} from 'react';
-import { SafeAreaView, View, StyleSheet, StatusBar, Image, Text, Button, Modal, Switch} from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableWithoutFeedback, Image, Text, Button, Modal, Switch, TouchableOpacity} from 'react-native';
 
 import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
 import ButtonComponent from "./homeComponents/ButtonComponent";
@@ -51,50 +51,51 @@ const HomeScreen = ({navigation}) => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-    
-            <View style={styles.modalRow}>
-              <Text style={styles.modalText}>Enable AI?</Text>
-              <Switch
-                trackColor={{ false: '#767577', true: '#ADCBFF' }}
-                thumbColor={AIEnabled ? '#81b0ff' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={AIEnabled}
-              />
-            </View>
-
-            {AIEnabled && (
+        <TouchableOpacity style={styles.centeredView} onPressOut={() => {setModalVisible(false)}}>
+          <TouchableWithoutFeedback>
+            <View style={styles.modalView}>
               <View style={styles.modalRow}>
-                <Text style={styles.modalText}>AI Symbol:</Text>
-                <AwesomeButton
-                  title={AISymbol}
-                  backgroundColor='#FFFFFF'
-                  borderColor='#000000'
-                  backgroundDarker='#000000'
-                  textColor= {AISymbol==='X' ? '#007AFF' : '#FF3B30'}
-                  textSize={20}
-                  raiseLevel={0}
-                  onPress={() => setAISymbol(AISymbol === 'O' ? 'X' : 'O')}
-                >{AISymbol}</AwesomeButton>
+                <Text style={styles.modalText}>Enable AI?</Text>
+                <Switch
+                  trackColor={{ false: '#767577', true: '#ADCBFF' }}
+                  thumbColor={AIEnabled ? '#81b0ff' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={toggleSwitch}
+                  value={AIEnabled}
+                />
               </View>
-            )}
 
-            <AwesomeButton 
-              borderWidth= {2}
-              backgroundColor='#007AFF'
-              borderColor='#000000'
-              backgroundDarker='#000000'
-              textColor='#FBFBFB'
-              raiseLevel={2}
-              onPress={() => {
-                setModalVisible(false);
-                navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})
-            }}
-            >Create Game</AwesomeButton>
-          </View>
-        </View>
+              {AIEnabled && (
+                <View style={styles.modalRow}>
+                  <Text style={styles.modalText}>AI Symbol:</Text>
+                  <AwesomeButton
+                    title={AISymbol}
+                    backgroundColor='#FFFFFF'
+                    borderColor='#000000'
+                    backgroundDarker='#000000'
+                    textColor= {AISymbol==='X' ? '#007AFF' : '#FF3B30'}
+                    textSize={20}
+                    raiseLevel={0}
+                    onPress={() => setAISymbol(AISymbol === 'O' ? 'X' : 'O')}
+                  >{AISymbol}</AwesomeButton>
+                </View>
+              )}
+
+              <AwesomeButton 
+                borderWidth= {2}
+                backgroundColor='#007AFF'
+                borderColor='#000000'
+                backgroundDarker='#000000'
+                textColor='#FBFBFB'
+                raiseLevel={2}
+                onPress={() => {
+                  setModalVisible(false);
+                  navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})
+              }}
+              >Create Game</AwesomeButton>
+            </View>
+          </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </Modal>
 
       <HomeTitleComponent style={[styles.HomeTitleComponent, {color: colors.text}]}></HomeTitleComponent>

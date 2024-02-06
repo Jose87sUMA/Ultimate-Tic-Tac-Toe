@@ -26,22 +26,41 @@ const StatisticsScreen = ({ navigation }) => {
 
     loadAsync();
 
-    const fetchData = async () => {
-      try {
-        const storedGames = await AsyncStorage.getItem('finishedGames');
-        const parsedGames = storedGames
-          ? JSON.parse(storedGames).map((game) => Game.fromState(game))
-          : null;
-        setGames(parsedGames || []);
-        return parsedGames;
-      } catch (error) {
-        console.error('Error retrieving games from AsyncStorage:', error);
-      }
+  }, []);
+
+  // Function to fetch data and update state
+  const fetchDataAndSetState = async () => {
+    try {
+      const storedGames = await AsyncStorage.getItem('finishedGames');
+      const parsedGames = storedGames
+        ? JSON.parse(storedGames).map((game) => Game.fromState(game))
+        : null;
+      setGames(parsedGames || []);
+    } catch (error) {
+      console.error('Error retrieving games from AsyncStorage:', error);
+    }
+  };
+
+  useEffect(() => {
+    const loadAsync = async () => {
+      await loadFonts();
+      setFontsLoaded(true);
     };
 
-    fetchData();
+    loadAsync();
 
-  }, []);
+    // Fetch data when the component mounts
+    fetchDataAndSetState();
+
+    // Listen for changes in the navigation state
+    const unsubscribe = navigation.addListener('focus', () => {
+      fetchDataAndSetState(); // Fetch data when the screen comes into focus
+    });
+
+    // Cleanup listener on component unmount
+    return unsubscribe;
+
+  }, [navigation]); 
 
   if (!fontsLoaded) {
     return null; // You can render a loading component or return null until the fonts are loaded

@@ -15,12 +15,12 @@ class Node {
     }
 
     selectChild() {
-        return this.children.reduce((selected, child) => (
-            child.wins / child.visits +
-            UCT_CONSTANT * Math.sqrt(Math.log(this.visits) / child.visits) > selected.score ?
-            { score: child.wins / child.visits + UCT_CONSTANT * Math.sqrt(Math.log(this.visits) / child.visits), child } :
-            selected
-        ), { score: -Infinity, child: null }).child;
+        // Modify the selection criteria
+        return this.children.reduce((selected, child) => {
+            const explorationTerm = UCT_CONSTANT * Math.sqrt(Math.log(this.visits) / child.visits);
+            const score = child.wins / child.visits + (child.depth % 2 === 0 ? explorationTerm : -explorationTerm);
+            return score > selected.score ? { score, child } : selected;
+        }, { score: -Infinity, child: null }).child;
     }
 
     addChild(childState) {
@@ -31,7 +31,7 @@ class Node {
 }
 
 
-function monteCarloTreeSearch(rootState, iterations) {
+async function monteCarloTreeSearch(rootState, iterations, setProgress) {
     const rootNode = new Node(rootState);
 
     for (let i = 0; i < iterations; i++) {
@@ -57,8 +57,13 @@ function monteCarloTreeSearch(rootState, iterations) {
 
         // Backpropagation phase
         backpropagate(node, simulationResult);
+
+        if([0,2,4].includes(i)){
+            await new Promise(resolve => setTimeout(resolve, 100));
+            setProgress((i+1)*100/iterations);
+        }
     }
-    console.log(rootNode.children.map(child => console.log(child.wins + '/' + child.visits + ' ' + child.state.boardOfNextMove)));
+
     const bestChild = rootNode.children.reduce((best, child) => (child.visits > best.visits ? child : best), { visits: -Infinity });
     return bestChild.state;
 }
@@ -81,21 +86,19 @@ function simulate(state) {
 }
 
 function evaluateMove(move, state) {
+    // Modify the evaluation function to consider various factors
     const clonedState = state.clone();
     clonedState.makeMove(move.smallBoard, move.pos);
 
     const currentPlayer = clonedState.currentPlayer;
     const opponent = clonedState.previousPlayer;
 
-    // Count potential winning lines for the current player and opponent
+    // Adjust weights based on different factors
     const currentPlayerLines = countPotentialWinningLines(clonedState, currentPlayer);
     const opponentLines = countPotentialWinningLines(clonedState, opponent);
+    const centerControl = isMoveInCenter(move) ? 0.1 : 0;
 
-    // Check if the move is in the center of the small board
-    const isMoveInCenterB = isMoveInCenter(move);
-
-    // Return a score based on winning lines and center control
-    return (currentPlayerLines - opponentLines) + (isMoveInCenterB ? 1 : 0);
+    return (currentPlayerLines - opponentLines) + centerControl;
 }
 
 function countPotentialWinningLines(state, player) {
