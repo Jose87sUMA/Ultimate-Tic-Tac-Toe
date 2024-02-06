@@ -47,10 +47,7 @@ const GamePlayScreen = ({route, navigation}) => {
     }
 
     if(gameInstance.AISymbol !== ' '){
-      setTimeout(() => {
-        // Trigger AI move after a delay
-        AIMove(newGameInstance);
-      }, 500); // 500 milliseconds delay as an example    
+      AIMove(newGameInstance);
     }
   }
 
@@ -88,10 +85,7 @@ const GamePlayScreen = ({route, navigation}) => {
       getGameFromStorage();
     }
     else if(AIMoveSymbol === 'X'){
-      setTimeout(() => {
-        // Trigger AI move after a delay
-        AIMove(gameInstance);
-      }, 500); // 500 milliseconds delay as an exampl
+      AIMove(gameInstance);
     }
   }, []);
 

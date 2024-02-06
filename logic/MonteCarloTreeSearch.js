@@ -59,7 +59,7 @@ async function monteCarloTreeSearch(rootState, iterations, setProgress) {
         backpropagate(node, simulationResult);
 
         if([0,2,4].includes(i)){
-            await new Promise(resolve => setTimeout(resolve, 1800));
+            await new Promise(resolve => setTimeout(resolve, 100));
             setProgress((i+1)*100/iterations);
         }
     }
