@@ -17,10 +17,12 @@ const ResetColorTheme = (props) => {
   
   const { setTheme, theme } = useContext(ThemeContext);
   const{valueO, setValueO, setValueX, valueX} = useContext(ColorContext);
-  const defaultColorScheme = useColorScheme();
+  const defaultColorScheme = Appearance.getColorScheme();
+  console.log('This is it ' + defaultColorScheme);
 
   const onPressButton = () => {
     setTheme(defaultColorScheme);
+    
     setValueX(1);
     setValueO(0);
     _storeData = async () => {

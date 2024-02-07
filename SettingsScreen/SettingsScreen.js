@@ -1,4 +1,4 @@
-import {React, useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme, Appearance } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';

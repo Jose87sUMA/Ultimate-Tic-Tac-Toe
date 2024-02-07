@@ -1,5 +1,5 @@
 // GameplayScreen.js
-import {React, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Button} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
@@ -9,6 +9,10 @@ import BigBoard from './BigBoard.js';
 import WinnerModal from './WinnerModal.js';
 import Game from '../GameLogic/Game.js';
 import monteCarloTreeSearch from '../GameLogic/MonteCarloTreeSearch.js';
+
+import { ColorContext } from '../styles/contexts/ColorContext.js';
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
+import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js';
 
 
 import * as Font from 'expo-font';
@@ -28,6 +32,8 @@ const GamePlayScreen = ({route, navigation}) => {
   const [gameInstance, setGame] = useState(initialGame);
   const [modalVisible, setModalVisible] = useState(false);
   const [progress, setProgress] = useState(100);
+
+  const {valueX, valueO} = useContext(ColorContext);
 
   const onPressCell = (smallBoardIndex, pos) => {
 
@@ -95,13 +101,11 @@ const GamePlayScreen = ({route, navigation}) => {
   }
 
   const winner = gameInstance.getWinner();
-  const currentPlayerColor = gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30';
+  const currentPlayerColor = gameInstance.currentPlayer === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO];
   return (
     <SafeAreaView style={styles.container}>
       <WinnerModal modalVisible={modalVisible} winner={winner} setModalVisible={setModalVisible} navigation={navigation}/>
-      <Button title='delete all games' onPress={() => {
-        AsyncStorage.removeItem('finishedGames');
-      }}></Button>
+      
       <Text style={{...styles.currentPlayerText, color: currentPlayerColor}}>{gameInstance.currentPlayer} turn</Text>
       <View style={{...styles.separator, backgroundColor: currentPlayerColor,}}/>
       {gameInstance.AISymbol !== ' ' && 

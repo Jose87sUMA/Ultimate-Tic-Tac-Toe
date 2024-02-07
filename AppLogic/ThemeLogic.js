@@ -36,7 +36,7 @@ useEffect(() => {
 
 const colorData = { valueX, setValueX, valueO, setValueO };
 
-const defaultColorScheme = useColorScheme();
+const defaultColorScheme = useColorScheme() === 'dark'? 'dark': 'light';
 const [theme, setTheme] = useState(defaultColorScheme);
 const themeData = { theme, setTheme };
 
@@ -51,7 +51,7 @@ useEffect(() => {
         const value = await AsyncStorage.getItem('THEME'); 
         if (value !== null) {
           setTheme(JSON.parse(value));
-          Appearance.setColorScheme(JSON.parse(value));
+          //Appearance.setColorScheme(JSON.parse(value));
         }
       } catch (error) {
         console.error('Error retrieving game from AsyncStorage:', error);

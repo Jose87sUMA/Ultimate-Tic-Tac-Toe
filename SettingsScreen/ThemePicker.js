@@ -31,7 +31,7 @@ const ThemePicker = (props) => {
           // Error saving data
         }
 
-    Appearance.setColorScheme(changedTheme);
+    //Appearance.setColorScheme(changedTheme);
     }
     _storeData();
 
