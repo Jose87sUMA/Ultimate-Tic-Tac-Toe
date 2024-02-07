@@ -1,6 +1,6 @@
 // NavigationLogic.js
 import {React, useState, useContext} from 'react';
-import {useColorScheme} from 'react-native';
+import {useColorScheme, useWindowDimensions} from 'react-native';
 import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -36,6 +36,10 @@ const NavigationLogic = () => {
 
 const TabNavigator = () => {
   const {valueX, valueO} = useContext(ColorContext);
+  const {width} = useWindowDimensions();
+  const tabBarHeight = width < 750? 60:120;
+  const NavigationTextSize = width < 750? 10:25;
+  console.log(width);
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -55,9 +59,10 @@ const TabNavigator = () => {
         },
         tabBarActiveTintColor: ColorsPalette[valueO],
         tabBarInactiveTintColor:  ColorsPalette[valueX],
-        tabBarStyle: { height: 60 }, // Adjust the height as needed
+        tabBarStyle: { height: tabBarHeight }, // Adjust the height as needed
         labelStyle: { fontSize: 14 },
         headerShown:false,
+        tabBarLabelStyle: {fontSize: NavigationTextSize}
         })}>
 
           <Tab.Screen  name='Home' component={HomeStack} options={{ headerShown: false }}/>
@@ -66,6 +71,7 @@ const TabNavigator = () => {
           <Tab.Screen name='Settings' component={SettingsScreen}/>
            
         </Tab.Navigator>
+         
    )
 }
 
