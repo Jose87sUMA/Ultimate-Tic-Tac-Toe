@@ -30,12 +30,11 @@ function HomeTitleComponent(props) {
 
   return (
     <View style={[styles.container]}>
-      <Text style={[styles.ultimate, props.style]}>ULTIMATE</Text>
-
+      <Text style={[styles.ultimate, props.styleHeader, props.style]}>ULTIMATE</Text>
       <View style={styles.tictactoe}>
-        <Text style={[styles.tic, {color : ColorsPalette[valueX]}]}>TIC</Text>
-        <Text style={[styles.tac, {color : ColorsPalette[valueO]}]}>TAC</Text>
-        <Text style={[styles.toe, {color : ColorsPalette[valueX]}]}>TOE</Text>
+        <Text style={[styles.tic, props.styleHeader,{color : ColorsPalette[valueX]}]}>TIC</Text>
+        <Text style={[styles.tac,props.styleHeader, {color : ColorsPalette[valueO]}]}>TAC</Text>
+        <Text style={[styles.toe, props.styleHeader,{color : ColorsPalette[valueX]}]}>TOE</Text>
       </View>
     </View>
   );
@@ -48,7 +47,6 @@ const styles = StyleSheet.create({
   },
   ultimate: {
     fontFamily: 'Acme',
-    //color: 'rgba(34,5,5,1)',
     fontSize: 50,
     alignSelf: 'center',
   },

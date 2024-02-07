@@ -137,17 +137,20 @@ const StatisticsScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView>
-      <View style={{
-        ...styles.headerView
-      }}>
+    <SafeAreaView style = {{flex: 1}}>
+      
+        <View style={{justifyContent: 'flex-end', height: '15%'}}>
         <Text style={{    
-          ...styles.headerTitle, color: colors.text
+          ...styles.headerTitle, color: colors.text, 
         }}>
           Statistics
         </Text>
+        </View>
 
         <View style={{...styles.separator}} />
+        <View style={{
+        ...styles.headerView,
+      }}>
         <View
           style={{
             ...styles.victoriesView
@@ -173,19 +176,20 @@ const StatisticsScreen = ({ navigation }) => {
 
       </View>
       
-        <View style={{height: '50%'}}>
+        <View style={{height: '50%', borderColor: colors.text, borderWidth : 1, borderRadius: 5, width :'90%', alignSelf: 'center'}}>
       <FlatList
         data={games}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
       </View>
-      
+      <View style = {{flex: 1, justifyContent : 'flex-end', marginBottom: '5%'}}>
       <ButtonComponent
                   style={[styles.deleteGamesButton,{backgroundColor: theme === 'dark' ? '#767577': '#606060', borderColor: colors.text, }]}
                   text={"Delete all"}
                   onPress={() => {AsyncStorage.removeItem('finishedGames')}}
       ></ButtonComponent>
+      </View>
     </SafeAreaView>
   );
 };
@@ -221,13 +225,11 @@ const styles = StyleSheet.create({
   headerView: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
   },
   headerTitle: {
     fontSize: 50,
     fontFamily: 'Acme',
-    marginTop: 20,
-    marginBottom: 20,
+    alignSelf: 'center'
   },
   separator: {
     height: 2, 

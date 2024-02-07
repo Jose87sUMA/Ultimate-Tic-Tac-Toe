@@ -1,5 +1,5 @@
 import {React, useState, useEffect, useContext} from 'react';
-import { SafeAreaView, View, StyleSheet, TouchableWithoutFeedback, Image, Text, Button, Modal, Switch, TouchableOpacity} from 'react-native';
+import { SafeAreaView, View, StyleSheet, TouchableWithoutFeedback, Image, Text, Button, Modal, Switch, TouchableOpacity, useWindowDimensions, Dimensions, Platform, PixelRatio} from 'react-native';
 
 import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
 import ButtonComponent from "./homeComponents/ButtonComponent";
@@ -9,6 +9,7 @@ import { useTheme } from '@react-navigation/native';
 import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 
+
 //import { useTheme } from 'react-native-paper';
 
 const loadFonts = async () => {
@@ -17,6 +18,10 @@ const loadFonts = async () => {
   });
 };
 
+
+
+
+
 const HomeScreen = ({navigation}) => {
   const { valueX, valueO} = useContext(ColorContext);
   const {colors} = useTheme();
@@ -24,6 +29,12 @@ const HomeScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [AIEnabled, setAIEnabled] = useState(false);
   const [AISymbol, setAISymbol] = useState('O');
+
+  const {height, width, scale, fontScale} = useWindowDimensions();
+
+  
+  const fontSize = width < 600? 20:50;
+  
 
   const toggleSwitch = () => setAIEnabled(previousState => !previousState);
   
@@ -40,11 +51,12 @@ const HomeScreen = ({navigation}) => {
     return null; // You can render a loading component or return null until the fonts are loaded
   }
 
+
  
  
   return (
     <SafeAreaView style={[styles.container,{backgroundColor: colors.background},]}>
- 
+      
       <Modal
         animationType="slide"
         transparent={true}
@@ -81,7 +93,7 @@ const HomeScreen = ({navigation}) => {
                 </View>
               )}
               <ButtonComponent
-                  style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text, width: 150}]}
+                  style={{backgroundColor: "#007AFF", height: '30%',backgroundColor: ColorsPalette[valueX], borderColor: colors.text, width: '50%'}}
                   text={"Create Game"}
                   onPress={() => {setModalVisible(false);
                    navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})}}
@@ -91,11 +103,15 @@ const HomeScreen = ({navigation}) => {
           </TouchableWithoutFeedback>
         </TouchableOpacity>
       </Modal>
-
-      <HomeTitleComponent style={[styles.HomeTitleComponent, {color: colors.text}]}></HomeTitleComponent>
+      <View style = {{flex : 1, flexDirection: 'column'}}>
+      <View style = {styles.HomeTitleComponent}>
+      <HomeTitleComponent style={[{color: colors.text}]} styleHeader = {{fontSize: width < 600? 60 : 120}}></HomeTitleComponent>
+      </View>
+      <View style={styles.buttonsContainerIns}>
       <View style={styles.buttons}>
         <ButtonComponent
           style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
+          styleText = {{fontSize: fontSize}}
           text={"NEW GAME"}
           onPress={() => setModalVisible(true)}
         ></ButtonComponent>
@@ -103,14 +119,17 @@ const HomeScreen = ({navigation}) => {
           style={[styles.middleButton, {backgroundColor: ColorsPalette[valueO], borderColor: colors.text}]}
           text={"CONTINUE"}
           onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: true})}
+          styleText = {{fontSize: fontSize}}
         ></ButtonComponent>
         <ButtonComponent
           style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
           text={"TUTORIAL"}
           onPress={() => navigation.navigate('Tutorial')}
+          styleText = {{fontSize: fontSize}}
         ></ButtonComponent>
       </View>
-    
+      </View>
+      </View>
       
       <View style={styles.homeComponentsFiller}></View>
           
@@ -122,14 +141,54 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+   
+    },
+    HomeTitleComponent: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      marginBottom: '10%'
+    
      
     },
-    centeredView: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 22,
+    buttonsContainerIns: {
+      flexDirection: "column",
+      alignSelf: "center",
+      flex : 1,
+  
+      
+      align: 'center',
+      width: '100%',
+     
+     
+      
     },
+    buttons : {
+        //justifyContent: 'space-around'
+        //borderColor: 'gray',
+        //borderWidth: 4,
+        flex: 1,
+        marginHorizontal :'25%',
+        marginBottom: '25%',
+        justifyContent: 'space-evenly', 
+        
+        
+    },
+    sideButton: {
+      backgroundColor: "#007AFF",
+      height: '20%'
+
+     
+    },
+    middleButton: {
+      backgroundColor: "#FF3B30",
+      height: '20%'
+      
+    
+    },
+    tabComponent: {
+      width: '100%',
+
+    },  /*MODAL */
     modalView: {
       margin: 20,
       borderRadius: 20,
@@ -158,48 +217,6 @@ const styles = StyleSheet.create({
       marginRight: 10,
       fontFamily: 'Acme',
     },
-    homeComponents: {
-      width: 241,
-      height: 522,
-      marginTop: 105,
-      alignSelf: "center",
-     
-    },
-    HomeTitleComponent: {
-      marginTop: "30%"
-      
-    },
-    buttons: {
-      flexDirection: "column",
-      alignSelf: "center",
-      marginTop: "20%"
-      
-    },
-    sideButton: {
-      height: 44,
-      width: 190,
-      backgroundColor: "#007AFF",
-    },
-    middleButton: {
-      height: 44,
-      width: 190,
-      backgroundColor: "#FF3B30",
-      marginTop: 40,
-      marginBottom: 40
-    },
-    image: {
-      height: 300,
-      width: 300,
-      marginTop: "5%",
-      alignSelf: "center"
-    },
-    homeComponentsFiller: {
-      flex: 1
-    },
-    tabComponent: {
-      width: 350,
-
-    }
   });
 
 

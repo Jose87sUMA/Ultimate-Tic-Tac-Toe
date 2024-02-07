@@ -39,8 +39,9 @@ const ThemePicker = (props) => {
 
   return (
     <View style={[styles.themeModeContainer, props.styleContainer]}>
+      <View style={styles.themeMode}>
        <Text style={[styles.text, props.styleText]}>Theme</Text> 
-       <View style={styles.themeMode}>
+       
         <Switch trackColor={{false: '#767577', true: '#E8E8E8'}}
           thumbColor={theme == 'dark' ? '#606060' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
@@ -48,32 +49,30 @@ const ThemePicker = (props) => {
           value={theme == 'dark'? true: false}
           style={{ transform: [{ scaleX: 1}, { scaleY:   1}] }}
           />
-        </View>
+      </View>
     </View>
 
 );};
 
 const styles = StyleSheet.create({
   themeModeContainer: {
-   flexDirection: "row",
    alignSelf: 'center',    
-   //justifyContent: 'space-around',
    width: '50%',
    backgroundColor: 'gray',
    borderWidth: 4,
    borderRadius: 9,
   
-
    
   }, 
   themeMode: {
-    marginLeft:  '45%',
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-between' ,
+   // borderWidth: 1,
    
-
-    
   },
   text :{
-
+      alignSelf: 'center'
     },
 });
 

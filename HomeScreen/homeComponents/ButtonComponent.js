@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
 function ButtonComponent(props) {
   return (
     <TouchableOpacity style={[styles.container, props.style]} onPress={props.onPress}>
-      <Text style={styles.text}>{props.text }</Text>
+      <Text style={[styles.text, props.styleText]}>{props.text }</Text>
     </TouchableOpacity>
   );
 }
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 16,
     paddingRight: 16,
-    borderRadius: 5,
     borderWidth: 1,
     
   },
