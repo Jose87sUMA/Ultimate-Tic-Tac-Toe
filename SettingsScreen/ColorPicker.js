@@ -6,7 +6,8 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   SafeAreaView,
-  Button
+  Button,
+  useWindowDimensions
 } from 'react-native';
 import { ColorContext } from '../styles/contexts/ColorContext.js';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -31,7 +32,8 @@ export default function ColorPicker(props) {
   const [editing, setEditing] = useState('O');
   const sheet = useRef();
 
- 
+  const {height, width, scale, fontScale} = useWindowDimensions();
+  const bigWidth = width >= 600;
 
 
 

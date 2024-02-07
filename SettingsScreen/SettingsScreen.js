@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme, Appearance } from 'react-native';
+import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme, Appearance, useWindowDimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
@@ -24,44 +24,33 @@ const SettingsScreen = ({navigation}) => {
   const { setTheme, theme } = useContext(ThemeContext);
   const{valueO, valueX} = useContext(ColorContext);
 
-
+  const {height, width, scale, fontScale} = useWindowDimensions();
+  const bigWidth = width >= 600;
   return (
-  <View style={styles.container}>
-    <SafeAreaView style={{flex : 1}}>
-    <Text style={[styles.headerTitle, {color: colors.text}]}>Settings</Text>
-
+  
+  <SafeAreaView style={{flex : 1}}>
+    <View style={{height : '15%', justifyContent: 'flex-end', alignContent: 'center'}}>
+      <Text style={[styles.headerTitle, {color: colors.text}]}>Settings</Text>
+    </View>
     <View style={{...styles.separator}} />
     <View style ={styles.containerInset}>
-    <ThemePicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer = {{...styles.boxOptions, backgroundColor: colors.border}}></ThemePicker> 
-    <ColorPicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}}></ColorPicker> 
-    <ResetColorTheme styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}}></ResetColorTheme> 
+      <ThemePicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer = {{...styles.boxOptions, backgroundColor: colors.border}}></ThemePicker> 
+      <ColorPicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}} bi></ColorPicker> 
+      <ResetColorTheme styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}}></ResetColorTheme> 
      
     </View>    
-    </SafeAreaView>
-  </View>
+  </SafeAreaView>
+
 
 );};
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,
-    backgroundColor: 'transparent',
+  containerInset: {
     //borderWidth: 4,
     //borderColor: '#e5e7eb',
     //borderStyle: 'dashed',
-
-    
-  },
-  containerInset: {
-   // borderWidth: 4,
-    //borderColor: '#e5e7eb',
-    //borderStyle: 'dashed',
-    borderRadius: 9,
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,
+    //borderRadius: 9,
+    height: '85%',
     alignSelf: 'center',
     width: '100%',
     justifyContent: 'center'
@@ -71,14 +60,11 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 50,
     fontFamily: 'Acme',
-    marginTop: 20,
-    marginBottom: 20,
-    alignSelf: 'center'
-
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   separator: {
     height: 2, 
-    marginVertical: 10,
     width: '100%',
     backgroundColor: 'gray', 
   },
@@ -87,16 +73,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: 'white',
-    marginLeft: 10,
+    marginLeft: '3%',
     borderColor: 'black',
-    
     fontFamily: 'Acme',
     
     
   },
   boxOptions:{
     width: '75%',
-    justifyContent: 'left',
     borderWidth: 0,
     margin: 5,
     paddingVertical: '5%',

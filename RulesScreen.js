@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 
-import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, ScrollView } from 'react-native';
+import { SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, ScrollView} from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import ParsedText from 'react-native-parsed-text';
 import { ColorContext } from './styles/contexts/ColorContext';
 import ColorsPalette from './styles/colorsPalettes/ColorsPalette';
 import ButtonComponent from './HomeScreen/homeComponents/ButtonComponent';
 import * as Font from 'expo-font';
+
 
 const loadFonts = async () => {
   await Font.loadAsync({
@@ -15,6 +16,8 @@ const loadFonts = async () => {
 };
 
 const RulesScreen = ({navigation}) => {
+ 
+
   const text = `
   Each small 3 × 3 tic-tac-toe board is referred to as a local board, and the larger 3 × 3 board is referred to as the global board.\n
   The game starts with X playing wherever they want in any of the 81 empty spots. This move "sends" their opponent to its relative location.\n
@@ -32,7 +35,9 @@ const {colors} = useTheme();
 
 return (
   <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+    <View style = {{height: '15%', justifyContent: 'flex-end', }}>
     <Text style={[styles.headerTitle, { color: colors.text }]}>Rules</Text>
+    </View>
     <View style = {styles.separator}></View>
     <ScrollView style={styles.scroll}>
       {paragraphs.map((paragraph, index) => (
@@ -47,19 +52,23 @@ return (
           {paragraph}
         </ParsedText>
       ))}
-      <Text style={[styles.tutorialText,{color: ColorsPalette[valueO]}]}>Ready to see it in action?</Text>
-       <ButtonComponent
+    </ScrollView>
+    <View style = {styles.separator}></View>
+    <View style = {{height: '25%', justifyContent :'center', flexDirection: 'column'}}>
+    <Text style={[styles.tutorialText,{color: ColorsPalette[valueO]}]}>Ready to see it in action?</Text>
+    <ButtonComponent
           style={[styles.tutorialButton, {backgroundColor: ColorsPalette[valueX]}]}
           text={"TUTORIAL"}
           onPress={() => navigation.navigate('Tutorial')}
         ></ButtonComponent>
-    </ScrollView>
+    </View>
   </SafeAreaView>
 );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
   },
   scroll: {
     flex: 1,
@@ -76,24 +85,26 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 50,
     fontFamily: 'Acme',
-    marginTop: 20,
-    marginBottom: 20,
-    alignSelf : 'center'
+    alignSelf : 'center',
+    
 
   },
   tutorialText: {
       alignSelf: 'center',
       fontWeight: 'bold',
-      marginTop: 30,
       fontSize: 25,
-      fontFamily: 'Acme'
+      fontFamily: 'Acme',
+      
   },
   tutorialButton: {
-    height: 44,
-    width: 190,
+    height: '20%',
+    width: '40%',
+    maxWidth: 400,
+    maxHeight: 100,
     backgroundColor: "#007AFF",
     alignSelf: 'center',
     marginVertical: 20,
+    justifyContent: 'center'
    
 
   },

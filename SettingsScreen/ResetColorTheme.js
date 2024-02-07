@@ -47,21 +47,21 @@ const ResetColorTheme = (props) => {
 
   return (
     <View style={[styles.themeModeContainer, props.styleContainer]}>
-       <Text style={[styles.text, props.styleText]}>Default Settings</Text> 
-       <View style={styles.themeMode}>
-        <TouchableOpacity  style={[styles.button, {backgroundColor: theme === 'dark' ? '#767577': '#606060'}]} onPress = {onPressButton}>
+      <View style ={styles.themeMode}>
+        <Text style={[styles.text, props.styleText]}>Default Settings</Text> 
+       
+        <TouchableOpacity  style={[styles.button, {backgroundColor: theme === 'dark' ? '#767577': '#606060', justifyContent: 'center'}]} onPress = {onPressButton}>
             <Text style ={styles.buttonText}>Revert</Text>
         </TouchableOpacity>
-        </View>
+        
+      </View>
     </View>
 
 );};
 
 const styles = StyleSheet.create({
   themeModeContainer: {
-   flexDirection: "row",
    alignSelf: 'center',    
-   justifyContent: 'space-around',
    width: '50%',
    backgroundColor: 'gray',
    borderWidth: 4,
@@ -69,15 +69,21 @@ const styles = StyleSheet.create({
    
   },
   themeMode: {
-    marginLeft: '5%',
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-between' ,
+    //borderWidth: 1,
+   
   },
   text :{
-    },
+    //alignSelf: 'center'
+  },
   button :{
     backgroundColor: '#606060',
-    padding: 10,
+    padding: 5,
     borderRadius: 5,
-    marginLeft: 30,
+    
+   
 
   },
   buttonText: {
