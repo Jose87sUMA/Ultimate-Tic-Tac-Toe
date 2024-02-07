@@ -64,75 +64,98 @@ const SettingsScreen = ({navigation}) => {
   
     const finishedGames = await AsyncStorage.getItem('finishedGames');
   
-    if (user) {
-      try {
-        // Replace 'finishedGames' with the actual name of your collection
-        const gamesRef = collection(firestore, 'finishedGames');
-        
-        // Check if a document with the user's UID already exists
-        const gamesQuery = query(gamesRef, where('user', '==', user.uid));
-        const querySnapshot = await getDocs(gamesQuery);
+    try {
+      // Replace 'finishedGames' with the actual name of your collection
+      const gamesRef = collection(firestore, 'finishedGames');
+      
+      // Check if a document with the user's UID already exists
+      const gamesQuery = query(gamesRef, where('user', '==', user.uid));
+      const querySnapshot = await getDocs(gamesQuery);
 
-        if (querySnapshot.empty) {
-          // If no document exists, create a new one
-          await addDoc(gamesRef, {
-            user: user.uid,
-            finishedGamesJSON: finishedGames,
-          });
-        }
-        else 
-        {
-          // If a document exists, update it with the new games
-          querySnapshot.forEach( async (docSaved) => {
-            console.log(docSaved.id, ' => ', docSaved.data());
-            const cloudGames = docSaved.data().finishedGamesJSON;
-
-            const finishedGamesArr = JSON.parse(finishedGames)
-            const cloudGamesArr = cloudGames ? JSON.parse(cloudGames) : [];
-
-            // Function to check uniqueness based on the 'id' property
-            const isUnique = (arr, obj) => arr.every(item => item.finishedDate !== obj.finishedDate);
-
-            // Combined array without repeated objects based on 'id'
-            const combinedArray = [...finishedGamesArr, ...cloudGamesArr.filter(obj => isUnique(finishedGamesArr, obj))];
-            const combinedGames = JSON.stringify(combinedArray);
-
-            const docId = querySnapshot.docs[0].id;
-            await setDoc(doc(gamesRef, docId), {
-              finishedGamesJSON: combinedGames,
-            }, { merge: true });
-          });     
-        }
-  
-        console.log('Game saved to cloud successfully!');
-      } catch (error) {
-        console.error('Error saving game to cloud:', error.message);
+      if (querySnapshot.empty) {
+        // If no document exists, create a new one
+        await addDoc(gamesRef, {
+          user: user.uid,
+          finishedGamesJSON: finishedGames,
+        });
       }
+      else 
+      {
+        // If a document exists, update it with the new games
+        querySnapshot.forEach( async (docSaved) => {
+          console.log(docSaved.id, ' => ', docSaved.data());
+          const cloudGames = docSaved.data().finishedGamesJSON;
+
+          const finishedGamesArr = JSON.parse(finishedGames)
+          const cloudGamesArr = cloudGames ? JSON.parse(cloudGames) : [];
+
+          // Function to check uniqueness based on the 'id' property
+          const isUnique = (arr, obj) => arr.every(item => item.finishedDate !== obj.finishedDate);
+
+          // Combined array without repeated objects based on 'id'
+          const combinedArray = [...finishedGamesArr, ...cloudGamesArr.filter(obj => isUnique(finishedGamesArr, obj))];
+          const combinedGames = JSON.stringify(combinedArray);
+
+          const docId = querySnapshot.docs[0].id;
+          await setDoc(doc(gamesRef, docId), {
+            finishedGamesJSON: combinedGames,
+          }, { merge: true });
+        });     
+      }
+
+      console.log('Game saved to cloud successfully!');
+    } catch (error) {
+      console.error('Error saving game to cloud:', error.message);
     }
+    
   };
 
   const syncFromCloud = async () => {
     if (!user) {
       await authenticateUser();
     }
-  
-    if (user) {
-      try {
-        // Replace 'finishedGames' with the actual name of your collection
-        const gamesRef = collection(firestore, 'finishedGames');
-        const gamesQuery = query(gamesRef, where('user', '==', user.uid));
-        const querySnapshot = await getDocs(gamesQuery);
-  
-        querySnapshot.forEach((doc) => {
-          console.log(doc.id, ' => ', doc.data());
+
+    try {
+      // Replace 'finishedGames' with the actual name of your collection
+      const gamesRef = collection(firestore, 'finishedGames');
+      const gamesQuery = query(gamesRef, where('user', '==', user.uid));
+      const querySnapshot = await getDocs(gamesQuery);
+
+      querySnapshot.forEach((doc) => {
+        if(doc.data().finishedGamesJSON != null) {
           AsyncStorage.setItem('finishedGames', doc.data().finishedGamesJSON);
-        });
-      } catch (error) {
-        console.error('Error syncing games from cloud:', error.message);
-      }
+        }
+        else {
+          AsyncStorage.removeItem('finishedGames');
+        }
+      });
+    } catch (error) {
+      console.error('Error syncing games from cloud:', error.message);
     }
+    
   };
   
+  const deleteFromCloud = async () => {
+    if (!user) {
+      await authenticateUser();
+    }
+
+    try {
+      // Replace 'finishedGames' with the actual name of your collection
+      const gamesRef = collection(firestore, 'finishedGames');
+
+      // Check if a document with the user's UID already exists
+      const gamesQuery = query(gamesRef, where('user', '==', user.uid));
+      const querySnapshot = await getDocs(gamesQuery);
+      const docId = querySnapshot.docs[0].id;
+      await setDoc(doc(gamesRef, docId), {
+        finishedGamesJSON: null,
+      }, { merge: true });
+    }
+    catch (error) {
+      console.error('Error deleting game from cloud:', error.message);
+    }
+  };
 
   const toggleSwitch = () => {
     const changedTheme = theme == 'light'? 'dark':'light';
@@ -181,6 +204,9 @@ const SettingsScreen = ({navigation}) => {
           <View style={styles.cloudButtonsContainer}>
             <Button title="Save to Cloud" onPress={saveToCloud} />
             <Button title="Sync from Cloud" onPress={syncFromCloud} />
+          </View>
+          <View style={styles.cloudButtonsContainer}>
+          <Button title="Delete Games from Cloud" onPress={deleteFromCloud} /> 
           </View>
           <View style={styles.cloudButtonsContainer}>
             <Button title="Logout" onPress={() => setUser(null)} />
