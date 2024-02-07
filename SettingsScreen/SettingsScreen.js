@@ -52,7 +52,7 @@ const SettingsScreen = ({navigation}) => {
       setModalVisible(false);
     } catch (error) {
       console.error('Error authenticating user:', error.message);
-      Sentry.captureException('Error authenticating user:', error.message);
+      Sentry.Native.captureException('Error authenticating user:', error.message);
     }
   };
 
@@ -63,7 +63,7 @@ const SettingsScreen = ({navigation}) => {
       setModalVisible(false);
     } catch (error) {
       console.error('Error registering user:', error.message);
-      Sentry.captureException('Error registering user:', error.message);
+      Sentry.Native.captureException('Error registering user:', error.message);
     }
   };
 
@@ -117,7 +117,7 @@ const SettingsScreen = ({navigation}) => {
       console.log('Game saved to cloud successfully!');
     } catch (error) {
       console.error('Error saving game to cloud:', error.message);
-      Sentry.captureException('Error saving game to cloud:', error.message);
+      Sentry.Native.captureException('Error saving game to cloud:', error.message);
     }
     
   };
@@ -143,7 +143,7 @@ const SettingsScreen = ({navigation}) => {
       });
     } catch (error) {
       console.error('Error syncing games from cloud:', error.message);
-      Sentry.captureException('Error syncing game to cloud:', error.message);
+      Sentry.Native.captureException('Error syncing game to cloud:', error.message);
     }
     
   };
@@ -167,7 +167,7 @@ const SettingsScreen = ({navigation}) => {
     }
     catch (error) {
       console.error('Error deleting games from cloud:', error.message);
-      Sentry.captureException('Error deleting games to cloud:', error.message);
+      Sentry.Native.captureException('Error deleting games to cloud:', error.message);
     }
   };
 
@@ -182,7 +182,7 @@ const SettingsScreen = ({navigation}) => {
           )
         } catch (error) {
           console.error('Error saving theme to local storage:', error.message);
-          Sentry.captureException('Error saving theme to local storage:', error.message);
+          Sentry.Native.captureException('Error saving theme to local storage:', error.message);
         }
 
     Appearance.setColorScheme(changedTheme);
