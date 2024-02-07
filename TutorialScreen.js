@@ -1,5 +1,5 @@
 import React, {useContext, useState, useRef, useEffect} from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Modal, TouchableOpacity, useWindowDimensions } from 'react-native';
 import RBSheet from "react-native-raw-bottom-sheet";
 import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
 import * as Font from 'expo-font';
@@ -22,6 +22,9 @@ const loadFonts = async () => {
   });
 };
 const TutorialScreen = ({navigation}) => {
+  const {width} = useWindowDimensions();
+  const fontSize = width < 750? 15:30;
+
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const {colors} = useTheme();
   const {valueX, valueO} = useContext(ColorContext);
@@ -163,7 +166,7 @@ const TutorialScreen = ({navigation}) => {
         }}
       >
         <View style={[styles.rbSheetContent, {backgroundColor: colors.background}]}>
-          <Text style={[styles.rbSheetText, {color: colors.text}]}>{tutorialMessages[currentMessageIndex]}</Text>
+          <Text style={[styles.rbSheetText, {color: colors.text, fontSize: fontSize}]}>{tutorialMessages[currentMessageIndex]}</Text>
           <View style={styles.rbButtonsContainer}>
             <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
               <Text style={styles.rbSheetButton}>{'Skip Tutorial'}</Text>

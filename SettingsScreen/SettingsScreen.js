@@ -33,8 +33,6 @@ const SettingsScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {height, width, scale, fontScale} = useWindowDimensions();
-  const bigWidth = width >= 600;
 
   // Check if the user is authenticated
   useEffect(() => {
@@ -185,11 +183,16 @@ const SettingsScreen = ({navigation}) => {
 
   }
 
+  const {width} = useWindowDimensions();
+  const fontSize = width < 750? 20:40;
+  const intermidiateFontSize = width < 750? 25:50;
+  const headerFontSize =  width < 750? 50:100;
+  const bigWidth = width >= 750;
   return (
   
   <SafeAreaView style={{flex : 1}}>
     <View style={{height : '15%', justifyContent: 'flex-end', alignContent: 'center'}}>
-      <Text style={[styles.headerTitle, {color: colors.text}]}>Settings</Text>
+      <Text style={[styles.headerTitle, {color: colors.text, fontSize: headerFontSize}]}>Settings</Text>
     </View>
     <View style={{...styles.separator}} />
     <View style ={styles.containerInset}>

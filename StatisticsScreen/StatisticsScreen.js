@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Text, View, Button, SafeAreaView, StyleSheet, FlatList, LayoutAnimation } from 'react-native';
+import { Text, View, Button, SafeAreaView, StyleSheet, FlatList, LayoutAnimation, useWindowDimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Game from '../GameLogic/Game.js';
@@ -13,6 +13,7 @@ import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js';
 import { useTheme } from '@react-navigation/native';
 import ButtonComponent from '../HomeScreen/homeComponents/ButtonComponent.js';
 import {ThemeContext} from '../styles/contexts/ThemeContext.js';
+
 const loadFonts = async () => {
   await Font.loadAsync({
     Acme: require('../assets/fonts/Acme.ttf'), 
@@ -27,6 +28,13 @@ const StatisticsScreen = ({ navigation }) => {
   const {valueX, valueO} = useContext(ColorContext);
   const {theme} = useContext(ThemeContext);
   const {colors} = useTheme();
+
+  const {width} = useWindowDimensions();
+  const fontSize = width < 750? 20:40;
+  const intermidiateFontSize = width < 750? 25:50;
+  const headerFontSize =  width < 750? 50:100;
+  const smallSize =  width < 750? 20:30;
+  const expandableHeight = width < 750? 100:200;
 
   useEffect(() => {
 
@@ -86,7 +94,7 @@ const StatisticsScreen = ({ navigation }) => {
     const isExpanded = expandedIndex === index;
 
     return (
-      <SafeAreaView
+      <View
         key={index}
         style={{...styles.statisticsButtonView, }}
       >
@@ -95,19 +103,23 @@ const StatisticsScreen = ({ navigation }) => {
           text={item.getWinner() + ' VICTORY' + ' - ' + item.finishedDate}
           onPress={() => toggleDropdown(index)}
           style={{
-            width: '100%',
+            
             backgroundColor :  item.getWinner() === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
-            padding: 5
+            padding: 5,
+            
 
           }}
+          styleText = {{fontSize: smallSize}}
+
         />
         
         <View
           style={{
             ...styles.expandableContainerView,
-            height: isExpanded ? 100 : 0,
+            height: isExpanded ? expandableHeight : 0,
             backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
-            borderColor: colors.border
+            borderColor: colors.border,
+            
           }}
           
         >
@@ -115,24 +127,27 @@ const StatisticsScreen = ({ navigation }) => {
           {isExpanded && (
               <View
               style={{
-                ...styles.expandableView
+                ...styles.expandableView,
+                fontSize : fontSize, 
               }}>
                 <Text
                   style={{
                     ...styles.numberOfMovesText,
+                    fontSize : fontSize,
                   }}
                 >
                   {item.moves.length} moves
                 </Text>
                  <ButtonComponent
-                  style={[{backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueO] : ColorsPalette[valueX], borderColor: colors.text, width: 150, padding: 10}]}
+                  style={[{backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueO] : ColorsPalette[valueX], borderColor: colors.text, padding: 10}]}
                   text={"Show Replay"}
                   onPress={() => navigation.navigate('ReplayScreen', { game: item })}
+                  styleText = {{fontSize: fontSize}}
                 ></ButtonComponent>
               </View>
           )}
         </View>
-      </SafeAreaView>
+      </View>
     );
   };
 
@@ -141,7 +156,7 @@ const StatisticsScreen = ({ navigation }) => {
       
         <View style={{justifyContent: 'flex-end', height: '15%'}}>
         <Text style={{    
-          ...styles.headerTitle, color: colors.text, 
+          ...styles.headerTitle, color: colors.text, fontSize: headerFontSize
         }}>
           Statistics
         </Text>
@@ -159,6 +174,7 @@ const StatisticsScreen = ({ navigation }) => {
           <Text style={{    
             ...styles.victoriesText,
             color: ColorsPalette[valueX],
+            fontSize : intermidiateFontSize,
           }}>
             X VICTORIES: {games.filter((game) => game.getWinner() === 'X').length}
           </Text>
@@ -166,12 +182,13 @@ const StatisticsScreen = ({ navigation }) => {
           <Text style={{    
             ...styles.victoriesText,
             color: ColorsPalette[valueO],
+            fontSize : intermidiateFontSize,
           }}>
             O VICTORIES: {games.filter((game) => game.getWinner() === 'O').length}
           </Text>
         </View>
         
-        <View ><Text style={{color: colors.text, fontWeight: 'bold', fontSize: 20}}>Previous games</Text></View>
+        <View ><Text style={{color: colors.text, fontWeight: 'bold', fontSize: 20, fontSize : intermidiateFontSize,}}>Previous games</Text></View>
         
 
       </View>
@@ -185,9 +202,10 @@ const StatisticsScreen = ({ navigation }) => {
       </View>
       <View style = {{flex: 1, justifyContent : 'flex-end', marginBottom: '5%'}}>
       <ButtonComponent
-                  style={[styles.deleteGamesButton,{backgroundColor: theme === 'dark' ? '#767577': '#606060', borderColor: colors.text, }]}
+                  style={[styles.deleteGamesButton,{backgroundColor: theme === 'dark' ? '#767577': '#606060', borderColor: colors.text,}]}
                   text={"Delete all"}
                   onPress={() => {AsyncStorage.removeItem('finishedGames')}}
+                  styleText = {{fontSize: fontSize}}
       ></ButtonComponent>
       </View>
     </SafeAreaView>
@@ -250,9 +268,13 @@ const styles = StyleSheet.create({
   },
   deleteGamesButton :{
     width: 150, 
-    padding: 10,
+   
     marginTop: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    maxWidth: 400,
+    maxHeight: 100,
+    width: '30%',
+
   }
 });
 

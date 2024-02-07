@@ -18,10 +18,6 @@ const loadFonts = async () => {
   });
 };
 
-
-
-
-
 const HomeScreen = ({navigation}) => {
   const { valueX, valueO} = useContext(ColorContext);
   const {colors} = useTheme();
@@ -31,10 +27,10 @@ const HomeScreen = ({navigation}) => {
   const [AISymbol, setAISymbol] = useState('O');
 
   const {height, width, scale, fontScale} = useWindowDimensions();
-
+  const headerFontSize =  width < 750? 60:120;
   
-  const fontSize = width < 600? 20:50;
-  
+  const fontSize = width < 750? 20:40;
+  const fontSmall = width < 750? 10:30;
 
   const toggleSwitch = () => setAIEnabled(previousState => !previousState);
   
@@ -50,12 +46,9 @@ const HomeScreen = ({navigation}) => {
   if (!fontsLoaded) {
     return null; // You can render a loading component or return null until the fonts are loaded
   }
-
-
- 
  
   return (
-    <SafeAreaView style={[styles.container,{backgroundColor: colors.background},]}>
+    <SafeAreaView style={styles.container}>
       
       <Modal
         animationType="slide"
@@ -68,35 +61,40 @@ const HomeScreen = ({navigation}) => {
           <TouchableWithoutFeedback>
             <View style={[styles.modalView, {backgroundColor: colors.background, shadowColor: colors.text}]}>
               <View style={styles.modalRow}>
-                <Text style={[styles.modalText, {color: colors.text}]}>Enable AI?</Text>
+                <Text style={[styles.modalText, {color: colors.text, fontSize: fontSize}]}>Enable AI?</Text>
                 <Switch
                   trackColor={{ false: '#767577', true: '#E8E8E8' }}
                   thumbColor={AIEnabled ? '#606060' : '#f4f3f4'}
                   ios_backgroundColor="#3e3e3e"
                   onValueChange={toggleSwitch}
                   value={AIEnabled}
+                  style={{
+                    transform: width < 750 ? [{ scaleX: 1 }, { scaleY: 1 }] : [{ scaleX: 1.5}, { scaleY: 1.5 }]
+                  }}
                 />
               </View>
 
               {AIEnabled && (
-                <View style={styles.modalRow}>
-                  <Text style={[styles.modalText, {color: colors.text}]}>AI Symbol:</Text>
+                <View style={[styles.modalRow]}>
+                  <Text style={[styles.modalText, {color: colors.text, fontSize: fontSize}]}>AI Symbol:</Text>
                   <AwesomeButton
                     title={AISymbol}
-                    backgroundColor='white'
+                    backgroundColor={colors.background}
                     borderColor='white'
-                    textColor= {AISymbol==='X' ? '#007AFF' : '#FF3B30'}
-                    textSize={20}
+                    textColor= {AISymbol==='X' ? ColorsPalette[valueX] :ColorsPalette[valueO]}
+                    textSize={fontSize}
                     raiseLevel={0}
                     onPress={() => setAISymbol(AISymbol === 'O' ? 'X' : 'O')}
                   >{AISymbol}</AwesomeButton>
                 </View>
               )}
               <ButtonComponent
-                  style={{backgroundColor: "#007AFF", height: '30%',backgroundColor: ColorsPalette[valueX], borderColor: colors.text, width: '50%'}}
+                  style={{ height: width < 750?40: 80,backgroundColor: ColorsPalette[valueX], borderColor: colors.text, width: '100%', alignItems: 'center', justifyContent: 'center', padding: 5}}
                   text={"Create Game"}
                   onPress={() => {setModalVisible(false);
-                   navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})}}
+                  navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})}}
+                  styleText = {{fontSize: fontSmall, textAlign: 'center'}}
+
               ></ButtonComponent>
               
             </View>
@@ -105,7 +103,7 @@ const HomeScreen = ({navigation}) => {
       </Modal>
       <View style = {{flex : 1, flexDirection: 'column'}}>
       <View style = {styles.HomeTitleComponent}>
-      <HomeTitleComponent style={[{color: colors.text}]} styleHeader = {{fontSize: width < 600? 60 : 120}}></HomeTitleComponent>
+      <HomeTitleComponent style={[{color: colors.text}]} styleHeader = {{fontSize: headerFontSize}}></HomeTitleComponent>
       </View>
       <View style={styles.buttonsContainerIns}>
       <View style={styles.buttons}>
@@ -122,7 +120,7 @@ const HomeScreen = ({navigation}) => {
           styleText = {{fontSize: fontSize}}
         ></ButtonComponent>
         <ButtonComponent
-          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
+          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text, }]}
           text={"TUTORIAL"}
           onPress={() => navigation.navigate('Tutorial')}
           styleText = {{fontSize: fontSize}}
@@ -153,14 +151,11 @@ const styles = StyleSheet.create({
     buttonsContainerIns: {
       flexDirection: "column",
       alignSelf: "center",
-      flex : 1,
-  
-      
-      align: 'center',
+      flex : 2,
       width: '100%',
      
      
-      
+  
     },
     buttons : {
         //justifyContent: 'space-around'
@@ -172,16 +167,21 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly', 
         
         
+        
     },
     sideButton: {
       backgroundColor: "#007AFF",
-      height: '20%'
+      height: '15%',
+      maxWidth: 400,
+      maxHeight: 100,
 
      
     },
     middleButton: {
       backgroundColor: "#FF3B30",
-      height: '20%'
+      height: '15%',
+      maxWidth: 400,
+      maxHeight: 100,
       
     
     },
@@ -190,7 +190,6 @@ const styles = StyleSheet.create({
 
     },  /*MODAL */
     modalView: {
-      margin: 20,
       borderRadius: 20,
       padding: 35,
       alignItems: 'center',
@@ -200,9 +199,12 @@ const styles = StyleSheet.create({
         width: 0,
         height: 2,
       },
-  
+      alignSelf:'center',
       shadowRadius: 4,
       elevation: 5,
+      marginTop: '30%'
+    
+      
     },
     modalRow: {
       flexDirection: 'row',

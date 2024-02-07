@@ -1,6 +1,6 @@
 // GameplayScreen.js
 import React, {useContext, useState, useEffect} from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Button} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Button, useWindowDimensions} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 import * as Progress from 'react-native-progress';
@@ -34,6 +34,9 @@ const GamePlayScreen = ({route, navigation}) => {
   const [progress, setProgress] = useState(100);
 
   const {valueX, valueO} = useContext(ColorContext);
+
+  const {width} = useWindowDimensions();
+  const fontSize = width < 750? 20:40;
 
   const onPressCell = (smallBoardIndex, pos) => {
 
@@ -106,11 +109,11 @@ const GamePlayScreen = ({route, navigation}) => {
     <SafeAreaView style={styles.container}>
       <WinnerModal modalVisible={modalVisible} winner={winner} setModalVisible={setModalVisible} navigation={navigation}/>
       
-      <Text style={{...styles.currentPlayerText, color: currentPlayerColor}}>{gameInstance.currentPlayer} turn</Text>
+      <Text style={{...styles.currentPlayerText, color: currentPlayerColor, fontSize: fontSize}}>{gameInstance.currentPlayer} turn</Text>
       <View style={{...styles.separator, backgroundColor: currentPlayerColor,}}/>
       {gameInstance.AISymbol !== ' ' && 
       <View style={{alignItems: 'center', marginBottom: 20}}>
-        <Progress.Bar progress={progress/100} width={400} color={gameInstance.AISymbol === 'X' ? '#007AFF' : '#FF3B30'}/>
+        <Progress.Bar progress={progress/100} width={400} color={gameInstance.AISymbol === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO] }/>
       </View>}
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
     </SafeAreaView> 
