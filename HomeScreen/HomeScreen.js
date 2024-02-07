@@ -104,31 +104,31 @@ const HomeScreen = ({navigation}) => {
         </TouchableOpacity>
       </Modal>
       <View style = {{flex : 1, flexDirection: 'column'}}>
-      <View style = {styles.HomeTitleComponent}>
-      <HomeTitleComponent style={[{color: colors.text}]} styleHeader = {{fontSize: width < 600? 60 : 120}}></HomeTitleComponent>
-      </View>
-      <View style={styles.buttonsContainerIns}>
-      <View style={styles.buttons}>
-        <ButtonComponent
-          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
-          styleText = {{fontSize: fontSize}}
-          text={"NEW GAME"}
-          onPress={() => setModalVisible(true)}
-        ></ButtonComponent>
-        <ButtonComponent
-          style={[styles.middleButton, {backgroundColor: ColorsPalette[valueO], borderColor: colors.text}]}
-          text={"CONTINUE"}
-          onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: true})}
-          styleText = {{fontSize: fontSize}}
-        ></ButtonComponent>
-        <ButtonComponent
-          style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
-          text={"TUTORIAL"}
-          onPress={() => navigation.navigate('Tutorial')}
-          styleText = {{fontSize: fontSize}}
-        ></ButtonComponent>
-      </View>
-      </View>
+        <View style = {styles.HomeTitleComponent}>
+          <HomeTitleComponent style={[{color: colors.text}]} styleHeader = {{fontSize: width < 600? 60 : 120}} />
+        </View>
+        <View style={styles.buttonsContainerIns}>
+          <View style={styles.buttons}>
+            <ButtonComponent
+              style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
+              styleText = {{fontSize: fontSize}}
+              text={"NEW GAME"}
+              onPress={() => setModalVisible(true)}
+            />
+            <ButtonComponent
+              style={[styles.middleButton, {backgroundColor: ColorsPalette[valueO], borderColor: colors.text}]}
+              text={"CONTINUE"}
+              onPress={() => navigation.navigate('Tic_Tac_Toe', {continuingGame: true})}
+              styleText = {{fontSize: fontSize}}
+            />
+            <ButtonComponent
+              style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text}]}
+              text={"TUTORIAL"}
+              onPress={() => navigation.navigate('Tutorial')}
+              styleText = {{fontSize: fontSize}}
+            />
+          </View>
+        </View>
       </View>
       
       <View style={styles.homeComponentsFiller}></View>
