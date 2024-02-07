@@ -35,7 +35,11 @@ const styles = StyleSheet.create({
   bigBoard: {
     flex: 1,
     flexDirection: 'column',
-    width: '75%',
+    width: '100%',
+    height: '100%',
+    marginTop: 20,
+    
+   
   },
   rowOfSmallBoards: {
     flex: 3,
@@ -43,6 +47,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     maxHeight: '15%',
+    height: '30%', 
+    margin: '10%'
+
+
   },
 });
 

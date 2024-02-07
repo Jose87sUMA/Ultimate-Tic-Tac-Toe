@@ -1,16 +1,23 @@
-import {React, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { Modal, View, Text, StyleSheet} from 'react-native';
 import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
+import {ColorContext } from '../styles/contexts/ColorContext.js';
+import {useTheme} from '@react-navigation/native'
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
+import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js'; 
+import ButtonComponent from '../HomeScreen/homeComponents/ButtonComponent.js';
+
 
 const WinnerModal = ({ modalVisible, winner, setModalVisible, navigation }) => {
-
+  const{valueX, valueO} = useContext(ColorContext);
+  const {colors} = useTheme();
   const getModalBackgroundColor = () => {
     if (winner === ' ') {
       return colors.text;
     } else if (winner === 'X') {
-      return '#007AFF';
+      return ColorsPalette[valueX];
     } else {
-      return '#FF3B30';
+      return ColorsPalette[valueO];
     }
   };
 
@@ -23,23 +30,20 @@ const WinnerModal = ({ modalVisible, winner, setModalVisible, navigation }) => {
         setModalVisible(!modalVisible);
       }}>
       <View style={styles.centeredView}>
-        <View style={{ ...styles.modalContainer }}>
+        <View style={{ ...styles.modalContainer, ...{backgroundColor: colors.background, shadowColor: colors.text} }}>
           <Text style={{
             ...styles.modalText,
-            color: winner === ' ' ? colors.text : winner === 'X' ? '#007AFF' : '#FF3B30'
+            color: winner === ' ' ? colors.text : winner === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO]
           }}>{winner === ' ' ? 'It\'s a tie!' : winner + ' wins!'}</Text>
-          <AwesomeButton
-            borderWidth={2}
-            backgroundColor={getModalBackgroundColor()}
-            borderColor='#000000'
-            backgroundDarker='#000000'
-            textColor='#FBFBFB'
-            raiseLevel={2}
-            onPress={() => {
-              setModalVisible(false);
-              navigation.navigate('HomeScreen');
-            }}
-          >Go Home</AwesomeButton>
+          <ButtonComponent
+          style={ {backgroundColor: getModalBackgroundColor(), borderColor: colors.text, color : 'white', borderWidth: 1, borderColor: colors.text, padding: 5}}
+          onPress={() => {
+            setModalVisible(false);
+            navigation.navigate('HomeScreen');
+          }}
+          text={"Go Home"}
+          />
+         
         </View>
       </View>
     </Modal>
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
       },
       modalText: {
         width: '100%',
-        fontSize: 42,
+        fontSize: 30,
         textAlign: 'center',
         fontFamily: 'Acme',
       },

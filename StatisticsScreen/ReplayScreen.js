@@ -1,7 +1,11 @@
 // ReplayScreen.js
-import {React, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { ColorContext } from '../styles/contexts/ColorContext.js';
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
+import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js';
+import {useTheme} from '@react-navigation/native';
 
 import BigBoard from '../GamePlayScreen/BigBoard.js';
 import Game from '../GameLogic/Game.js';
@@ -15,8 +19,10 @@ const loadFonts = async () => {
 };
 
 const ReplayScreen = ({route, navigation}) => {
+  const {valueX, valueO} = useContext(ColorContext);
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [gameInstance, setGame] = useState(Game.fromState(route.params.game));
+  const {colors} = useTheme();
 
   useEffect(() => {
 
@@ -46,10 +52,10 @@ const ReplayScreen = ({route, navigation}) => {
             setGame(newGameInstance);
           }}
         >
-          <FontAwesome5 name="undo" size={20} />
+          <FontAwesome5 name="undo" size={20} color= {colors.text}/>
         </TouchableOpacity>
 
-        <Text style={{...styles.currentPlayerText, color: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30'}}>{gameInstance.currentPlayer} turn</Text>
+        <Text style={{...styles.currentPlayerText, color: gameInstance.currentPlayer === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO]}}>{gameInstance.currentPlayer} turn</Text>
 
         <TouchableOpacity
           onPress={() => {
@@ -59,12 +65,12 @@ const ReplayScreen = ({route, navigation}) => {
             setGame(newGameInstance);
           }}
         >
-          <FontAwesome5 name="redo" size={20} />
+          <FontAwesome5 name="redo" size={20} color= {colors.text}/>
         </TouchableOpacity>
 
       </View>
 
-      <View style={{marginBottom: 0, height: 2, width: '100%', backgroundColor: gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30', marginBottom: 25}} />
+      <View style={{marginBottom: 0, height: 2, width: '100%', backgroundColor: gameInstance.currentPlayer === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO], marginBottom: 25}} />
 
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={() => {}} AITurn={gameInstance.AITurn}/>
       

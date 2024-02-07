@@ -44,6 +44,7 @@ const HomeScreen = ({navigation}) => {
  
   return (
     <SafeAreaView style={[styles.container,{backgroundColor: colors.background},]}>
+ 
       <Modal
         animationType="slide"
         transparent={true}
@@ -53,12 +54,12 @@ const HomeScreen = ({navigation}) => {
         }}>
         <TouchableOpacity style={styles.centeredView} onPressOut={() => {setModalVisible(false)}}>
           <TouchableWithoutFeedback>
-            <View style={styles.modalView}>
+            <View style={[styles.modalView, {backgroundColor: colors.background, shadowColor: colors.text}]}>
               <View style={styles.modalRow}>
-                <Text style={styles.modalText}>Enable AI?</Text>
+                <Text style={[styles.modalText, {color: colors.text}]}>Enable AI?</Text>
                 <Switch
-                  trackColor={{ false: '#767577', true: '#ADCBFF' }}
-                  thumbColor={AIEnabled ? '#81b0ff' : '#f4f3f4'}
+                  trackColor={{ false: '#767577', true: '#E8E8E8' }}
+                  thumbColor={AIEnabled ? '#606060' : '#f4f3f4'}
                   ios_backgroundColor="#3e3e3e"
                   onValueChange={toggleSwitch}
                   value={AIEnabled}
@@ -67,12 +68,11 @@ const HomeScreen = ({navigation}) => {
 
               {AIEnabled && (
                 <View style={styles.modalRow}>
-                  <Text style={styles.modalText}>AI Symbol:</Text>
+                  <Text style={[styles.modalText, {color: colors.text}]}>AI Symbol:</Text>
                   <AwesomeButton
                     title={AISymbol}
-                    backgroundColor='#FFFFFF'
-                    borderColor='#000000'
-                    backgroundDarker='#000000'
+                    backgroundColor='white'
+                    borderColor='white'
                     textColor= {AISymbol==='X' ? '#007AFF' : '#FF3B30'}
                     textSize={20}
                     raiseLevel={0}
@@ -80,19 +80,13 @@ const HomeScreen = ({navigation}) => {
                   >{AISymbol}</AwesomeButton>
                 </View>
               )}
-
-              <AwesomeButton 
-                borderWidth= {2}
-                backgroundColor='#007AFF'
-                borderColor='#000000'
-                backgroundDarker='#000000'
-                textColor='#FBFBFB'
-                raiseLevel={2}
-                onPress={() => {
-                  setModalVisible(false);
-                  navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})
-              }}
-              >Create Game</AwesomeButton>
+              <ButtonComponent
+                  style={[styles.sideButton, {backgroundColor: ColorsPalette[valueX], borderColor: colors.text, width: 150}]}
+                  text={"Create Game"}
+                  onPress={() => {setModalVisible(false);
+                   navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})}}
+              ></ButtonComponent>
+              
             </View>
           </TouchableWithoutFeedback>
         </TouchableOpacity>
@@ -138,16 +132,16 @@ const styles = StyleSheet.create({
     },
     modalView: {
       margin: 20,
-      backgroundColor: 'white',
       borderRadius: 20,
       padding: 35,
       alignItems: 'center',
+      shadowOpacity: 1,
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
         height: 2,
       },
-      shadowOpacity: 0.25,
+  
       shadowRadius: 4,
       elevation: 5,
     },

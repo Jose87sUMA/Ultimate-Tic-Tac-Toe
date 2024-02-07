@@ -6,7 +6,8 @@ export default ColorsPalette = [
     '#ff1d8e',
     '#F26419',
     '#F6AE2D',
-    '#3d2b56',
+    '#9500FF',
     '#32cd32',
+    '#FFF01F',
     
   ];

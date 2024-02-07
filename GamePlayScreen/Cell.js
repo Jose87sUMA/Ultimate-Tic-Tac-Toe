@@ -1,11 +1,16 @@
 // Cell.js
-import React from 'react';
+import React, {useContext} from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
-
+import { ColorContext } from '../styles/contexts/ColorContext';
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
+import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
+import { useTheme } from '@react-navigation/native';
 
 const Cell = (props) => {
-  const colorBackground = props.nextMoveHere ? props.currentPlayer === 'X' ? '#B8DAFF':'#FFAAA6':null;
-  const colorBorderAndText = props.value !== ' ' ? props.value === 'X' ? '#007AFF':'#FF3B30':'#000000';
+  const {valueX, valueO} = useContext(ColorContext);
+  const {colors} = useTheme();
+  const colorBackground = props.nextMoveHere ? props.currentPlayer === 'X' ? ColorsPaletteSoft[valueX]:ColorsPaletteSoft[valueO]:null;
+  const colorBorderAndText = props.value !== ' ' ? props.value === 'X' ? ColorsPalette[valueX]:ColorsPalette[valueO]:colors.text;
   return (
     <TouchableOpacity style={{...styles.cell, backgroundColor: colorBackground, borderColor: colorBorderAndText}} onPress={props.onPressCell} disabled = {(props.AITurn || props.value !== ' ') && props.nextMoveHere}>
       <Text style={{...styles.cellText, color: colorBorderAndText}}>{props.value}</Text>

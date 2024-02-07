@@ -1,4 +1,4 @@
-import {React, useState, useRef, useEffect} from 'react';
+import React, {useContext, useState, useRef, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
 import RBSheet from "react-native-raw-bottom-sheet";
 import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
@@ -12,6 +12,10 @@ import Game from './GameLogic/Game.js';
 import monteCarloTreeSearch from './GameLogic/MonteCarloTreeSearch.js';
 
 
+import { ColorContext } from './styles/contexts/ColorContext.js';
+import ColorsPalette from './styles/colorsPalettes/ColorsPalette.js';
+import ColorsPaletteSoft from './styles/colorsPalettes/ColorsPaletteSoft.js'; 
+
 const loadFonts = async () => {
   await Font.loadAsync({
     Acme: require('./assets/fonts/Acme.ttf'), 
@@ -20,6 +24,7 @@ const loadFonts = async () => {
 const TutorialScreen = ({navigation}) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const {colors} = useTheme();
+  const {valueX, valueO} = useContext(ColorContext);
 
   const initialGame = new Game('O');
   const [gameInstance, setGame] = useState(initialGame);
@@ -129,14 +134,14 @@ const TutorialScreen = ({navigation}) => {
   };
 
   const winner = gameInstance.getWinner();
-  const currentPlayerColor = gameInstance.currentPlayer === 'X' ? '#007AFF' : '#FF3B30';
+  const currentPlayerColor = gameInstance.currentPlayer === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO];
   return (
     <SafeAreaView style={styles.container}>
       <WinnerModal modalVisible={modalVisible} winner={winner} setModalVisible={setModalVisible} navigation={navigation}/>
       <Text style={{...styles.currentPlayerText, color: currentPlayerColor}}>{gameInstance.currentPlayer} turn</Text>
       <View style={{...styles.separator, backgroundColor: currentPlayerColor,}}/>
       <View style={{alignItems: 'center', marginBottom: 20}}>
-        <Progress.Bar progress={progress/100} width={400} color={gameInstance.AISymbol === 'X' ? '#007AFF' : '#FF3B30'}/>
+        <Progress.Bar progress={progress/100} width={400} color={gameInstance.AISymbol === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO]}/>
       </View>
       <BigBoard bigBoard={gameInstance.bigBoard} winnerBoard={gameInstance.winnerBoard} boardOfNextMove={gameInstance.boardOfNextMove} currentPlayer={gameInstance.currentPlayer} onPressCell={onPressCell} AITurn={gameInstance.AITurn}/>
 
@@ -151,11 +156,14 @@ const TutorialScreen = ({navigation}) => {
           container: {
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
+            borderTopColor: colors.text,
+            borderTopWidth: 1,
+            
           },
         }}
       >
-        <View style={styles.rbSheetContent}>
-          <Text style={styles.rbSheetText}>{tutorialMessages[currentMessageIndex]}</Text>
+        <View style={[styles.rbSheetContent, {backgroundColor: colors.background}]}>
+          <Text style={[styles.rbSheetText, {color: colors.text}]}>{tutorialMessages[currentMessageIndex]}</Text>
           <View style={styles.rbButtonsContainer}>
             <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
               <Text style={styles.rbSheetButton}>{'Skip Tutorial'}</Text>
@@ -193,20 +201,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    
+
   },
   rbButtonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '80%',
     marginTop: 40,
+   
   },
   rbSheetText: {
     width: '80%',
     height: '40%',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Acme',
+   
   },
   rbSheetButton: {
     fontSize: 16,

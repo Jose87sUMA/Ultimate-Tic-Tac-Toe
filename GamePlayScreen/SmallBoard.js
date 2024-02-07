@@ -41,12 +41,14 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    
   },
   rowOfCells: {
     width: '90%',
     flexDirection: 'row',
     alignSelf: 'center',
     justifyContent: 'center',
+    
 
   },
   finishedCell: {

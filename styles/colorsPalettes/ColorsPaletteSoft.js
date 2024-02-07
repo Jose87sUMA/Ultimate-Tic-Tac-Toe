@@ -8,5 +8,6 @@ export default ColorsPaletteSoft = [
     '#fce1b1',
     '#d1c5e2',
     '#c0f0c0',
+    '#fff780',
     
   ];

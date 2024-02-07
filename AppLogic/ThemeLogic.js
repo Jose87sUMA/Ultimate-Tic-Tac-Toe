@@ -36,7 +36,7 @@ useEffect(() => {
 
 const colorData = { valueX, setValueX, valueO, setValueO };
 
-const defaultColorScheme = useColorScheme();
+const defaultColorScheme = useColorScheme() === 'dark'? 'dark': 'light';
 const [theme, setTheme] = useState(defaultColorScheme);
 const themeData = { theme, setTheme };
 

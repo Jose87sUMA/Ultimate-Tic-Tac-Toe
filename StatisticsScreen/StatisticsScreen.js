@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Text, View, Button, SafeAreaView, StyleSheet, FlatList, LayoutAnimation } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -6,6 +6,13 @@ import Game from '../GameLogic/Game.js';
 
 import * as Font from 'expo-font';
 
+
+import { ColorContext } from '../styles/contexts/ColorContext.js';
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
+import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js';
+import { useTheme } from '@react-navigation/native';
+import ButtonComponent from '../HomeScreen/homeComponents/ButtonComponent.js';
+import {ThemeContext} from '../styles/contexts/ThemeContext.js';
 const loadFonts = async () => {
   await Font.loadAsync({
     Acme: require('../assets/fonts/Acme.ttf'), 
@@ -16,6 +23,10 @@ const StatisticsScreen = ({ navigation }) => {
   const [games, setGames] = useState([]);
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  const {valueX, valueO} = useContext(ColorContext);
+  const {theme} = useContext(ThemeContext);
+  const {colors} = useTheme();
 
   useEffect(() => {
 
@@ -79,25 +90,32 @@ const StatisticsScreen = ({ navigation }) => {
         key={index}
         style={{...styles.statisticsButtonView, }}
       >
-        <Button
-          title={item.getWinner() + ' VICTORY' + ' - ' + item.finishedDate}
+       
+        <ButtonComponent
+          text={item.getWinner() + ' VICTORY' + ' - ' + item.finishedDate}
           onPress={() => toggleDropdown(index)}
-          color= {item.getWinner() === 'X' ? '#007AFF' : '#FF3B30'}
           style={{
             width: '100%',
+            backgroundColor :  item.getWinner() === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+            padding: 5
+
           }}
         />
+        
         <View
           style={{
             ...styles.expandableContainerView,
             height: isExpanded ? 100 : 0,
-            backgroundColor: item.getWinner() === 'X' ? '#B8DAFF' : '#FFAAA6',
+            backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+            borderColor: colors.border
           }}
+          
         >
+         
           {isExpanded && (
               <View
               style={{
-                ...styles.expandableView,
+                ...styles.expandableView
               }}>
                 <Text
                   style={{
@@ -106,12 +124,11 @@ const StatisticsScreen = ({ navigation }) => {
                 >
                   {item.moves.length} moves
                 </Text>
-                <Button
-                  title={'Show Replay'}
-                  style={{fontFamily: 'Acme', }}
+                 <ButtonComponent
+                  style={[{backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueO] : ColorsPalette[valueX], borderColor: colors.text, width: 150, padding: 10}]}
+                  text={"Show Replay"}
                   onPress={() => navigation.navigate('ReplayScreen', { game: item })}
-                  color={'green'}
-                />
+                ></ButtonComponent>
               </View>
           )}
         </View>
@@ -125,7 +142,7 @@ const StatisticsScreen = ({ navigation }) => {
         ...styles.headerView
       }}>
         <Text style={{    
-          ...styles.headerTitle,
+          ...styles.headerTitle, color: colors.text
         }}>
           Statistics
         </Text>
@@ -138,29 +155,37 @@ const StatisticsScreen = ({ navigation }) => {
         >
           <Text style={{    
             ...styles.victoriesText,
-            color: '#007AFF',
+            color: ColorsPalette[valueX],
           }}>
             X VICTORIES: {games.filter((game) => game.getWinner() === 'X').length}
           </Text>
 
           <Text style={{    
             ...styles.victoriesText,
-            color: '#FF3B30',
+            color: ColorsPalette[valueO],
           }}>
             O VICTORIES: {games.filter((game) => game.getWinner() === 'O').length}
           </Text>
         </View>
         
-        <View style={{...styles.separator}} />
+        <View ><Text style={{color: colors.text, fontWeight: 'bold', fontSize: 20}}>Previous games</Text></View>
+        
 
       </View>
       
-
+        <View style={{height: '50%'}}>
       <FlatList
         data={games}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
+      </View>
+      
+      <ButtonComponent
+                  style={[styles.deleteGamesButton,{backgroundColor: theme === 'dark' ? '#767577': '#606060', borderColor: colors.text, }]}
+                  text={"Delete all"}
+                  onPress={() => {AsyncStorage.removeItem('finishedGames')}}
+      ></ButtonComponent>
     </SafeAreaView>
   );
 };
@@ -175,17 +200,23 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 5 ,
+    borderWidth: 2,
+    
   },
   expandableView:{
     flexDirection: 'row',   
     height: '100%',    
     width: '100%',             
     justifyContent: 'space-around',
-    alignItems: 'center',      
+    alignItems: 'center',  
+     
   },
   numberOfMovesText: {
     fontSize: 20,
     fontFamily: 'Acme',
+    color: 'white',
+
   },
   headerView: {
     justifyContent: 'center',
@@ -215,6 +246,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontFamily: 'Acme',
   },
+  deleteGamesButton :{
+    width: 150, 
+    padding: 10,
+    marginTop: 20,
+    alignSelf: 'center'
+  }
 });
 
 export default StatisticsScreen;
