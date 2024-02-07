@@ -148,9 +148,6 @@ const styles = StyleSheet.create({
     //borderColor: '#e5e7eb',
     //borderStyle: 'dashed',
     borderRadius: 9,
-    /*flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,*/
     flexDirection: 'column',
     alignSelf : 'center',
     backgroundColor: 'gray',
@@ -158,13 +155,6 @@ const styles = StyleSheet.create({
     
   },
   buttonContainer: {
-    //borderWidth: 4,
-    //borderColor: '#e5e7eb',
-    //borderStyle: 'dashed',
-    //borderRadius: 9,
-    /*flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,*/
     flexDirection: 'row',
     alignSelf : 'center',
     padding:'10%',

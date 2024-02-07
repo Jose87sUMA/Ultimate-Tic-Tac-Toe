@@ -50,7 +50,7 @@ const ResetColorTheme = (props) => {
       <View style ={styles.themeMode}>
         <Text style={[styles.text, props.styleText]}>Default Settings</Text> 
        
-        <TouchableOpacity  style={[styles.button, {backgroundColor: theme === 'dark' ? '#767577': '#606060', justifyContent: 'center'}]} onPress = {onPressButton}>
+        <TouchableOpacity  style={[styles.button, props.grayButtonStyle]} onPress = {onPressButton}>
             <Text style ={styles.buttonText}>Revert</Text>
         </TouchableOpacity>
         
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#606060',
     padding: 5,
     borderRadius: 5,
+    justifyContent: 'center'
     
    
 

@@ -1,142 +1,4 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { Modal, TextInput, Switch, SafeAreaView, View, StyleSheet, StatusBar, Image, Text, Button, useColorScheme, Appearance, useWindowDimensions, ScrollView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useTheme } from '@react-navigation/native';
-
-import Sentry from 'sentry-expo';
-
-import { signInAnonymously, onAuthStateChanged, getAuth } from 'firebase/auth';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc, getDocs, setDoc, doc, query, where} from 'firebase/firestore';
-import {firestore, auth} from '../Firebase/firebaseConfig';
-
-import { ThemeContext } from '../styles/contexts/ThemeContext';
-import { ColorContext } from '../styles/contexts/ColorContext';
-import ColorPicker from './ColorPicker';
-import ThemePicker from './ThemePicker';
-import ResetColorTheme from './ResetColorTheme';
-import AuthenticationSection from './AuthenticationSection';
-import * as Font from 'expo-font';
-
-import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
-import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
-
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
-
-const SettingsScreen = ({navigation}) => {
-  const {colors} = useTheme();
-  const { setTheme, theme } = useContext(ThemeContext);
-  const{valueO, valueX} = useContext(ColorContext);
-
-  const toggleSwitch = () => {
-    const changedTheme = theme == 'light'? 'dark':'light';
-    setTheme(changedTheme);
-    _storeData = async () => {
-         try {
-          await AsyncStorage.setItem(
-            'THEME',
-            JSON.stringify(changedTheme),
-          )
-        } catch (error) {
-          console.error('Error saving theme to local storage:', error.message);
-          Sentry.captureException('Error saving theme to local storage:', error.message);
-        }
-
-    Appearance.setColorScheme(changedTheme);
-    }
-    _storeData();
-
-  }
-
-  const {width} = useWindowDimensions();
-  const fontSize = width < 750? 20:40;
-  const intermidiateFontSize = width < 750? 25:50;
-  const headerFontSize =  width < 750? 50:100;
-  const bigWidth = width >= 750;
-  return (
-  
-  <SafeAreaView style={{flex : 1}}>
-    <View style={{height : '15%', justifyContent: 'flex-end', alignContent: 'center'}}>
-      <Text style={[styles.headerTitle, {color: colors.text, fontSize: headerFontSize}]}>Settings</Text>
-    </View>
-    <View style={{...styles.separator}} />
-    <View style ={styles.containerInset}>
-      <ScrollView>
-      <ThemePicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer = {{...styles.boxOptions, backgroundColor: colors.border}}></ThemePicker> 
-      <ColorPicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}} bi></ColorPicker> 
-      <ResetColorTheme styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}} grayButtonStyle={{backgroundColor: theme === 'dark' ? '#767577': '#606060', }}></ResetColorTheme> 
-
-
-      <AuthenticationSection styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border, }} grayButtonStyle={{backgroundColor: theme === 'dark' ? '#767577': '#606060', }}></AuthenticationSection>
-     </ScrollView>
-     
-    </View>    
-  </SafeAreaView>
-
-
-);};
-
-const styles = StyleSheet.create({
-  containerInset: {
-    //borderWidth: 4,
-    //borderColor: '#e5e7eb',
-    //borderStyle: 'dashed',
-    //borderRadius: 9,
-    height: '85%',
-    alignSelf: 'center',
-    width: '100%',
-    justifyContent: 'center'
-    
-   
-  },
-  headerTitle: {
-    fontSize: 50,
-    fontFamily: 'Acme',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-  },
-  separator: {
-    height: 2, 
-    width: '100%',
-    backgroundColor: 'gray', 
-  },
-  textOptions:{
-    
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'white',
-    marginLeft: '3%',
-    borderColor: 'black',
-    fontFamily: 'Acme',
-    
-    
-    
-  },
-  boxOptions:{
-    width: '75%',
-    borderWidth: 0,
-    margin: 5,
-    paddingVertical: '5%',
-    backgroundColor: '#B8DAFF',
-    borderWidth: 1,
-    borderRadius: 9,
-    alignSelf: 'center'
-    
-  },
- 
- 
-});
-
-export default SettingsScreen;
-
-
-/*
-import React, {useState, useEffect, useContext} from 'react';
 import { Modal, TextInput, Switch, SafeAreaView, View, StyleSheet, StatusBar, Image, Text, Button, useColorScheme, Appearance, useWindowDimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
@@ -148,6 +10,8 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'fire
 import { collection, addDoc, getDocs, setDoc, doc, query, where} from 'firebase/firestore';
 import {firestore, auth} from '../Firebase/firebaseConfig';
 
+import ButtonComponent from '../HomeScreen/homeComponents/ButtonComponent';
+
 import { ThemeContext } from '../styles/contexts/ThemeContext';
 import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorPicker from './ColorPicker';
@@ -164,7 +28,7 @@ const loadFonts = async () => {
   });
 };
 
-const SettingsScreen = ({navigation}) => {
+const AuthenticationSection = (props) => {
   const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
   const{valueO, valueX} = useContext(ColorContext);
@@ -190,7 +54,7 @@ const SettingsScreen = ({navigation}) => {
       setModalVisible(false);
     } catch (error) {
       console.error('Error authenticating user:', error.message);
-      Sentry.captureException('Error authenticating user:', error.message);
+      Sentry.captureException('Error authenticating user:' + error.message);
     }
   };
 
@@ -335,35 +199,25 @@ const SettingsScreen = ({navigation}) => {
   const headerFontSize =  width < 750? 50:100;
   const bigWidth = width >= 750;
   return (
+   
+  <SafeAreaView style={[styles.container, props.styleContainer]}>
+  <Text style={[props.styleText, styles.personaliseText]}>Cloud Connection</Text> 
   
-  <SafeAreaView style={{flex : 1}}>
-    <View style={{height : '15%', justifyContent: 'flex-end', alignContent: 'center'}}>
-      <Text style={[styles.headerTitle, {color: colors.text, fontSize: headerFontSize}]}>Settings</Text>
-    </View>
-    <View style={{...styles.separator}} />
-    <View style ={styles.containerInset}>
-      <ThemePicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer = {{...styles.boxOptions, backgroundColor: colors.border}}></ThemePicker> 
-      <ColorPicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}} bi></ColorPicker> 
-      <ResetColorTheme styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}}></ResetColorTheme> 
-
-      <View style={styles.separator} />
       {user ? (
-        <View>
-          <View style={styles.cloudButtonsContainer}>
-            <Button title="Save to Cloud" onPress={saveToCloud} />
-            <Button title="Sync from Cloud" onPress={syncFromCloud} />
-          </View>
-          <View style={styles.cloudButtonsContainer}>
-          <Button title="Delete Games from Cloud" onPress={deleteFromCloud} /> 
-          </View>
-          <View style={styles.cloudButtonsContainer}>
-            <Button title="Logout" onPress={() => setUser(null)} />
-          </View>
-        </View>
+            <View style={styles.cloudButtonsContainer}>
+                <ButtonComponent text="Save to Cloud" onPress={saveToCloud} style = {[props.grayButtonStyle,  {width: '100%', height: '15%'}]}/> 
+                <ButtonComponent text="Sync from Cloud" onPress={syncFromCloud}  style = {[props.grayButtonStyle,  {width: '100%', height: '15%'}]}/> 
+                <ButtonComponent text="Delete Games from Cloud"onPress={deleteFromCloud} style = {[props.grayButtonStyle,  {width: '100%', height: '15%'}]}/> 
+                <ButtonComponent text="Logout" onPress={() => setUser(null)} style = {[props.grayButtonStyle, {width: '100%', height: '15%'}]}/> 
+            </View>
 
         ) : (
-          <Button title="Login/Register" onPress={() => setModalVisible(true)} />
+            <View style={[styles.cloudButtonsContainer, {height: 50}]}>
+                <ButtonComponent text="Login/Register" onPress={() => setModalVisible(true)} style = {[props.grayButtonStyle]}/> 
+            </View>
+          
       )}
+ 
 
       <Modal visible={isModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
@@ -381,66 +235,36 @@ const SettingsScreen = ({navigation}) => {
             secureTextEntry
             style={styles.input}
           />
-          <Button title="Login" onPress={authenticateUser} />
-          <Button title="Register" onPress={registerUser} />
-          <Button title="Cancel" onPress={() => setModalVisible(false)} />
+          <ButtonComponent text="Login" onPress={authenticateUser} style = {[props.grayButtonStyle]}/> 
+          <ButtonComponent text="Register" onPress={registerUser} style = {[props.grayButtonStyle]}/> 
+          <ButtonComponent text="Cancel" onPress={() => setModalVisible(false)} style = {[props.grayButtonStyle]}/> 
         </View>
-      </Modal>
-     
-    </View>    
+      </Modal>  
   </SafeAreaView>
 
 
 );};
 
 const styles = StyleSheet.create({
-  containerInset: {
-    //borderWidth: 4,
-    //borderColor: '#e5e7eb',
-    //borderStyle: 'dashed',
-    //borderRadius: 9,
-    height: '85%',
-    alignSelf: 'center',
-    width: '100%',
-    justifyContent: 'center'
-    
-   
-  },
-  headerTitle: {
-    fontSize: 50,
-    fontFamily: 'Acme',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-  },
-  separator: {
-    height: 2, 
-    width: '100%',
-    backgroundColor: 'gray', 
-  },
-  textOptions:{
-    
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'white',
-    marginLeft: '3%',
-    borderColor: 'black',
-    fontFamily: 'Acme',
-    
-    
-  },
-  boxOptions:{
-    width: '75%',
-    borderWidth: 0,
-    margin: 5,
-    paddingVertical: '5%',
-    backgroundColor: '#B8DAFF'
-    
-  },
+    container : {
+
+    },
+    text:{
+
+    },
   cloudButtonsContainer: {
-    flexDirection: 'row',
+   
+    flexDirection: 'column',
     alignSelf: 'center',
-    justifyContent: 'space-evenly',
-    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '85%',
+    marginTop: '5%',
+    //borderWidth: 5,
+    height: 200,
+    
+  
+   
   },
   modalContainer: {
     flex: 1,
@@ -461,8 +285,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsScreen;
+export default AuthenticationSection;
 
 
-
-*/
