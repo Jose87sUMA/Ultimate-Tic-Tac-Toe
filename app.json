@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-appNav",
-    "slug": "my-appNav",
+    "name": "UltimateTicTacToe",
+    "slug": "UltimateTicTacToe",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
