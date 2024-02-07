@@ -84,6 +84,7 @@ const StatisticsScreen = ({ navigation }) => {
 
   const renderItem = ({ item, index }) => {
     const isExpanded = expandedIndex === index;
+    const winner = item.getWinner();
 
     return (
       <SafeAreaView
@@ -92,13 +93,12 @@ const StatisticsScreen = ({ navigation }) => {
       >
        
         <ButtonComponent
-          text={item.getWinner() + ' VICTORY' + ' - ' + item.finishedDate}
+          text={winner === ' ' ? "TIE!": winner + ' VICTORY' + ' - ' + item.finishedDate}
           onPress={() => toggleDropdown(index)}
           style={{
             width: '100%',
-            backgroundColor :  item.getWinner() === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+            backgroundColor: winner === ' ' ? "gray" : winner === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
             padding: 5
-
           }}
         />
         
@@ -106,7 +106,7 @@ const StatisticsScreen = ({ navigation }) => {
           style={{
             ...styles.expandableContainerView,
             height: isExpanded ? 100 : 0,
-            backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+            backgroundColor: winner === ' ' ? "gray" : winner === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
             borderColor: colors.border
           }}
           
@@ -125,7 +125,12 @@ const StatisticsScreen = ({ navigation }) => {
                   {item.moves.length} moves
                 </Text>
                  <ButtonComponent
-                  style={[{backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueO] : ColorsPalette[valueX], borderColor: colors.text, width: 150, padding: 10}]}
+                  style={[{
+                    backgroundColor: winner === ' ' ? "darkgray" : winner === 'O' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+                    borderColor: colors.text,
+                    width: 150,
+                    padding: 10
+                  }]}
                   text={"Show Replay"}
                   onPress={() => navigation.navigate('ReplayScreen', { game: item })}
                 ></ButtonComponent>
