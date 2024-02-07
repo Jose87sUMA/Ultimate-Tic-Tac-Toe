@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { Modal, View, Text, StyleSheet} from 'react-native';
+import { Modal, View, Text, StyleSheet, useWindowDimensions} from 'react-native';
 import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
 import {ColorContext } from '../styles/contexts/ColorContext.js';
 import {useTheme} from '@react-navigation/native'
@@ -11,6 +11,9 @@ import ButtonComponent from '../HomeScreen/homeComponents/ButtonComponent.js';
 const WinnerModal = ({ modalVisible, winner, setModalVisible, navigation }) => {
   const{valueX, valueO} = useContext(ColorContext);
   const {colors} = useTheme();
+  const {width} = useWindowDimensions();
+  const fontSize = width < 750? 20:40;
+ 
   const getModalBackgroundColor = () => {
     if (winner === ' ') {
       return colors.text;
@@ -33,15 +36,17 @@ const WinnerModal = ({ modalVisible, winner, setModalVisible, navigation }) => {
         <View style={{ ...styles.modalContainer, ...{backgroundColor: colors.background, shadowColor: colors.text} }}>
           <Text style={{
             ...styles.modalText,
-            color: winner === ' ' ? colors.text : winner === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO]
+            color: winner === ' ' ? colors.text : winner === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+            fontSize: fontSize
           }}>{winner === ' ' ? 'It\'s a tie!' : winner + ' wins!'}</Text>
           <ButtonComponent
-          style={ {backgroundColor: getModalBackgroundColor(), borderColor: colors.text, color : 'white', borderWidth: 1, borderColor: colors.text, padding: 5}}
+          style={ {backgroundColor: getModalBackgroundColor(), borderColor: colors.text, color : 'white', borderWidth: 1, borderColor: colors.text, width: '90%'}}
           onPress={() => {
             setModalVisible(false);
             navigation.navigate('HomeScreen');
           }}
           text={"Go Home"}
+          styleText = {{fontSize: fontSize}}
           />
          
         </View>

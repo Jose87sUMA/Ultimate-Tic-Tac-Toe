@@ -30,7 +30,7 @@ const HomeScreen = ({navigation}) => {
   const headerFontSize =  width < 750? 60:120;
   
   const fontSize = width < 750? 20:40;
-  
+  const fontSmall = width < 750? 10:30;
 
   const toggleSwitch = () => setAIEnabled(previousState => !previousState);
   
@@ -89,11 +89,11 @@ const HomeScreen = ({navigation}) => {
                 </View>
               )}
               <ButtonComponent
-                  style={{ height: width < 750?40: 80,backgroundColor: ColorsPalette[valueX], borderColor: colors.text, width: '50%', alignItems: 'center', justifyContent: 'center'}}
+                  style={{ height: width < 750?40: 80,backgroundColor: ColorsPalette[valueX], borderColor: colors.text, width: '100%', alignItems: 'center', justifyContent: 'center', padding: 5}}
                   text={"Create Game"}
                   onPress={() => {setModalVisible(false);
                   navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})}}
-                  styleText = {{fontSize: fontSize, alignContent: 'center'}}
+                  styleText = {{fontSize: fontSmall, textAlign: 'center'}}
 
               ></ButtonComponent>
               
