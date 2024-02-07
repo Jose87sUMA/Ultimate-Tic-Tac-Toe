@@ -23,14 +23,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-        
       }
     },
     "plugins": [
       [
         "./plugins/withDisableForcedDarkModeAndroid.js",
         {}
-      ]
+      ], 
+      "sentry-expo"
     ],
     "web": {
       "favicon": "./assets/favicon.png"

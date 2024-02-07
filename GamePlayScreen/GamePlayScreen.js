@@ -5,6 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 import * as Progress from 'react-native-progress';
 
+import Sentry from 'sentry-expo';
+
 import BigBoard from './BigBoard.js';
 import WinnerModal from './WinnerModal.js';
 import Game from '../GameLogic/Game.js';
@@ -89,6 +91,7 @@ const GamePlayScreen = ({route, navigation}) => {
           setGame(parsedGame);
         } catch (error) {
           console.error('Error retrieving game from AsyncStorage:', error);
+          Sentry.captureException('Error retrieving game from AsyncStorage:', error);
         }
       };
     

@@ -8,6 +8,8 @@ import { ColorContext } from '../styles/contexts/ColorContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MyLightTheme from '../styles/themes/MyLightTheme';
 
+import Sentry from 'sentry-expo';
+
 const ThemeLogic = () => {
 
 const [valueX, setValueX] = useState(1);
@@ -28,6 +30,7 @@ useEffect(() => {
       }
     } catch (error) {
       console.error('Error retrieving game from AsyncStorage:', error);
+      Sentry.captureException('Error retrieving game from AsyncStorage:', error);
     }
   };
 
@@ -55,6 +58,7 @@ useEffect(() => {
         }
       } catch (error) {
         console.error('Error retrieving game from AsyncStorage:', error);
+        Sentry.captureException('Error retrieving game from AsyncStorage:', error);
       }
     };
   

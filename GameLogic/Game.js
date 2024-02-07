@@ -71,7 +71,7 @@ class Game {
       // If no small board restriction, all empty positions are legal moves
       for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
-          if (this.bigBoard[i][j] === ' ') {
+          if (this.bigBoard[i][j] === ' ' && this.winnerBoard[i] === ' ') {
             legalMoves.push({ smallBoard: i, pos: j });
           }
         }

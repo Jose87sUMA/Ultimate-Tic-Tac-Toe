@@ -3,6 +3,8 @@ import { Modal, TextInput, Switch, SafeAreaView, View, StyleSheet, StatusBar, Im
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
+import * as Sentry from "sentry-expo";
+
 import { signInAnonymously, onAuthStateChanged, getAuth } from 'firebase/auth';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc, getDocs, setDoc, doc, query, where} from 'firebase/firestore';
@@ -50,6 +52,7 @@ const SettingsScreen = ({navigation}) => {
       setModalVisible(false);
     } catch (error) {
       console.error('Error authenticating user:', error.message);
+      Sentry.captureException('Error authenticating user:', error.message);
     }
   };
 
@@ -60,6 +63,7 @@ const SettingsScreen = ({navigation}) => {
       setModalVisible(false);
     } catch (error) {
       console.error('Error registering user:', error.message);
+      Sentry.captureException('Error registering user:', error.message);
     }
   };
 
@@ -113,6 +117,7 @@ const SettingsScreen = ({navigation}) => {
       console.log('Game saved to cloud successfully!');
     } catch (error) {
       console.error('Error saving game to cloud:', error.message);
+      Sentry.captureException('Error saving game to cloud:', error.message);
     }
     
   };
@@ -138,6 +143,7 @@ const SettingsScreen = ({navigation}) => {
       });
     } catch (error) {
       console.error('Error syncing games from cloud:', error.message);
+      Sentry.captureException('Error syncing game to cloud:', error.message);
     }
     
   };
@@ -160,7 +166,8 @@ const SettingsScreen = ({navigation}) => {
       }, { merge: true });
     }
     catch (error) {
-      console.error('Error deleting game from cloud:', error.message);
+      console.error('Error deleting games from cloud:', error.message);
+      Sentry.captureException('Error deleting games to cloud:', error.message);
     }
   };
 
@@ -174,7 +181,8 @@ const SettingsScreen = ({navigation}) => {
             JSON.stringify(changedTheme),
           )
         } catch (error) {
-          // Error saving data
+          console.error('Error saving theme to local storage:', error.message);
+          Sentry.captureException('Error saving theme to local storage:', error.message);
         }
 
     Appearance.setColorScheme(changedTheme);

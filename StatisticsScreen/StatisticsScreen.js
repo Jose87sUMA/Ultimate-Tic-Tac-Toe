@@ -92,6 +92,7 @@ const StatisticsScreen = ({ navigation }) => {
 
   const renderItem = ({ item, index }) => {
     const isExpanded = expandedIndex === index;
+    const winner = item.getWinner();
 
     return (
       <View
@@ -100,26 +101,21 @@ const StatisticsScreen = ({ navigation }) => {
       >
        
         <ButtonComponent
-          text={item.getWinner() + ' VICTORY' + ' - ' + item.finishedDate}
+          text={winner === ' ' ? "TIE!": winner + ' VICTORY' + ' - ' + item.finishedDate}
           onPress={() => toggleDropdown(index)}
           style={{
-            
-            backgroundColor :  item.getWinner() === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+            backgroundColor: winner === ' ' ? "gray" : winner === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
             padding: 5,
-            
-
           }}
           styleText = {{fontSize: smallSize}}
-
         />
         
         <View
           style={{
             ...styles.expandableContainerView,
             height: isExpanded ? expandableHeight : 0,
-            backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+            backgroundColor: winner === ' ' ? "gray" : winner === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
             borderColor: colors.border,
-            
           }}
           
         >
@@ -139,11 +135,15 @@ const StatisticsScreen = ({ navigation }) => {
                   {item.moves.length} moves
                 </Text>
                  <ButtonComponent
-                  style={[{backgroundColor: item.getWinner() === 'X' ? ColorsPalette[valueO] : ColorsPalette[valueX], borderColor: colors.text, padding: 10}]}
-                  text={"Show Replay"}
-                  onPress={() => navigation.navigate('ReplayScreen', { game: item })}
-                  styleText = {{fontSize: fontSize}}
-                ></ButtonComponent>
+                    style={[{
+                      backgroundColor: winner === ' ' ? "gray" : winner === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO],
+                      borderColor: colors.text, 
+                      padding: 10
+                    }]}
+                    text={"Show Replay"}
+                    onPress={() => navigation.navigate('ReplayScreen', { game: item })}
+                    styleText = {{fontSize: fontSize}}
+                />
               </View>
           )}
         </View>
