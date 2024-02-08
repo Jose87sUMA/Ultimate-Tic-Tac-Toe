@@ -3,6 +3,7 @@ import { Text, View, Button, SafeAreaView, StyleSheet, FlatList, LayoutAnimation
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Game from '../GameLogic/Game.js';
+import Sentry from 'sentry-expo';
 
 import { ColorContext } from '../styles/contexts/ColorContext.js';
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
@@ -30,12 +31,15 @@ const StatisticsScreen = ({ navigation }) => {
   const fetchDataAndSetState = async () => {
     try {
       const storedGames = await AsyncStorage.getItem('finishedGames');
+      console.log(storedGames);
       const parsedGames = storedGames
         ? JSON.parse(storedGames).map((game) => Game.fromState(game))
         : null;
       setGames(parsedGames || []);
+    
     } catch (error) {
       console.error('Error retrieving games from AsyncStorage:', error);
+      Sentry.Native.captureException('Error retrieving games from AsyncStorage:', error);
     }
   };
 
@@ -69,7 +73,6 @@ const StatisticsScreen = ({ navigation }) => {
         key={index}
         style={{...styles.statisticsButtonView, }}
       >
-       
         <ButtonComponent
           text={winner === ' ' ? "TIE!": winner + ' VICTORY' + ' - ' + item.finishedDate}
           onPress={() => toggleDropdown(index)}

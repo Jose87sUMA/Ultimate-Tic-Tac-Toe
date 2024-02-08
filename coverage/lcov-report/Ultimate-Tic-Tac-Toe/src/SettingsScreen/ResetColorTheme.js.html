@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.63% </span>
+                <span class="strong">95% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/19</span>
+                <span class='fraction'>19/20</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.63% </span>
+                <span class="strong">95% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/19</span>
+                <span class='fraction'>19/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -180,40 +180,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -275,7 +275,7 @@ import { useTheme } from '@react-navigation/native';
 import { ThemeContext } from '../styles/contexts/ThemeContext';
 import { ColorContext } from '../styles/contexts/ColorContext';
 &nbsp;
-&nbsp;
+import Sentry from 'sentry-expo';
 &nbsp;
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
@@ -290,29 +290,29 @@ const ResetColorTheme = (props) =&gt; {
   const {width} = useWindowDimensions();
   const fontSize = width &lt; 750? <span class="branch-0 cbranch-no" title="branch not covered" >10:</span>20;
 &nbsp;
-  const onPressButton = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >    setTheme(defaultColorScheme);</span>
+  const onPressButton = () =&gt; {
+    setTheme(defaultColorScheme);
     
-<span class="cstat-no" title="statement not covered" >    setValueX(1);</span>
-<span class="cstat-no" title="statement not covered" >    setValueO(0);</span>
-<span class="cstat-no" title="statement not covered" >    _storeData = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >        await AsyncStorage.setItem(</span>
+    setValueX(1);
+    setValueO(0);
+    _storeData = async () =&gt; {
+        try {
+        await AsyncStorage.setItem(
            'COLORX',
           JSON.stringify(1),
         )
-<span class="cstat-no" title="statement not covered" >        await AsyncStorage.setItem(</span>
+        await AsyncStorage.setItem(
             'COLORO',
             JSON.stringify(0),
         )
-<span class="cstat-no" title="statement not covered" >        await AsyncStorage.setItem(</span>
+        await AsyncStorage.setItem(
             'THEME',
             JSON.stringify(defaultColorScheme),
         )
        } catch (error) {
-         // Error saving data
-       }};
-<span class="cstat-no" title="statement not covered" >    _storeData();</span>
+<span class="cstat-no" title="statement not covered" >        Sentry.Native.captureException('Error resetting theme:', error.message);</span>
+      }};
+    _storeData();
   }
 &nbsp;
   return (
@@ -320,7 +320,7 @@ const ResetColorTheme = (props) =&gt; {
       &lt;View style ={styles.themeMode}&gt;
         &lt;Text style={[styles.text, props.styleText]}&gt;Default Settings&lt;/Text&gt; 
        
-        &lt;TouchableOpacity  style={[styles.button, props.grayButtonStyle]} onPress = {onPressButton}&gt;
+        &lt;TouchableOpacity   style={[styles.button, props.grayButtonStyle]} onPress = {onPressButton}&gt;
             &lt;Text style ={{...styles.buttonText, fontSize: fontSize}}&gt;Revert&lt;/Text&gt;
         &lt;/TouchableOpacity&gt;
         
@@ -376,7 +376,7 @@ export default ResetColorTheme;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-02-08T09:29:12.456Z
+                at 2024-02-08T17:53:02.569Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

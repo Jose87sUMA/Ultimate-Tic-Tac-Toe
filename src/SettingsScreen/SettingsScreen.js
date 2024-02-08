@@ -37,7 +37,7 @@ const SettingsScreen = ({navigation}) => {
           )
         } catch (error) {
           console.error('Error saving theme to local storage:', error.message);
-          Sentry.captureException('Error saving theme to local storage:', error.message);
+          Sentry.Native.captureException('Error saving theme to local storage:', error.message);
         }
 
     Appearance.setColorScheme(changedTheme);

@@ -21,6 +21,7 @@ const ReplayScreen = ({route, navigation}) => {
       <View style={styles.buttonsView}>
 
         <TouchableOpacity
+          testID='undoButton'
           onPress={() => {
             const newGameInstance = gameInstance.clone();
             newGameInstance.positionOneMoveBack();
@@ -34,6 +35,7 @@ const ReplayScreen = ({route, navigation}) => {
         <Text style={{...styles.currentPlayerText, color: gameInstance.currentPlayer === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO]}}>{gameInstance.currentPlayer} turn</Text>
 
         <TouchableOpacity
+          testID='redoButton'
           onPress={() => {
             const newGameInstance = gameInstance.clone();
             newGameInstance.positionOneMoveForward();

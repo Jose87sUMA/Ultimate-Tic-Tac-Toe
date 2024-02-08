@@ -6,7 +6,7 @@ import { useTheme } from '@react-navigation/native';
 import { ThemeContext } from '../styles/contexts/ThemeContext';
 import { ColorContext } from '../styles/contexts/ColorContext';
 
-
+import Sentry from 'sentry-expo';
 
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
@@ -41,8 +41,8 @@ const ResetColorTheme = (props) => {
             JSON.stringify(defaultColorScheme),
         )
        } catch (error) {
-         // Error saving data
-       }};
+        Sentry.Native.captureException('Error resetting theme:', error.message);
+      }};
     _storeData();
   }
 
@@ -51,7 +51,7 @@ const ResetColorTheme = (props) => {
       <View style ={styles.themeMode}>
         <Text style={[styles.text, props.styleText]}>Default Settings</Text> 
        
-        <TouchableOpacity  style={[styles.button, props.grayButtonStyle]} onPress = {onPressButton}>
+        <TouchableOpacity   style={[styles.button, props.grayButtonStyle]} onPress = {onPressButton}>
             <Text style ={{...styles.buttonText, fontSize: fontSize}}>Revert</Text>
         </TouchableOpacity>
         

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { Modal, TextInput, Switch, SafeAreaView, View, StyleSheet, StatusBar, Image, Text, Button, useColorScheme, Appearance, useWindowDimensions } from 'react-native';
+import { Modal, TextInput, Switch, SafeAreaView, View, StyleSheet, StatusBar, Alert, Text, Button, useColorScheme, Appearance, useWindowDimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
@@ -51,20 +51,20 @@ const AuthenticationSection = (props) => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
       setModalVisible(false);
-      alert('Loged in ' + email);
+      Alert.alert('Loged in ' + email);
     } catch (error) {
       
       console.error('Error authenticating user:', error.message);
       if(error.message.includes('invalid-email')){
-        alert('Invalid Email');
+        Alert.alert('Invalid Email');
       }else  if(error.message.includes('missing-password')){
-        alert('Missing Password');
+        Alert.alert('Missing Password');
       }else if(error.message.includes('invalid-credential')){
-          alert('User not found. Password or email incorrect');
+        Alert.alert('User not found. Password or email incorrect');
       }else{
-          alert('Unexpected error ocurred');
+        Alert.alert('Unexpected error ocurred');
       }
-      Sentry.captureException('Error authenticating user:' + error.message);
+      Sentry.Native.captureException('Error authenticating user:' + error.message);
     }
   };
 
@@ -76,16 +76,16 @@ const AuthenticationSection = (props) => {
     } catch (error) {
       console.error('Error registering user:', error.message);
       if(error.message.includes('invalid-email')){
-        alert('Invalid Email');
+        Alert.alert('Invalid Email');
       }else  if(error.message.includes('missing-password')){
-        alert('Missing Password');
+        Alert.alert('Missing Password');
       }else if(error.message.includes('at least')){
-          alert('Password must have at least six characters');
+        Alert.alert('Password must have at least six characters');
       }else{
-          alert('Unexpected error ocurred');
+        Alert.alert('Unexpected error ocurred');
       }
       
-      Sentry.captureException('Error registering user:', error.message);
+      Sentry.Native.captureException('Error registering user:', error.message);
     }
   };
 
@@ -97,14 +97,14 @@ const AuthenticationSection = (props) => {
   
     const finishedGames = await AsyncStorage.getItem('finishedGames');
     if(finishedGames == null){
-      alert('No games to save');
+      Alert.alert('No games to save');
       return;
     }
   
     try {
       // Replace 'finishedGames' with the actual name of your collection
       const gamesRef = collection(firestore, 'finishedGames');
-      
+      console.log('gamesRef', gamesRef)
       // Check if a document with the user's UID already exists
       const gamesQuery = query(gamesRef, where('user', '==', user.uid));
       const querySnapshot = await getDocs(gamesQuery);
@@ -120,7 +120,6 @@ const AuthenticationSection = (props) => {
       {
         // If a document exists, update it with the new games
         querySnapshot.forEach( async (docSaved) => {
-          console.log(docSaved.id, ' => ', docSaved.data());
           const cloudGames = docSaved.data().finishedGamesJSON;
 
           const finishedGamesArr = JSON.parse(finishedGames)
@@ -141,14 +140,13 @@ const AuthenticationSection = (props) => {
       }
 
       console.log('Game saved to cloud successfully!');
-      alert('Games saved successfully');
+      Alert.alert('Games saved successfully');
     } catch (error) {
       console.error('Error saving game to cloud:', error.message);
-      Sentry.captureException('Error saving game to cloud:', error.message);
+      Sentry.Native.captureException('Error saving game to cloud:', error.message);
       
-      alert('Unexpected error occurred');
-      
-      
+      Alert.alert('Unexpected error occurred');
+    
     }
     
   };
@@ -167,17 +165,17 @@ const AuthenticationSection = (props) => {
       querySnapshot.forEach((doc) => {
         if(doc.data().finishedGamesJSON != null) {
           AsyncStorage.setItem('finishedGames', doc.data().finishedGamesJSON);
-          alert('Downloaded games successfully');
+          Alert.alert('Downloaded games successfully');
         }
         else {
           AsyncStorage.removeItem('finishedGames');
-          alert('No games in the cloud');
+          Alert.alert('No games in the cloud');
         }
       });
     } catch (error) {
       console.error('Error syncing games from cloud:', error.message);
-      alert('Error while retrieving games from cloud');
-      Sentry.captureException('Error syncing game to cloud:', error.message);
+      Alert.alert('Error while retrieving games from cloud');
+      Sentry.Native.captureException('Error syncing game to cloud:', error.message);
     }
     
   };
@@ -198,12 +196,12 @@ const AuthenticationSection = (props) => {
       await setDoc(doc(gamesRef, docId), {
         finishedGamesJSON: null,
       }, { merge: true });
-      alert('Deleted games successfully');
+      Alert.alert('Deleted games successfully');
     }
     catch (error) {
       console.error('Error deleting games from cloud:', error.message);
-      alert('Unexpected error');
-      Sentry.captureException('Error deleting games to cloud:', error.message);
+      Alert.alert('Unexpected error');
+      Sentry.Native.captureException('Error deleting games to cloud:', error.message);
     }
   };
 
@@ -211,11 +209,11 @@ const AuthenticationSection = (props) => {
     try {
       await auth.signOut();
       setUser(null);
-      alert('Loging out completed');
+      Alert.alert('Loging out completed');
       // Additional cleanup or navigation logic if needed
     } catch (error) {
       console.error('Error logging out user:', error.message);
-      alert('Error logging out user. Please try again.');
+      Alert.alert('Error logging out user. Please try again.');
       Sentry.captureException('Error logging out user:', error.message);
     }
   };
@@ -231,7 +229,7 @@ const AuthenticationSection = (props) => {
           )
         } catch (error) {
           console.error('Error saving theme to local storage:', error.message);
-          Sentry.captureException('Error saving theme to local storage:', error.message);
+          Sentry.Native.captureException('Error saving theme to local storage:', error.message);
         }
 
     Appearance.setColorScheme(changedTheme);
@@ -269,22 +267,23 @@ const AuthenticationSection = (props) => {
           </View>
           <View style = {{flex:1, justifyContent: 'center'}}>
             <TextInput
-             placeholder="Email"
-             value={email}
-             
-             onChangeText={(text) => setEmail(text)}
-             placeholderTextColor={colors.text}
-             style={{...styles.input, width: inputWidth, fontSize: fontSize, color:colors.text}}
+              testID='emailInput'
+              placeholder="Email"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              placeholderTextColor={colors.text}
+              style={{...styles.input, width: inputWidth, fontSize: fontSize, color:colors.text}}
             />
           
          
            <TextInput
+              testID='passwordInput'
               placeholder="Password"
-             value={password}
-             onChangeText={(text) => setPassword(text)}
-             secureTextEntry
-             placeholderTextColor={colors.text}
-             style={{...styles.input, width: inputWidth,  fontSize: fontSize, color: colors.text }}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry
+              placeholderTextColor={colors.text}
+              style={{...styles.input, width: inputWidth,  fontSize: fontSize, color: colors.text }}
             />
           </View>
           <View style = {{flex:1, justifyContent: 'space-evenly', marginBottom: '5%'}}>

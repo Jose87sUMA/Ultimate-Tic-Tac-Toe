@@ -29,6 +29,7 @@ google-services.json
 # Android Profiling
 *.hprof
 *.json
+.env
 
 node_modules/
 .expo/
