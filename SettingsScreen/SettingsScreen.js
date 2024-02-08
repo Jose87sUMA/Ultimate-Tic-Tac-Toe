@@ -143,8 +143,7 @@ import { useTheme } from '@react-navigation/native';
 
 import * as Sentry from "sentry-expo";
 
-import { signInAnonymously, onAuthStateChanged, getAuth } from 'firebase/auth';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import {onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc, getDocs, setDoc, doc, query, where} from 'firebase/firestore';
 import {firestore, auth} from '../Firebase/firebaseConfig';
 
@@ -153,16 +152,9 @@ import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorPicker from './ColorPicker';
 import ThemePicker from './ThemePicker';
 import ResetColorTheme from './ResetColorTheme';
-import * as Font from 'expo-font';
 
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
 
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
@@ -190,7 +182,7 @@ const SettingsScreen = ({navigation}) => {
       setModalVisible(false);
     } catch (error) {
       console.error('Error authenticating user:', error.message);
-      Sentry.captureException('Error authenticating user:', error.message);
+      Sentry.Native.captureException('Error authenticating user:', error.message);
     }
   };
 
@@ -201,7 +193,7 @@ const SettingsScreen = ({navigation}) => {
       setModalVisible(false);
     } catch (error) {
       console.error('Error registering user:', error.message);
-      Sentry.captureException('Error registering user:', error.message);
+      Sentry.Native.captureException('Error registering user:', error.message);
     }
   };
 
@@ -255,7 +247,7 @@ const SettingsScreen = ({navigation}) => {
       console.log('Game saved to cloud successfully!');
     } catch (error) {
       console.error('Error saving game to cloud:', error.message);
-      Sentry.captureException('Error saving game to cloud:', error.message);
+      Sentry.Native.captureException('Error saving game to cloud:', error.message);
     }
     
   };
@@ -281,7 +273,7 @@ const SettingsScreen = ({navigation}) => {
       });
     } catch (error) {
       console.error('Error syncing games from cloud:', error.message);
-      Sentry.captureException('Error syncing game to cloud:', error.message);
+      Sentry.Native.captureException('Error syncing game to cloud:', error.message);
     }
     
   };
@@ -305,7 +297,7 @@ const SettingsScreen = ({navigation}) => {
     }
     catch (error) {
       console.error('Error deleting games from cloud:', error.message);
-      Sentry.captureException('Error deleting games to cloud:', error.message);
+      Sentry.Native.captureException('Error deleting games to cloud:', error.message);
     }
   };
 
@@ -320,7 +312,7 @@ const SettingsScreen = ({navigation}) => {
           )
         } catch (error) {
           console.error('Error saving theme to local storage:', error.message);
-          Sentry.captureException('Error saving theme to local storage:', error.message);
+          Sentry.Native.captureException('Error saving theme to local storage:', error.message);
         }
 
     Appearance.setColorScheme(changedTheme);

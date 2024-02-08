@@ -12,7 +12,7 @@ const Cell = (props) => {
   const colorBackground = props.nextMoveHere ? props.currentPlayer === 'X' ? ColorsPaletteSoft[valueX]:ColorsPaletteSoft[valueO]:null;
   const colorBorderAndText = props.value !== ' ' ? props.value === 'X' ? ColorsPalette[valueX]:ColorsPalette[valueO]:colors.text;
   return (
-    <TouchableOpacity style={{...styles.cell, backgroundColor: colorBackground, borderColor: colorBorderAndText}} onPress={props.onPressCell} disabled = {(props.AITurn || props.value !== ' ') && props.nextMoveHere}>
+    <TouchableOpacity testID={`cell-${props.smallBoardIndex}-${props.pos}`} style={{...styles.cell, backgroundColor: colorBackground, borderColor: colorBorderAndText}} onPress={props.onPressCell} disabled = {(props.AITurn || props.value !== ' ') && props.nextMoveHere}>
       <Text style={{...styles.cellText, color: colorBorderAndText}}>{props.value}</Text>
     </TouchableOpacity>
   );

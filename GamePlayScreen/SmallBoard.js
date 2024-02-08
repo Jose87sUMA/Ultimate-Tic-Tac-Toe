@@ -12,6 +12,8 @@ const SmallBoard = (props) => {
           {[0, 1, 2].map((col) => (
             <Cell
               key={row * 3 + col}
+              smallBoardIndex={props.smallBoardIndex}
+              pos={row * 3 + col}
               value={props.smallBoard[row * 3 + col]}
               nextMoveHere={props.nextMoveHere}
               currentPlayer={props.currentPlayer}
@@ -25,6 +27,7 @@ const SmallBoard = (props) => {
     <View style={styles.finishedCell}>
         <Cell
           key={props.smallBoardIndex}
+          smallBoardIndex={props.smallBoardIndex}
           value={props.winnerBoard[props.smallBoardIndex]}
           nextMoveHere={false}
           currentPlayer={props.currentPlayer}

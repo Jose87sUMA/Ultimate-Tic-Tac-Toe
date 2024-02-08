@@ -5,7 +5,7 @@ import SmallBoard from './SmallBoard';
 
 const BigBoard = (props) => {
   return (
-    <View style={styles.bigBoard}>
+    <View testID="bigBoard" style={styles.bigBoard}>
       {[0, 1, 2].map((row) => (
         <View key={row} style={styles.rowOfSmallBoards}>
           {[0, 1, 2].map((col) => (

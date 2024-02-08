@@ -12,21 +12,12 @@ import WinnerModal from './WinnerModal.js';
 import Game from '../GameLogic/Game.js';
 import monteCarloTreeSearch from '../GameLogic/MonteCarloTreeSearch.js';
 
-import { ColorContext } from '../styles/contexts/ColorContext.js';
-import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
-import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js';
+import { ColorContext } from '../styles/contexts/ColorContext';
+import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
+import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
 
-
-import * as Font from 'expo-font';
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
 
 const GamePlayScreen = ({route, navigation}) => {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const { continuingGame, AIMoveSymbol } = route.params;
 
@@ -73,15 +64,7 @@ const GamePlayScreen = ({route, navigation}) => {
     });
   };
 
-
   useEffect(() => {
-
-    const loadAsync = async () => {
-      await loadFonts();
-      setFontsLoaded(true);
-    };
-
-    loadAsync();
     
     if(continuingGame){
       const getGameFromStorage = async () => {
@@ -91,7 +74,7 @@ const GamePlayScreen = ({route, navigation}) => {
           setGame(parsedGame);
         } catch (error) {
           console.error('Error retrieving game from AsyncStorage:', error);
-          Sentry.captureException('Error retrieving game from AsyncStorage:', error);
+          Sentry.Native.captureException('Error retrieving game from AsyncStorage:', error);
         }
       };
     
@@ -101,10 +84,6 @@ const GamePlayScreen = ({route, navigation}) => {
       AIMove(gameInstance);
     }
   }, []);
-
-  if (!fontsLoaded) {
-    return null; // You can render a loading component or return null until the fonts are loaded
-  }
 
   const winner = gameInstance.getWinner();
   const currentPlayerColor = gameInstance.currentPlayer === 'X' ? ColorsPalette[valueX] : ColorsPalette[valueO];

@@ -1,40 +1,19 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import * as Font from 'expo-font';
 import { ColorContext } from '../../styles/contexts/ColorContext';
 import ColorsPalette from '../../styles/colorsPalettes/ColorsPalette';
 
-// Function to load custom font
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../../assets/fonts/ArchivoBlack Regular.ttf'), 
-  });
-};
 
-function HomeTitleComponent(props) {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+const HomeTitleComponent = (props) => {
   const {valueX, valueO} = useContext(ColorContext);
 
-  useEffect(() => {
-    const loadAsync = async () => {
-      await loadFonts();
-      setFontsLoaded(true);
-    };
-
-    loadAsync();
-  }, []);
-
-  if (!fontsLoaded) {
-    return null; // You can render a loading component or return null until the fonts are loaded
-  }
-
   return (
-    <View style={[styles.container]}>
+    <View testID={'HomeScreenTitle'} style={[styles.container]}>
       <Text style={[styles.ultimate, props.styleHeader, props.style]}>ULTIMATE</Text>
       <View style={styles.tictactoe}>
-        <Text style={[styles.tic, props.styleHeader,{color : ColorsPalette[valueX]}]}>TIC</Text>
-        <Text style={[styles.tac,props.styleHeader, {color : ColorsPalette[valueO]}]}>TAC</Text>
-        <Text style={[styles.toe, props.styleHeader,{color : ColorsPalette[valueX]}]}>TOE</Text>
+        <Text style={[styles.tic, props.styleHeader, {color : ColorsPalette[valueX]}]}>TIC</Text>
+        <Text style={[styles.tac, props.styleHeader, {color : ColorsPalette[valueO]}]}>TAC</Text>
+        <Text style={[styles.toe, props.styleHeader, {color : ColorsPalette[valueX]}]}>TOE</Text>
       </View>
     </View>
   );

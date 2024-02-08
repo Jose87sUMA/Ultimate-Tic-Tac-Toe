@@ -6,14 +6,6 @@ import ParsedText from 'react-native-parsed-text';
 import { ColorContext } from './styles/contexts/ColorContext';
 import ColorsPalette from './styles/colorsPalettes/ColorsPalette';
 import ButtonComponent from './HomeScreen/homeComponents/ButtonComponent';
-import * as Font from 'expo-font';
-
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('./assets/fonts/Acme.ttf'), 
-  });
-};
 
 const RulesScreen = ({navigation}) => {
   const {width} = useWindowDimensions();

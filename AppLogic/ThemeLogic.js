@@ -30,7 +30,7 @@ useEffect(() => {
       }
     } catch (error) {
       console.error('Error retrieving game from AsyncStorage:', error);
-      Sentry.captureException('Error retrieving game from AsyncStorage:', error);
+      Sentry.Native.captureException('Error retrieving game from AsyncStorage:', error);
     }
   };
 
@@ -58,7 +58,7 @@ useEffect(() => {
         }
       } catch (error) {
         console.error('Error retrieving game from AsyncStorage:', error);
-        Sentry.captureException('Error retrieving game from AsyncStorage:', error);
+        Sentry.Native.captureException('Error retrieving game from AsyncStorage:', error);
       }
     };
   

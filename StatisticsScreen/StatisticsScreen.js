@@ -6,7 +6,6 @@ import Game from '../GameLogic/Game.js';
 
 import * as Font from 'expo-font';
 
-
 import { ColorContext } from '../styles/contexts/ColorContext.js';
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js';

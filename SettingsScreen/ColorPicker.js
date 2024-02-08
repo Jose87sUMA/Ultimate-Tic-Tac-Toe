@@ -41,10 +41,10 @@ export default function ColorPicker(props) {
     <SafeAreaView style={[styles.container, props.styleContainer]}>
         <Text style={[props.styleText, styles.personaliseText]}>Personalise colors</Text> 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueX], borderColor:  colors.text, height: bigWidth? 140: 70, width: bigWidth? 140: 70}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
+          <TouchableOpacity testID='colorPickerX' style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueX], borderColor:  colors.text, height: bigWidth? 140: 70, width: bigWidth? 140: 70}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
             <Text style = {styles.btnText}>X</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueO], borderColor:  colors.text, height: bigWidth? 140: 70, width: bigWidth? 140: 70}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
+          <TouchableOpacity testID='colorPickerO' style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueO], borderColor:  colors.text, height: bigWidth? 140: 70, width: bigWidth? 140: 70}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
             <Text style = {styles.btnText}>O</Text>
           </TouchableOpacity>
         </View>
@@ -72,39 +72,35 @@ export default function ColorPicker(props) {
               return (
                 <View key={item}>
                   <TouchableWithoutFeedback
-
+                    testID={`color-${index}`}
                     onPress={() => {
-                        if(!isInactive){
-                            
-                            if(editing == 'X'){
-                                setValueX(index);
-                                _storeData = async () => {
-                                    try {
-                                     await AsyncStorage.setItem(
-                                       'COLORX',
-                                       JSON.stringify(index),
-                                     )
-                                   } catch (error) {
-                                     // Error saving data
-                                   }};
-                                   _storeData();
-                            }else  if(editing == 'O'){
-                                setValueO(index);
-                                _storeData = async () => {
-                                    try {
-                                     await AsyncStorage.setItem(
-                                       'COLORO',
-                                       JSON.stringify(index),
-                                     )
-                                   } catch (error) {
-                                     // Error saving data
-                                   }};
-                                   _storeData();
-                                   
-                            }  
-                        }
-                      
-                      
+                      if(!isInactive){   
+                        if(editing == 'X'){
+                          setValueX(index);
+                          _storeData = async () => {
+                            try {
+                              await AsyncStorage.setItem(
+                                'COLORX',
+                                JSON.stringify(index),
+                              )
+                            } catch (error) {
+                              // Error saving data
+                            }};
+                          _storeData();
+                        }else  if(editing == 'O'){
+                          setValueO(index);
+                          _storeData = async () => {
+                            try {
+                              await AsyncStorage.setItem(
+                                'COLORO',
+                                JSON.stringify(index),
+                              )
+                            } catch (error) {
+                              // Error saving data
+                            }};
+                          _storeData(); 
+                        }  
+                      }                      
                     }}>
                     <View
                       style={[
@@ -124,7 +120,7 @@ export default function ColorPicker(props) {
           <TouchableOpacity
             style={[styles.btn, editing === 'X' && {backgroundColor: ColorsPalette[valueX]}, editing === 'O' && {backgroundColor: ColorsPalette[valueO]}]}
             onPress={() => {
-                sheet.current.close()
+              sheet.current.close()
             }}>
             <Text style={[styles.btnText]}>Done</Text>
           </TouchableOpacity>

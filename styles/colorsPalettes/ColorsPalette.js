@@ -9,5 +9,4 @@ export default ColorsPalette = [
     '#9500FF',
     '#32cd32',
     '#FFF01F',
-    
   ];

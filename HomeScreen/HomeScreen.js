@@ -3,8 +3,6 @@ import { SafeAreaView, View, StyleSheet, TouchableWithoutFeedback, Image, Text, 
 
 import HomeTitleComponent from "./homeComponents/HomeTitleComponent";
 import ButtonComponent from "./homeComponents/ButtonComponent";
-import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
-import * as Font from 'expo-font';
 import { useTheme } from '@react-navigation/native';
 import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
@@ -12,16 +10,9 @@ import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 
 //import { useTheme } from 'react-native-paper';
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
-
 const HomeScreen = ({navigation}) => {
   const { valueX, valueO} = useContext(ColorContext);
   const {colors} = useTheme();
-  const [fontsLoaded, setFontsLoaded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [AIEnabled, setAIEnabled] = useState(false);
   const [AISymbol, setAISymbol] = useState('O');
@@ -33,23 +24,10 @@ const HomeScreen = ({navigation}) => {
   const fontSmall = width < 750? 10:20;
 
   const toggleSwitch = () => setAIEnabled(previousState => !previousState);
-  
-  useEffect(() => {
-    const loadAsync = async () => {
-      await loadFonts();
-      setFontsLoaded(true);
-    };
-
-    loadAsync();
-  }, []);
-
-  if (!fontsLoaded) {
-    return null; // You can render a loading component or return null until the fonts are loaded
-  }
  
   return (
     <SafeAreaView style={styles.container}>
-      
+   
       <Modal
         animationType="slide"
         transparent={true}
@@ -57,12 +35,13 @@ const HomeScreen = ({navigation}) => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <TouchableOpacity style={styles.centeredView} onPressOut={() => {setModalVisible(false)}}>
+        <TouchableOpacity testID='ModalCloser' style={styles.centeredView} onPress={() => {setModalVisible(false)}}>
           <TouchableWithoutFeedback>
             <View style={[styles.modalView, {backgroundColor: colors.background, shadowColor: colors.text}]}>
               <View style={styles.modalRow}>
                 <Text style={[styles.modalText, {color: colors.text, fontSize: fontSize}]}>Enable AI?</Text>
                 <Switch
+                  testID='AISwitch'
                   trackColor={{ false: '#767577', true: '#E8E8E8' }}
                   thumbColor={AIEnabled ? '#606060' : '#f4f3f4'}
                   ios_backgroundColor="#3e3e3e"
@@ -77,22 +56,20 @@ const HomeScreen = ({navigation}) => {
               {AIEnabled && (
                 <View style={[styles.modalRow]}>
                   <Text style={[styles.modalText, {color: colors.text, fontSize: fontSize}]}>AI Symbol:</Text>
-                  <AwesomeButton
+                  <Button
                     title={AISymbol}
-                    backgroundColor={colors.background}
-                    borderColor='white'
-                    textColor= {AISymbol==='X' ? ColorsPalette[valueX] :ColorsPalette[valueO]}
-                    textSize={fontSize}
-                    raiseLevel={0}
+                    style={{backgroundColor: colors.background, borderColor: colors.text}}
                     onPress={() => setAISymbol(AISymbol === 'O' ? 'X' : 'O')}
-                  >{AISymbol}</AwesomeButton>
+                  />
                 </View>
               )}
               <ButtonComponent
                   style={{ height: width < 750?40: 80,backgroundColor: ColorsPalette[valueX], borderColor: colors.text, width: '100%', alignItems: 'center', justifyContent: 'center', padding: 5}}
                   text={"Create Game"}
-                  onPress={() => {setModalVisible(false);
-                  navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})}}
+                  onPress={() => {
+                    setModalVisible(false);
+                    navigation.navigate('Tic_Tac_Toe', {continuingGame: false, AIMoveSymbol: AIEnabled ? AISymbol:' '})
+                  }}
                   styleText = {{fontSize: fontSmall, textAlign: 'center'}}
 
               ></ButtonComponent>
@@ -153,9 +130,6 @@ const styles = StyleSheet.create({
       alignSelf: "center",
       flex : 2,
       width: '100%',
-     
-     
-  
     },
     buttons : {
         //justifyContent: 'space-around'
@@ -164,10 +138,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal :'25%',
         marginBottom: '25%',
-        justifyContent: 'space-evenly', 
-        
-        
-        
+        justifyContent: 'space-evenly',  
     },
     sideButton: {
       backgroundColor: "#007AFF",
@@ -185,10 +156,12 @@ const styles = StyleSheet.create({
       
     
     },
-    tabComponent: {
-      width: '100%',
-
-    },  /*MODAL */
+    /*MODAL */
+    centeredView: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     modalView: {
       borderRadius: 20,
       padding: 35,
