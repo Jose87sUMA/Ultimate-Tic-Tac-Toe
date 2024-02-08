@@ -5,8 +5,7 @@ import { useTheme } from '@react-navigation/native';
 
 import * as Sentry from "sentry-expo";
 
-import { signInAnonymously, onAuthStateChanged, getAuth } from 'firebase/auth';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import {onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc, getDocs, setDoc, doc, query, where} from 'firebase/firestore';
 import {firestore, auth} from '../Firebase/firebaseConfig';
 
@@ -15,16 +14,9 @@ import { ColorContext } from '../styles/contexts/ColorContext';
 import ColorPicker from './ColorPicker';
 import ThemePicker from './ThemePicker';
 import ResetColorTheme from './ResetColorTheme';
-import * as Font from 'expo-font';
 
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
 
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
