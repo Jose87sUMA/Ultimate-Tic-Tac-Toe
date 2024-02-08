@@ -17,16 +17,7 @@ import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
 
 
-import * as Font from 'expo-font';
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
-
 const GamePlayScreen = ({route, navigation}) => {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const { continuingGame, AIMoveSymbol } = route.params;
 
@@ -74,13 +65,6 @@ const GamePlayScreen = ({route, navigation}) => {
   };
 
   useEffect(() => {
-
-    const loadAsync = async () => {
-      await loadFonts();
-      setFontsLoaded(true);
-    };
-
-    loadAsync();
     
     if(continuingGame){
       const getGameFromStorage = async () => {

@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1707361906116" clover="3.2.0">
-  <project timestamp="1707361906116" name="All files">
-    <metrics statements="710" coveredstatements="224" conditionals="351" coveredconditionals="100" methods="177" coveredmethods="56" elements="1238" coveredelements="380" complexity="0" loc="710" ncloc="710" packages="13" files="32" classes="32"/>
+<coverage generated="1707370818125" clover="3.2.0">
+  <project timestamp="1707370818125" name="All files">
+    <metrics statements="694" coveredstatements="241" conditionals="347" coveredconditionals="112" methods="172" coveredmethods="64" elements="1213" coveredelements="417" complexity="0" loc="694" ncloc="694" packages="13" files="32" classes="32"/>
     <package name="Ultimate-Tic-Tac-Toe">
-      <metrics statements="82" coveredstatements="0" conditionals="33" coveredconditionals="0" methods="21" coveredmethods="0"/>
+      <metrics statements="92" coveredstatements="0" conditionals="35" coveredconditionals="0" methods="24" coveredmethods="0"/>
       <file name="App.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\App.js">
-        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <metrics statements="13" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
       </file>
       <file name="RulesScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\RulesScreen.js">
         <metrics statements="15" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="5" coveredmethods="0"/>
@@ -182,15 +192,15 @@
       <metrics statements="183" coveredstatements="146" conditionals="97" coveredconditionals="64" methods="41" coveredmethods="37"/>
       <file name="Game.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GameLogic\Game.js">
         <metrics statements="112" coveredstatements="80" conditionals="75" coveredconditionals="50" methods="17" coveredmethods="15"/>
-        <line num="6" count="5068" type="stmt"/>
-        <line num="7" count="5068" type="stmt"/>
-        <line num="8" count="5068" type="stmt"/>
-        <line num="9" count="5068" type="stmt"/>
-        <line num="10" count="5068" type="stmt"/>
-        <line num="11" count="5068" type="stmt"/>
-        <line num="12" count="5068" type="stmt"/>
-        <line num="13" count="5068" type="stmt"/>
-        <line num="14" count="5068" type="stmt"/>
+        <line num="6" count="5152" type="stmt"/>
+        <line num="7" count="5152" type="stmt"/>
+        <line num="8" count="5152" type="stmt"/>
+        <line num="9" count="5152" type="stmt"/>
+        <line num="10" count="5152" type="stmt"/>
+        <line num="11" count="5152" type="stmt"/>
+        <line num="12" count="5152" type="stmt"/>
+        <line num="13" count="5152" type="stmt"/>
+        <line num="14" count="5152" type="stmt"/>
         <line num="18" count="12" type="stmt"/>
         <line num="19" count="108" type="stmt"/>
         <line num="20" count="12" type="stmt"/>
@@ -203,70 +213,70 @@
         <line num="27" count="12" type="stmt"/>
         <line num="28" count="12" type="stmt"/>
         <line num="29" count="12" type="stmt"/>
-        <line num="33" count="41591" type="cond" truecount="2" falsecount="0"/>
-        <line num="37" count="30933" type="stmt"/>
-        <line num="38" count="85571" type="cond" truecount="2" falsecount="0"/>
-        <line num="43" count="2962" type="stmt"/>
-        <line num="46" count="82609" type="cond" truecount="2" falsecount="0"/>
-        <line num="51" count="2581" type="stmt"/>
-        <line num="55" count="25390" type="cond" truecount="2" falsecount="0"/>
-        <line num="59" count="1552" type="stmt"/>
-        <line num="62" count="23838" type="stmt"/>
-        <line num="67" count="735" type="stmt"/>
-        <line num="68" count="735" type="stmt"/>
-        <line num="69" count="735" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="41623" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="30078" type="stmt"/>
+        <line num="38" count="84168" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="2640" type="stmt"/>
+        <line num="46" count="81528" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="2359" type="stmt"/>
+        <line num="55" count="25079" type="cond" truecount="2" falsecount="0"/>
+        <line num="59" count="1083" type="stmt"/>
+        <line num="62" count="23996" type="stmt"/>
+        <line num="67" count="708" type="stmt"/>
+        <line num="68" count="708" type="stmt"/>
+        <line num="69" count="708" type="cond" truecount="2" falsecount="0"/>
         <line num="72" count="97" type="stmt"/>
         <line num="73" count="873" type="stmt"/>
         <line num="74" count="7857" type="cond" truecount="4" falsecount="0"/>
-        <line num="75" count="1620" type="stmt"/>
-        <line num="82" count="638" type="stmt"/>
-        <line num="83" count="5742" type="cond" truecount="2" falsecount="0"/>
-        <line num="84" count="3507" type="stmt"/>
-        <line num="89" count="735" type="stmt"/>
-        <line num="95" count="5717" type="cond" truecount="4" falsecount="1"/>
+        <line num="75" count="1789" type="stmt"/>
+        <line num="82" count="611" type="stmt"/>
+        <line num="83" count="5499" type="cond" truecount="2" falsecount="0"/>
+        <line num="84" count="3429" type="stmt"/>
+        <line num="89" count="708" type="stmt"/>
+        <line num="95" count="5781" type="cond" truecount="4" falsecount="1"/>
         <line num="97" count="0" type="stmt"/>
-        <line num="101" count="5717" type="cond" truecount="1" falsecount="1"/>
+        <line num="101" count="5781" type="cond" truecount="1" falsecount="1"/>
         <line num="102" count="0" type="stmt"/>
-        <line num="104" count="5717" type="stmt"/>
-        <line num="106" count="5717" type="stmt"/>
-        <line num="109" count="5717" type="cond" truecount="2" falsecount="0"/>
-        <line num="110" count="683" type="stmt"/>
-        <line num="114" count="5717" type="cond" truecount="2" falsecount="0"/>
-        <line num="115" count="489" type="stmt"/>
-        <line num="119" count="5717" type="cond" truecount="2" falsecount="0"/>
-        <line num="120" count="40" type="stmt"/>
-        <line num="122" count="40" type="stmt"/>
-        <line num="126" count="5717" type="stmt"/>
-        <line num="127" count="5717" type="cond" truecount="2" falsecount="0"/>
-        <line num="128" count="5717" type="cond" truecount="2" falsecount="0"/>
-        <line num="129" count="5717" type="stmt"/>
-        <line num="130" count="5717" type="stmt"/>
-        <line num="132" count="5717" type="stmt"/>
+        <line num="104" count="5781" type="stmt"/>
+        <line num="106" count="5781" type="stmt"/>
+        <line num="109" count="5781" type="cond" truecount="2" falsecount="0"/>
+        <line num="110" count="700" type="stmt"/>
+        <line num="114" count="5781" type="cond" truecount="2" falsecount="0"/>
+        <line num="115" count="478" type="stmt"/>
+        <line num="119" count="5781" type="cond" truecount="2" falsecount="0"/>
+        <line num="120" count="50" type="stmt"/>
+        <line num="122" count="50" type="stmt"/>
+        <line num="126" count="5781" type="stmt"/>
+        <line num="127" count="5781" type="cond" truecount="2" falsecount="0"/>
+        <line num="128" count="5781" type="cond" truecount="2" falsecount="0"/>
+        <line num="129" count="5781" type="stmt"/>
+        <line num="130" count="5781" type="stmt"/>
+        <line num="132" count="5781" type="stmt"/>
         <line num="136" count="1" type="stmt"/>
         <line num="137" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="138" count="1" type="stmt"/>
         <line num="141" count="0" type="stmt"/>
         <line num="142" count="0" type="stmt"/>
         <line num="143" count="0" type="stmt"/>
-        <line num="149" count="12868" type="cond" truecount="2" falsecount="0"/>
-        <line num="153" count="78" type="stmt"/>
-        <line num="154" count="78" type="cond" truecount="2" falsecount="0"/>
-        <line num="155" count="13" type="cond" truecount="2" falsecount="0"/>
-        <line num="157" count="65" type="stmt"/>
-        <line num="161" count="45108" type="stmt"/>
-        <line num="162" count="5012" type="stmt"/>
-        <line num="163" count="5012" type="stmt"/>
-        <line num="164" count="5012" type="stmt"/>
-        <line num="165" count="5012" type="stmt"/>
-        <line num="166" count="5012" type="stmt"/>
-        <line num="167" count="5012" type="stmt"/>
-        <line num="168" count="5012" type="stmt"/>
-        <line num="169" count="5012" type="stmt"/>
-        <line num="170" count="5012" type="stmt"/>
-        <line num="171" count="5012" type="stmt"/>
-        <line num="172" count="5012" type="stmt"/>
-        <line num="173" count="5012" type="stmt"/>
-        <line num="174" count="5012" type="stmt"/>
+        <line num="149" count="11863" type="cond" truecount="2" falsecount="0"/>
+        <line num="153" count="71" type="stmt"/>
+        <line num="154" count="71" type="cond" truecount="2" falsecount="0"/>
+        <line num="155" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="157" count="59" type="stmt"/>
+        <line num="161" count="45927" type="stmt"/>
+        <line num="162" count="5103" type="stmt"/>
+        <line num="163" count="5103" type="stmt"/>
+        <line num="164" count="5103" type="stmt"/>
+        <line num="165" count="5103" type="stmt"/>
+        <line num="166" count="5103" type="stmt"/>
+        <line num="167" count="5103" type="stmt"/>
+        <line num="168" count="5103" type="stmt"/>
+        <line num="169" count="5103" type="stmt"/>
+        <line num="170" count="5103" type="stmt"/>
+        <line num="171" count="5103" type="stmt"/>
+        <line num="172" count="5103" type="stmt"/>
+        <line num="173" count="5103" type="stmt"/>
+        <line num="174" count="5103" type="stmt"/>
         <line num="178" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="179" count="0" type="stmt"/>
         <line num="181" count="0" type="stmt"/>
@@ -334,29 +344,29 @@
         <line num="72" count="10" type="stmt"/>
         <line num="73" count="10" type="stmt"/>
         <line num="75" count="10" type="stmt"/>
-        <line num="76" count="715" type="stmt"/>
-        <line num="77" count="4967" type="stmt"/>
-        <line num="78" count="10205" type="stmt"/>
-        <line num="79" count="715" type="stmt"/>
-        <line num="81" count="715" type="stmt"/>
+        <line num="76" count="688" type="stmt"/>
+        <line num="77" count="5058" type="stmt"/>
+        <line num="78" count="11016" type="stmt"/>
+        <line num="79" count="688" type="stmt"/>
+        <line num="81" count="688" type="stmt"/>
         <line num="84" count="10" type="stmt"/>
         <line num="85" count="10" type="cond" truecount="2" falsecount="2"/>
-        <line num="90" count="4967" type="stmt"/>
-        <line num="91" count="4967" type="stmt"/>
-        <line num="93" count="4967" type="stmt"/>
-        <line num="94" count="4967" type="stmt"/>
-        <line num="97" count="4967" type="stmt"/>
-        <line num="98" count="4967" type="stmt"/>
-        <line num="99" count="4967" type="cond" truecount="2" falsecount="0"/>
-        <line num="101" count="4967" type="stmt"/>
-        <line num="106" count="9934" type="stmt"/>
-        <line num="107" count="89406" type="stmt"/>
-        <line num="108" count="89406" type="stmt"/>
-        <line num="111" count="9934" type="stmt"/>
-        <line num="116" count="89406" type="stmt"/>
-        <line num="127" count="956740" type="stmt"/>
-        <line num="132" count="4967" type="stmt"/>
-        <line num="133" count="4967" type="stmt"/>
+        <line num="90" count="5058" type="stmt"/>
+        <line num="91" count="5058" type="stmt"/>
+        <line num="93" count="5058" type="stmt"/>
+        <line num="94" count="5058" type="stmt"/>
+        <line num="97" count="5058" type="stmt"/>
+        <line num="98" count="5058" type="stmt"/>
+        <line num="99" count="5058" type="cond" truecount="2" falsecount="0"/>
+        <line num="101" count="5058" type="stmt"/>
+        <line num="106" count="10116" type="stmt"/>
+        <line num="107" count="91044" type="stmt"/>
+        <line num="108" count="91044" type="stmt"/>
+        <line num="111" count="10116" type="stmt"/>
+        <line num="116" count="91044" type="stmt"/>
+        <line num="127" count="967774" type="stmt"/>
+        <line num="132" count="5058" type="stmt"/>
+        <line num="133" count="5058" type="stmt"/>
         <line num="138" count="10" type="stmt"/>
         <line num="139" count="20" type="stmt"/>
         <line num="140" count="20" type="stmt"/>
@@ -371,13 +381,13 @@
       </file>
     </package>
     <package name="Ultimate-Tic-Tac-Toe.GamePlayScreen">
-      <metrics statements="90" coveredstatements="76" conditionals="47" coveredconditionals="36" methods="21" coveredmethods="18"/>
+      <metrics statements="83" coveredstatements="69" conditionals="47" coveredconditionals="36" methods="19" coveredmethods="16"/>
       <file name="BigBoard.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\BigBoard.js">
         <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="44" type="stmt"/>
-        <line num="10" count="130" type="stmt"/>
-        <line num="12" count="388" type="stmt"/>
+        <line num="7" count="37" type="stmt"/>
+        <line num="10" count="109" type="stmt"/>
+        <line num="12" count="325" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
@@ -387,91 +397,84 @@
       <file name="Cell.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\Cell.js">
         <metrics statements="7" coveredstatements="7" conditionals="11" coveredconditionals="11" methods="1" coveredmethods="1"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="10" count="3212" type="stmt"/>
-        <line num="11" count="3212" type="stmt"/>
-        <line num="12" count="3212" type="cond" truecount="4" falsecount="0"/>
-        <line num="13" count="3211" type="cond" truecount="4" falsecount="0"/>
-        <line num="14" count="3211" type="stmt"/>
+        <line num="10" count="2693" type="stmt"/>
+        <line num="11" count="2693" type="stmt"/>
+        <line num="12" count="2693" type="cond" truecount="4" falsecount="0"/>
+        <line num="13" count="2692" type="cond" truecount="4" falsecount="0"/>
+        <line num="14" count="2692" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
       </file>
       <file name="GamePlayScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\GamePlayScreen.js">
-        <metrics statements="52" coveredstatements="42" conditionals="20" coveredconditionals="13" methods="9" coveredmethods="8"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="7" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="29" count="43" type="stmt"/>
-        <line num="31" count="43" type="stmt"/>
-        <line num="33" count="43" type="stmt"/>
-        <line num="34" count="43" type="stmt"/>
-        <line num="35" count="43" type="stmt"/>
-        <line num="36" count="43" type="stmt"/>
-        <line num="38" count="43" type="stmt"/>
-        <line num="40" count="43" type="stmt"/>
-        <line num="41" count="43" type="cond" truecount="1" falsecount="1"/>
-        <line num="43" count="43" type="stmt"/>
-        <line num="45" count="25" type="stmt"/>
-        <line num="47" count="25" type="cond" truecount="1" falsecount="1"/>
-        <line num="48" count="25" type="stmt"/>
-        <line num="49" count="25" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="54" count="25" type="cond" truecount="2" falsecount="0"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
-        <line num="61" count="24" type="cond" truecount="2" falsecount="0"/>
+        <metrics statements="45" coveredstatements="35" conditionals="20" coveredconditionals="13" methods="7" coveredmethods="6"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="36" type="stmt"/>
+        <line num="24" count="36" type="stmt"/>
+        <line num="25" count="36" type="stmt"/>
+        <line num="26" count="36" type="stmt"/>
+        <line num="27" count="36" type="stmt"/>
+        <line num="29" count="36" type="stmt"/>
+        <line num="31" count="36" type="stmt"/>
+        <line num="32" count="36" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="36" type="stmt"/>
+        <line num="36" count="25" type="stmt"/>
+        <line num="38" count="25" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="25" type="stmt"/>
+        <line num="40" count="25" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="45" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="52" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="57" count="36" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
         <line num="62" count="2" type="stmt"/>
-        <line num="66" count="43" type="stmt"/>
-        <line num="67" count="2" type="stmt"/>
-        <line num="68" count="2" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
-        <line num="70" count="2" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="72" count="2" type="stmt"/>
-        <line num="76" count="43" type="stmt"/>
-        <line num="78" count="7" type="stmt"/>
-        <line num="79" count="7" type="stmt"/>
-        <line num="80" count="7" type="stmt"/>
-        <line num="83" count="7" type="stmt"/>
-        <line num="85" count="7" type="cond" truecount="1" falsecount="1"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="87" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="89" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
-        <line num="99" count="7" type="cond" truecount="1" falsecount="1"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="104" count="43" type="stmt"/>
-        <line num="105" count="43" type="cond" truecount="2" falsecount="0"/>
-        <line num="106" count="43" type="stmt"/>
-        <line num="121" count="1" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="67" count="36" type="stmt"/>
+        <line num="69" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="88" count="36" type="stmt"/>
+        <line num="89" count="36" type="cond" truecount="2" falsecount="0"/>
+        <line num="90" count="36" type="stmt"/>
+        <line num="105" count="1" type="stmt"/>
       </file>
       <file name="SmallBoard.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\SmallBoard.js">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="388" type="stmt"/>
-        <line num="11" count="1059" type="stmt"/>
-        <line num="13" count="3177" type="stmt"/>
+        <line num="7" count="325" type="stmt"/>
+        <line num="11" count="888" type="stmt"/>
+        <line num="13" count="2664" type="stmt"/>
         <line num="20" count="25" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
       </file>
       <file name="WinnerModal.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\WinnerModal.js">
         <metrics statements="16" coveredstatements="12" conditionals="12" coveredconditionals="8" methods="4" coveredmethods="2"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="11" count="43" type="stmt"/>
-        <line num="12" count="43" type="stmt"/>
-        <line num="13" count="43" type="stmt"/>
-        <line num="14" count="43" type="cond" truecount="1" falsecount="1"/>
-        <line num="16" count="43" type="stmt"/>
-        <line num="17" count="43" type="cond" truecount="1" falsecount="1"/>
+        <line num="11" count="36" type="stmt"/>
+        <line num="12" count="36" type="stmt"/>
+        <line num="13" count="36" type="stmt"/>
+        <line num="14" count="36" type="cond" truecount="1" falsecount="1"/>
+        <line num="16" count="36" type="stmt"/>
+        <line num="17" count="36" type="cond" truecount="1" falsecount="1"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="19" count="43" type="cond" truecount="2" falsecount="0"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="22" count="41" type="stmt"/>
-        <line num="26" count="43" type="stmt"/>
+        <line num="19" count="36" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="35" type="stmt"/>
+        <line num="26" count="36" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
@@ -479,64 +482,45 @@
       </file>
     </package>
     <package name="Ultimate-Tic-Tac-Toe.HomeScreen">
-      <metrics statements="31" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="13" coveredmethods="0"/>
+      <metrics statements="21" coveredstatements="20" conditionals="18" coveredconditionals="12" methods="10" coveredmethods="9"/>
       <file name="HomeScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\HomeScreen\HomeScreen.js">
-        <metrics statements="31" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="13" coveredmethods="0"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="87" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="114" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="139" count="0" type="stmt"/>
+        <metrics statements="21" coveredstatements="20" conditionals="18" coveredconditionals="12" methods="10" coveredmethods="9"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="21" type="stmt"/>
+        <line num="15" count="21" type="stmt"/>
+        <line num="16" count="21" type="stmt"/>
+        <line num="17" count="21" type="stmt"/>
+        <line num="18" count="21" type="stmt"/>
+        <line num="20" count="21" type="stmt"/>
+        <line num="21" count="21" type="cond" truecount="1" falsecount="1"/>
+        <line num="23" count="21" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="21" type="cond" truecount="1" falsecount="1"/>
+        <line num="26" count="21" type="stmt"/>
+        <line num="28" count="21" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="62" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="71" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="91" count="5" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="116" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Ultimate-Tic-Tac-Toe.HomeScreen.homeComponents">
-      <metrics statements="17" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="6" coveredmethods="1"/>
+      <metrics statements="8" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="2"/>
       <file name="ButtonComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\HomeScreen\homeComponents\ButtonComponent.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
+        <line num="5" count="72" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
       </file>
       <file name="HomeTitleComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\HomeScreen\homeComponents\HomeTitleComponent.js">
-        <metrics statements="13" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="21" type="stmt"/>
+        <line num="10" count="21" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
       </file>
       <file name="TabComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\HomeScreen\homeComponents\TabComponent.js">
         <metrics statements="2" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>

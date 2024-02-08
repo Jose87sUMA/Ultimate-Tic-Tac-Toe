@@ -1,6 +1,5 @@
 import React from "react";
 import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
-import BigBoard from "../../GamePlayScreen/BigBoard";
 import GamePlayScreen from "../../GamePlayScreen/GamePlayScreen";
 import Game from "../../GameLogic/Game";
 
@@ -8,12 +7,6 @@ const gameInstance = new Game('O');
 
 jest.mock('sentry-expo', () => ({
   Sentry:{Native: {captureException: jest.fn()}},
-}));
-
-// Mock the Font module to avoid loading delays
-jest.mock('expo-font', () => ({
-  ...jest.requireActual('expo-font'),
-  loadAsync: jest.fn().mockResolvedValue(),
 }));
 
 // Create a mock ColorContext for testing
@@ -41,7 +34,10 @@ jest.mock('@react-navigation/native', () => ({
 
 
 describe("GamePlayScreen", () => {
-
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+  
   it('renders correctly', async () => {
     const { getByText } = render(<GamePlayScreen route={{ params: { continuingGame: false, AIMoveSymbol: 'O' } }} navigation={{}} />);
     expect(getByText('X turn')).toBeTruthy();
@@ -56,7 +52,7 @@ describe("GamePlayScreen", () => {
     const { getByTestId } = render(<GamePlayScreen route={{ params: { continuingGame: false, AIMoveSymbol: 'O' } }} navigation={{}} />);
     const cell = getByTestId('cell-0-0');
     expect(cell.props.value === ' ')
-    act(() => {
+    await act( async () => {
       fireEvent.press(cell);
     });
     expect(cell.props.value === 'X')
@@ -67,7 +63,7 @@ describe("GamePlayScreen", () => {
     const cell = getByTestId('cell-0-0');
 
     expect(getByText('X turn')).toBeTruthy();
-    act(() => {
+    await act( async () => {
       fireEvent.press(cell);
     });
     expect(getByText('O turn')).toBeTruthy();
@@ -76,23 +72,23 @@ describe("GamePlayScreen", () => {
   it('when a player wins a small board, the small board turns to a cell', async () => {
     const { getByTestId, getByText } = render(<GamePlayScreen route={{ params: { continuingGame: false, AIMoveSymbol: ' ' } }} navigation={{}} />);
     const cell = getByTestId('cell-0-6');
-    act(() => {
+    await act( async () => {
       fireEvent.press(cell);
     });
     const cell1 = getByTestId('cell-6-0');
-    act(() => {
+    await act( async () => {
       fireEvent.press(cell1);
     });
     const cell2 = getByTestId('cell-0-7');
-    act(() => {
+    await act( async () => {
       fireEvent.press(cell2);
     });
     const cell3 = getByTestId('cell-7-0');
-    act(() => {
+    await act( async () => {
       fireEvent.press(cell3);
     });
     const cell4 = getByTestId('cell-0-8');
-    act(() => {
+    await act( async () => {
       fireEvent.press(cell4);
     });
     expect(getByTestId('cell-0-undefined')).toBeTruthy();
@@ -101,55 +97,55 @@ describe("GamePlayScreen", () => {
   it('when a player wins 3 small boards, the winner modal appears', async () => {
     const { getByTestId, getByText } = render(<GamePlayScreen route={{ params: { continuingGame: false, AIMoveSymbol: ' ' } }} navigation={{}} />);
 
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-0-6'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-6-0'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-0-7'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-7-0'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-0-8'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-8-0'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-1-6'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-6-1'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-1-7'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-7-1'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-1-8'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-8-1'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-2-6'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-6-2'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-2-7'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-7-2'));
     });
-    act(() => {
+    await act( async () => {
       fireEvent.press(getByTestId('cell-2-8'));
     });
     expect(getByText('X wins!')).toBeTruthy();
@@ -160,7 +156,7 @@ describe("GamePlayScreen", () => {
     const { getByTestId, getByText } = render(<GamePlayScreen route={{ params: { continuingGame: false, AIMoveSymbol: 'O' } }} navigation={{}} />);
     
     const cell = getByTestId('cell-0-0');
-    act(() => {
+    await act( async () => {
       fireEvent.press(cell);
     });
 
