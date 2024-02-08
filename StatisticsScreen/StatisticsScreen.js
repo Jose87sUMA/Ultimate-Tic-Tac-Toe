@@ -204,7 +204,7 @@ const StatisticsScreen = ({ navigation }) => {
       <ButtonComponent
                   style={[styles.deleteGamesButton,{backgroundColor: theme === 'dark' ? '#767577': '#606060', borderColor: colors.text,}]}
                   text={"Delete all"}
-                  onPress={() => {AsyncStorage.removeItem('finishedGames')}}
+                  onPress={() => {AsyncStorage.removeItem('finishedGames'); setGames([]); alert('You deleted your games.')}}
                   styleText = {{fontSize: fontSize}}
       ></ButtonComponent>
       </View>
