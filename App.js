@@ -1,6 +1,6 @@
 // App.js
 import React, { useState, useEffect } from 'react';
-import ThemeLogic from './AppLogic/ThemeLogic';
+import ThemeLogic from './src/AppLogic/ThemeLogic';
 import { ErrorBoundary } from "@sentry/react-native";
 import * as Sentry from 'sentry-expo';
 import * as Font from 'expo-font';

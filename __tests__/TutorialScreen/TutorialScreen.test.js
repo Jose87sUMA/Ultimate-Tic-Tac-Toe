@@ -1,7 +1,6 @@
 import React from "react";
 import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
-import TutorialScreen from "../../TutorialScreen";
-import Game from "../../GameLogic/Game";
+import TutorialScreen from "../../src/TutorialScreen";
 
 // Create a mock ColorContext for testing
 const MockColorContext = React.createContext({
@@ -10,7 +9,7 @@ const MockColorContext = React.createContext({
 });
 
 // Use this mock context in your tests
-jest.mock('../../styles/contexts/ColorContext', () => ({
+jest.mock('../../src/styles/contexts/ColorContext', () => ({
 ColorContext: MockColorContext,
 }));
 

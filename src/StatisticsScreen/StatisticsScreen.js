@@ -4,8 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Game from '../GameLogic/Game.js';
 
-import * as Font from 'expo-font';
-
 import { ColorContext } from '../styles/contexts/ColorContext.js';
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft.js';
@@ -13,16 +11,9 @@ import { useTheme } from '@react-navigation/native';
 import ButtonComponent from '../HomeScreen/homeComponents/ButtonComponent.js';
 import {ThemeContext} from '../styles/contexts/ThemeContext.js';
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
-
 const StatisticsScreen = ({ navigation }) => {
   const [games, setGames] = useState([]);
   const [expandedIndex, setExpandedIndex] = useState(null);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const {valueX, valueO} = useContext(ColorContext);
   const {theme} = useContext(ThemeContext);
@@ -34,17 +25,6 @@ const StatisticsScreen = ({ navigation }) => {
   const headerFontSize =  width < 750? 50:100;
   const smallSize =  width < 750? 20:30;
   const expandableHeight = width < 750? 100:200;
-
-  useEffect(() => {
-
-    const loadAsync = async () => {
-      await loadFonts();
-      setFontsLoaded(true);
-    };
-
-    loadAsync();
-
-  }, []);
 
   // Function to fetch data and update state
   const fetchDataAndSetState = async () => {
@@ -60,12 +40,6 @@ const StatisticsScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    const loadAsync = async () => {
-      await loadFonts();
-      setFontsLoaded(true);
-    };
-
-    loadAsync();
 
     // Fetch data when the component mounts
     fetchDataAndSetState();
@@ -80,9 +54,6 @@ const StatisticsScreen = ({ navigation }) => {
 
   }, [navigation]); 
 
-  if (!fontsLoaded) {
-    return null; // You can render a loading component or return null until the fonts are loaded
-  }
 
   const toggleDropdown = (index) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);

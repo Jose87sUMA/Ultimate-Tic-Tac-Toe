@@ -10,34 +10,10 @@ import {useTheme} from '@react-navigation/native';
 import BigBoard from '../GamePlayScreen/BigBoard.js';
 import Game from '../GameLogic/Game.js';
 
-import * as Font from 'expo-font';
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
-
 const ReplayScreen = ({route, navigation}) => {
   const {valueX, valueO} = useContext(ColorContext);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
   const [gameInstance, setGame] = useState(Game.fromState(route.params.game));
   const {colors} = useTheme();
-
-  useEffect(() => {
-
-    const loadAsync = async () => {
-      await loadFonts();
-      setFontsLoaded(true);
-    };
-
-    loadAsync();
-  }, []);
-  
-
-  if (!fontsLoaded) {
-    return null; // You can render a loading component or return null until the fonts are loaded
-  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -83,6 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 50,
   },
   currentPlayerText: {
     fontSize: 24,

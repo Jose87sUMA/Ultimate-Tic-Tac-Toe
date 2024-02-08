@@ -44,7 +44,7 @@ const ThemePicker = (props) => {
       <View style={styles.themeMode}>
        <Text style={[styles.text, props.styleText]}>Theme</Text> 
        
-        <Switch trackColor={{false: '#767577', true: '#E8E8E8'}}
+        <Switch testID='themeSwitch' trackColor={{false: '#767577', true: '#E8E8E8'}}
           thumbColor={theme == 'dark' ? '#606060' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}

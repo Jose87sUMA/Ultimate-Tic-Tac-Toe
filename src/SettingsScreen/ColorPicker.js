@@ -76,15 +76,17 @@ export default function ColorPicker(props) {
                     onPress={() => {
                       if(!isInactive){   
                         if(editing == 'X'){
+                          console.log(setValueX)
                           setValueX(index);
                           _storeData = async () => {
                             try {
+                              console.log(AsyncStorage.setItem)
                               await AsyncStorage.setItem(
                                 'COLORX',
                                 JSON.stringify(index),
                               )
                             } catch (error) {
-                              // Error saving data
+                              console.error(error);
                             }};
                           _storeData();
                         }else  if(editing == 'O'){

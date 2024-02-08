@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, waitFor, act } from "@testing-library/react-native";
-import HomeScreen from "../../HomeScreen/HomeScreen";
+import HomeScreen from "../../src/HomeScreen/HomeScreen";
 
 // Create a mock ColorContext for testing
 const MockColorContext = React.createContext({
@@ -9,10 +9,10 @@ valueO: 'red',
 });
 
 // Use this mock context in your tests
-jest.mock('../../styles/contexts/ColorContext', () => ({
-ColorContext: MockColorContext,
+jest.mock('../../src/styles/contexts/ColorContext', () => ({
+    ColorContext: MockColorContext,
 }));
-
+  
 // Mock the useContext hook
 jest.mock('react', () => ({
 ...jest.requireActual('react'),

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1707378433405" clover="3.2.0">
-  <project timestamp="1707378433405" name="All files">
-    <metrics statements="682" coveredstatements="291" conditionals="345" coveredconditionals="129" methods="168" coveredmethods="74" elements="1195" coveredelements="494" complexity="0" loc="682" ncloc="682" packages="13" files="32" classes="32"/>
+<coverage generated="1707384552654" clover="3.2.0">
+  <project timestamp="1707384552654" name="All files">
+    <metrics statements="741" coveredstatements="376" conditionals="385" coveredconditionals="185" methods="171" coveredmethods="87" elements="1297" coveredelements="648" complexity="0" loc="741" ncloc="741" packages="14" files="33" classes="33"/>
     <package name="Ultimate-Tic-Tac-Toe">
-      <metrics statements="82" coveredstatements="50" conditionals="33" coveredconditionals="17" methods="21" coveredmethods="10"/>
+      <metrics statements="18" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="App.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\App.js">
         <metrics statements="13" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
@@ -20,7 +20,35 @@
         <line num="33" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
       </file>
-      <file name="RulesScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\RulesScreen.js">
+      <file name="metro.config.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\metro.config.js">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+      <file name="react-native.config.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\react-native.config.js">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="Ultimate-Tic-Tac-Toe.plugins">
+      <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="withDisableForcedDarkModeAndroid.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\plugins\withDisableForcedDarkModeAndroid.js">
+        <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="Ultimate-Tic-Tac-Toe.src">
+      <metrics statements="64" coveredstatements="50" conditionals="31" coveredconditionals="17" methods="17" coveredmethods="10"/>
+      <file name="RulesScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\RulesScreen.js">
         <metrics statements="13" coveredstatements="13" conditionals="6" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="3" type="stmt"/>
@@ -36,7 +64,7 @@
         <line num="59" count="1" type="stmt"/>
         <line num="66" count="1" type="stmt"/>
       </file>
-      <file name="TutorialScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\TutorialScreen.js">
+      <file name="TutorialScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\TutorialScreen.js">
         <metrics statements="51" coveredstatements="37" conditionals="25" coveredconditionals="14" methods="13" coveredmethods="6"/>
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="18" type="stmt"/>
@@ -90,21 +118,10 @@
         <line num="153" count="1" type="stmt"/>
         <line num="167" count="1" type="stmt"/>
       </file>
-      <file name="metro.config.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\metro.config.js">
-        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-      </file>
-      <file name="react-native.config.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\react-native.config.js">
-        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-      </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.AppLogic">
+    <package name="Ultimate-Tic-Tac-Toe.src.AppLogic">
       <metrics statements="57" coveredstatements="0" conditionals="32" coveredconditionals="0" methods="11" coveredmethods="0"/>
-      <file name="NavigationLogic.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\AppLogic\NavigationLogic.js">
+      <file name="NavigationLogic.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\AppLogic\NavigationLogic.js">
         <metrics statements="25" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="22" count="0" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
@@ -132,7 +149,7 @@
         <line num="89" count="0" type="stmt"/>
         <line num="90" count="0" type="stmt"/>
       </file>
-      <file name="ThemeLogic.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\AppLogic\ThemeLogic.js">
+      <file name="ThemeLogic.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\AppLogic\ThemeLogic.js">
         <metrics statements="32" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="13" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
@@ -168,9 +185,9 @@
         <line num="70" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.Firebase">
+    <package name="Ultimate-Tic-Tac-Toe.src.Firebase">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="firebaseConfig.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\Firebase\firebaseConfig.js">
+      <file name="firebaseConfig.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\Firebase\firebaseConfig.js">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="15" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
@@ -178,19 +195,19 @@
         <line num="28" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.GameLogic">
+    <package name="Ultimate-Tic-Tac-Toe.src.GameLogic">
       <metrics statements="183" coveredstatements="146" conditionals="97" coveredconditionals="64" methods="41" coveredmethods="37"/>
-      <file name="Game.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GameLogic\Game.js">
+      <file name="Game.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\GameLogic\Game.js">
         <metrics statements="112" coveredstatements="80" conditionals="75" coveredconditionals="50" methods="17" coveredmethods="15"/>
-        <line num="6" count="5237" type="stmt"/>
-        <line num="7" count="5237" type="stmt"/>
-        <line num="8" count="5237" type="stmt"/>
-        <line num="9" count="5237" type="stmt"/>
-        <line num="10" count="5237" type="stmt"/>
-        <line num="11" count="5237" type="stmt"/>
-        <line num="12" count="5237" type="stmt"/>
-        <line num="13" count="5237" type="stmt"/>
-        <line num="14" count="5237" type="stmt"/>
+        <line num="6" count="5190" type="stmt"/>
+        <line num="7" count="5190" type="stmt"/>
+        <line num="8" count="5190" type="stmt"/>
+        <line num="9" count="5190" type="stmt"/>
+        <line num="10" count="5190" type="stmt"/>
+        <line num="11" count="5190" type="stmt"/>
+        <line num="12" count="5190" type="stmt"/>
+        <line num="13" count="5190" type="stmt"/>
+        <line num="14" count="5190" type="stmt"/>
         <line num="18" count="12" type="stmt"/>
         <line num="19" count="108" type="stmt"/>
         <line num="20" count="12" type="stmt"/>
@@ -203,70 +220,70 @@
         <line num="27" count="12" type="stmt"/>
         <line num="28" count="12" type="stmt"/>
         <line num="29" count="12" type="stmt"/>
-        <line num="33" count="43235" type="cond" truecount="2" falsecount="0"/>
-        <line num="37" count="31099" type="stmt"/>
-        <line num="38" count="87408" type="cond" truecount="2" falsecount="0"/>
-        <line num="43" count="2814" type="stmt"/>
-        <line num="46" count="84594" type="cond" truecount="2" falsecount="0"/>
-        <line num="51" count="2462" type="stmt"/>
-        <line num="55" count="25823" type="cond" truecount="2" falsecount="0"/>
-        <line num="59" count="1137" type="stmt"/>
-        <line num="62" count="24686" type="stmt"/>
-        <line num="67" count="734" type="stmt"/>
-        <line num="68" count="734" type="stmt"/>
-        <line num="69" count="734" type="cond" truecount="2" falsecount="0"/>
-        <line num="72" count="99" type="stmt"/>
-        <line num="73" count="891" type="stmt"/>
-        <line num="74" count="8019" type="cond" truecount="4" falsecount="0"/>
-        <line num="75" count="1761" type="stmt"/>
-        <line num="82" count="635" type="stmt"/>
-        <line num="83" count="5715" type="cond" truecount="2" falsecount="0"/>
-        <line num="84" count="3523" type="stmt"/>
-        <line num="89" count="734" type="stmt"/>
-        <line num="95" count="5874" type="cond" truecount="4" falsecount="1"/>
+        <line num="33" count="39883" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="30210" type="stmt"/>
+        <line num="38" count="84117" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="2695" type="stmt"/>
+        <line num="46" count="81422" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="2357" type="stmt"/>
+        <line num="55" count="25158" type="cond" truecount="2" falsecount="0"/>
+        <line num="59" count="1077" type="stmt"/>
+        <line num="62" count="24081" type="stmt"/>
+        <line num="67" count="715" type="stmt"/>
+        <line num="68" count="715" type="stmt"/>
+        <line num="69" count="715" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="95" type="stmt"/>
+        <line num="73" count="855" type="stmt"/>
+        <line num="74" count="7695" type="cond" truecount="4" falsecount="0"/>
+        <line num="75" count="1778" type="stmt"/>
+        <line num="82" count="620" type="stmt"/>
+        <line num="83" count="5580" type="cond" truecount="2" falsecount="0"/>
+        <line num="84" count="3459" type="stmt"/>
+        <line num="89" count="715" type="stmt"/>
+        <line num="95" count="5808" type="cond" truecount="4" falsecount="1"/>
         <line num="97" count="0" type="stmt"/>
-        <line num="101" count="5874" type="cond" truecount="1" falsecount="1"/>
+        <line num="101" count="5808" type="cond" truecount="1" falsecount="1"/>
         <line num="102" count="0" type="stmt"/>
-        <line num="104" count="5874" type="stmt"/>
-        <line num="106" count="5874" type="stmt"/>
-        <line num="109" count="5874" type="cond" truecount="2" falsecount="0"/>
-        <line num="110" count="703" type="stmt"/>
-        <line num="114" count="5874" type="cond" truecount="2" falsecount="0"/>
-        <line num="115" count="505" type="stmt"/>
-        <line num="119" count="5874" type="cond" truecount="2" falsecount="0"/>
-        <line num="120" count="51" type="stmt"/>
-        <line num="122" count="51" type="stmt"/>
-        <line num="126" count="5874" type="stmt"/>
-        <line num="127" count="5874" type="cond" truecount="2" falsecount="0"/>
-        <line num="128" count="5874" type="cond" truecount="2" falsecount="0"/>
-        <line num="129" count="5874" type="stmt"/>
-        <line num="130" count="5874" type="stmt"/>
-        <line num="132" count="5874" type="stmt"/>
+        <line num="104" count="5808" type="stmt"/>
+        <line num="106" count="5808" type="stmt"/>
+        <line num="109" count="5808" type="cond" truecount="2" falsecount="0"/>
+        <line num="110" count="718" type="stmt"/>
+        <line num="114" count="5808" type="cond" truecount="2" falsecount="0"/>
+        <line num="115" count="470" type="stmt"/>
+        <line num="119" count="5808" type="cond" truecount="2" falsecount="0"/>
+        <line num="120" count="57" type="stmt"/>
+        <line num="122" count="57" type="stmt"/>
+        <line num="126" count="5808" type="stmt"/>
+        <line num="127" count="5808" type="cond" truecount="2" falsecount="0"/>
+        <line num="128" count="5808" type="cond" truecount="2" falsecount="0"/>
+        <line num="129" count="5808" type="stmt"/>
+        <line num="130" count="5808" type="stmt"/>
+        <line num="132" count="5808" type="stmt"/>
         <line num="136" count="1" type="stmt"/>
         <line num="137" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="138" count="1" type="stmt"/>
         <line num="141" count="0" type="stmt"/>
         <line num="142" count="0" type="stmt"/>
         <line num="143" count="0" type="stmt"/>
-        <line num="149" count="12541" type="cond" truecount="2" falsecount="0"/>
+        <line num="149" count="11869" type="cond" truecount="2" falsecount="0"/>
         <line num="153" count="90" type="stmt"/>
         <line num="154" count="90" type="cond" truecount="2" falsecount="0"/>
         <line num="155" count="12" type="cond" truecount="2" falsecount="0"/>
         <line num="157" count="78" type="stmt"/>
-        <line num="161" count="46530" type="stmt"/>
-        <line num="162" count="5170" type="stmt"/>
-        <line num="163" count="5170" type="stmt"/>
-        <line num="164" count="5170" type="stmt"/>
-        <line num="165" count="5170" type="stmt"/>
-        <line num="166" count="5170" type="stmt"/>
-        <line num="167" count="5170" type="stmt"/>
-        <line num="168" count="5170" type="stmt"/>
-        <line num="169" count="5170" type="stmt"/>
-        <line num="170" count="5170" type="stmt"/>
-        <line num="171" count="5170" type="stmt"/>
-        <line num="172" count="5170" type="stmt"/>
-        <line num="173" count="5170" type="stmt"/>
-        <line num="174" count="5170" type="stmt"/>
+        <line num="161" count="46107" type="stmt"/>
+        <line num="162" count="5123" type="stmt"/>
+        <line num="163" count="5123" type="stmt"/>
+        <line num="164" count="5123" type="stmt"/>
+        <line num="165" count="5123" type="stmt"/>
+        <line num="166" count="5123" type="stmt"/>
+        <line num="167" count="5123" type="stmt"/>
+        <line num="168" count="5123" type="stmt"/>
+        <line num="169" count="5123" type="stmt"/>
+        <line num="170" count="5123" type="stmt"/>
+        <line num="171" count="5123" type="stmt"/>
+        <line num="172" count="5123" type="stmt"/>
+        <line num="173" count="5123" type="stmt"/>
+        <line num="174" count="5123" type="stmt"/>
         <line num="178" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="179" count="0" type="stmt"/>
         <line num="181" count="0" type="stmt"/>
@@ -295,7 +312,7 @@
         <line num="227" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="228" count="0" type="stmt"/>
       </file>
-      <file name="MonteCarloTreeSearch.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GameLogic\MonteCarloTreeSearch.js">
+      <file name="MonteCarloTreeSearch.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\GameLogic\MonteCarloTreeSearch.js">
         <metrics statements="71" coveredstatements="66" conditionals="22" coveredconditionals="14" methods="24" coveredmethods="22"/>
         <line num="2" count="2" type="stmt"/>
         <line num="5" count="12" type="stmt"/>
@@ -334,29 +351,29 @@
         <line num="72" count="10" type="stmt"/>
         <line num="73" count="10" type="stmt"/>
         <line num="75" count="10" type="stmt"/>
-        <line num="76" count="714" type="stmt"/>
-        <line num="77" count="5124" type="stmt"/>
-        <line num="78" count="11082" type="stmt"/>
-        <line num="79" count="714" type="stmt"/>
-        <line num="81" count="714" type="stmt"/>
+        <line num="76" count="695" type="stmt"/>
+        <line num="77" count="5077" type="stmt"/>
+        <line num="78" count="11000" type="stmt"/>
+        <line num="79" count="695" type="stmt"/>
+        <line num="81" count="695" type="stmt"/>
         <line num="84" count="10" type="stmt"/>
         <line num="85" count="10" type="cond" truecount="2" falsecount="2"/>
-        <line num="90" count="5124" type="stmt"/>
-        <line num="91" count="5124" type="stmt"/>
-        <line num="93" count="5124" type="stmt"/>
-        <line num="94" count="5124" type="stmt"/>
-        <line num="97" count="5124" type="stmt"/>
-        <line num="98" count="5124" type="stmt"/>
-        <line num="99" count="5124" type="cond" truecount="2" falsecount="0"/>
-        <line num="101" count="5124" type="stmt"/>
-        <line num="106" count="10248" type="stmt"/>
-        <line num="107" count="92232" type="stmt"/>
-        <line num="108" count="92232" type="stmt"/>
-        <line num="111" count="10248" type="stmt"/>
-        <line num="116" count="92232" type="stmt"/>
-        <line num="127" count="976471" type="stmt"/>
-        <line num="132" count="5124" type="stmt"/>
-        <line num="133" count="5124" type="stmt"/>
+        <line num="90" count="5077" type="stmt"/>
+        <line num="91" count="5077" type="stmt"/>
+        <line num="93" count="5077" type="stmt"/>
+        <line num="94" count="5077" type="stmt"/>
+        <line num="97" count="5077" type="stmt"/>
+        <line num="98" count="5077" type="stmt"/>
+        <line num="99" count="5077" type="cond" truecount="2" falsecount="0"/>
+        <line num="101" count="5077" type="stmt"/>
+        <line num="106" count="10154" type="stmt"/>
+        <line num="107" count="91386" type="stmt"/>
+        <line num="108" count="91386" type="stmt"/>
+        <line num="111" count="10154" type="stmt"/>
+        <line num="116" count="91386" type="stmt"/>
+        <line num="127" count="969288" type="stmt"/>
+        <line num="132" count="5077" type="stmt"/>
+        <line num="133" count="5077" type="stmt"/>
         <line num="138" count="10" type="stmt"/>
         <line num="139" count="20" type="stmt"/>
         <line num="140" count="20" type="stmt"/>
@@ -370,9 +387,9 @@
         <line num="162" count="50" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.GamePlayScreen">
+    <package name="Ultimate-Tic-Tac-Toe.src.GamePlayScreen">
       <metrics statements="83" coveredstatements="69" conditionals="47" coveredconditionals="36" methods="19" coveredmethods="16"/>
-      <file name="BigBoard.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\BigBoard.js">
+      <file name="BigBoard.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\GamePlayScreen\BigBoard.js">
         <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="55" type="stmt"/>
@@ -384,7 +401,7 @@
         <line num="32" count="2" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
       </file>
-      <file name="Cell.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\Cell.js">
+      <file name="Cell.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\GamePlayScreen\Cell.js">
         <metrics statements="7" coveredstatements="7" conditionals="11" coveredconditionals="11" methods="1" coveredmethods="1"/>
         <line num="9" count="2" type="stmt"/>
         <line num="10" count="4151" type="stmt"/>
@@ -394,7 +411,7 @@
         <line num="14" count="4150" type="stmt"/>
         <line num="21" count="2" type="stmt"/>
       </file>
-      <file name="GamePlayScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\GamePlayScreen.js">
+      <file name="GamePlayScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\GamePlayScreen\GamePlayScreen.js">
         <metrics statements="45" coveredstatements="35" conditionals="20" coveredconditionals="13" methods="7" coveredmethods="6"/>
         <line num="20" count="1" type="stmt"/>
         <line num="22" count="36" type="stmt"/>
@@ -442,7 +459,7 @@
         <line num="90" count="36" type="stmt"/>
         <line num="105" count="1" type="stmt"/>
       </file>
-      <file name="SmallBoard.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\SmallBoard.js">
+      <file name="SmallBoard.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\GamePlayScreen\SmallBoard.js">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="487" type="stmt"/>
@@ -451,7 +468,7 @@
         <line num="20" count="26" type="stmt"/>
         <line num="41" count="2" type="stmt"/>
       </file>
-      <file name="WinnerModal.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\GamePlayScreen\WinnerModal.js">
+      <file name="WinnerModal.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\GamePlayScreen\WinnerModal.js">
         <metrics statements="16" coveredstatements="12" conditionals="12" coveredconditionals="8" methods="4" coveredmethods="2"/>
         <line num="10" count="2" type="stmt"/>
         <line num="11" count="54" type="stmt"/>
@@ -471,9 +488,9 @@
         <line num="57" count="2" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.HomeScreen">
+    <package name="Ultimate-Tic-Tac-Toe.src.HomeScreen">
       <metrics statements="21" coveredstatements="20" conditionals="18" coveredconditionals="12" methods="10" coveredmethods="9"/>
-      <file name="HomeScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\HomeScreen\HomeScreen.js">
+      <file name="HomeScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\HomeScreen\HomeScreen.js">
         <metrics statements="21" coveredstatements="20" conditionals="18" coveredconditionals="12" methods="10" coveredmethods="9"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="21" type="stmt"/>
@@ -498,199 +515,261 @@
         <line num="116" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.HomeScreen.homeComponents">
+    <package name="Ultimate-Tic-Tac-Toe.src.HomeScreen.homeComponents">
       <metrics statements="8" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="2"/>
-      <file name="ButtonComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\HomeScreen\homeComponents\ButtonComponent.js">
+      <file name="ButtonComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\HomeScreen\homeComponents\ButtonComponent.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="75" type="stmt"/>
-        <line num="12" count="4" type="stmt"/>
+        <line num="7" count="81" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
       </file>
-      <file name="HomeTitleComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\HomeScreen\homeComponents\HomeTitleComponent.js">
+      <file name="HomeTitleComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\HomeScreen\homeComponents\HomeTitleComponent.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="21" type="stmt"/>
         <line num="10" count="21" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
       </file>
-      <file name="TabComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\HomeScreen\homeComponents\TabComponent.js">
+      <file name="TabComponent.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\HomeScreen\homeComponents\TabComponent.js">
         <metrics statements="2" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="9" count="0" type="stmt"/>
         <line num="58" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.SettingsScreen">
-      <metrics statements="155" coveredstatements="0" conditionals="70" coveredconditionals="0" methods="35" coveredmethods="0"/>
-      <file name="ColorPicker.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\SettingsScreen\ColorPicker.js">
-        <metrics statements="29" coveredstatements="0" conditionals="40" coveredconditionals="0" methods="8" coveredmethods="0"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="72" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="78" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="79" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="91" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="124" count="0" type="stmt"/>
-        <line num="134" count="0" type="stmt"/>
-      </file>
-      <file name="ResetColorTheme.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\SettingsScreen\ResetColorTheme.js">
-        <metrics statements="18" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-      </file>
-      <file name="SettingsScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\SettingsScreen\SettingsScreen.js">
-        <metrics statements="95" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="21" coveredmethods="0"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
+    <package name="Ultimate-Tic-Tac-Toe.src.SettingsScreen">
+      <metrics statements="214" coveredstatements="85" conditionals="110" coveredconditionals="56" methods="38" coveredmethods="13"/>
+      <file name="AuthenticationSection.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\SettingsScreen\AuthenticationSection.js">
+        <metrics statements="127" coveredstatements="25" conditionals="38" coveredconditionals="5" methods="21" coveredmethods="3"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="7" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
+        <line num="26" count="6" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="31" count="6" type="stmt"/>
+        <line num="32" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="33" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="35" count="6" type="stmt"/>
+        <line num="36" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="37" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="6" type="stmt"/>
+        <line num="42" count="6" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
+        <line num="46" count="6" type="stmt"/>
+        <line num="49" count="6" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
         <line num="51" count="0" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="63" count="0" type="stmt"/>
-        <line num="64" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="65" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="71" count="6" type="stmt"/>
         <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
         <line num="78" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="80" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="80" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
         <line num="88" count="0" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="93" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
+        <line num="93" count="6" type="stmt"/>
+        <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="100" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
         <line num="109" count="0" type="stmt"/>
-        <line num="111" count="0" type="stmt"/>
-        <line num="112" count="0" type="stmt"/>
-        <line num="117" count="0" type="stmt"/>
-        <line num="118" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="119" count="0" type="stmt"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="112" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="114" count="0" type="stmt"/>
         <line num="122" count="0" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
         <line num="124" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
         <line num="126" count="0" type="stmt"/>
-        <line num="128" count="0" type="stmt"/>
-        <line num="129" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="127" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="130" count="0" type="stmt"/>
         <line num="133" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
         <line num="137" count="0" type="stmt"/>
-        <line num="138" count="0" type="stmt"/>
         <line num="143" count="0" type="stmt"/>
-        <line num="144" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="145" count="0" type="stmt"/>
-        <line num="148" count="0" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="153" count="0" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="155" count="0" type="stmt"/>
-        <line num="156" count="0" type="stmt"/>
+        <line num="144" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="156" count="6" type="stmt"/>
+        <line num="157" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="158" count="0" type="stmt"/>
         <line num="161" count="0" type="stmt"/>
-        <line num="162" count="0" type="stmt"/>
-        <line num="166" count="0" type="stmt"/>
-        <line num="167" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="168" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="165" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="168" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="169" count="0" type="stmt"/>
         <line num="170" count="0" type="stmt"/>
-        <line num="171" count="0" type="stmt"/>
-        <line num="176" count="0" type="stmt"/>
-        <line num="177" count="0" type="stmt"/>
+        <line num="173" count="0" type="stmt"/>
+        <line num="174" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="179" count="0" type="stmt"/>
         <line num="180" count="0" type="stmt"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="186" count="0" type="stmt"/>
-        <line num="187" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="188" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="189" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="185" count="6" type="stmt"/>
+        <line num="186" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="187" count="0" type="stmt"/>
         <line num="190" count="0" type="stmt"/>
-        <line num="191" count="0" type="stmt"/>
+        <line num="192" count="0" type="stmt"/>
+        <line num="195" count="0" type="stmt"/>
+        <line num="196" count="0" type="stmt"/>
+        <line num="197" count="0" type="stmt"/>
+        <line num="198" count="0" type="stmt"/>
+        <line num="201" count="0" type="stmt"/>
+        <line num="204" count="0" type="stmt"/>
+        <line num="205" count="0" type="stmt"/>
+        <line num="206" count="0" type="stmt"/>
+        <line num="210" count="6" type="stmt"/>
+        <line num="211" count="0" type="stmt"/>
+        <line num="212" count="0" type="stmt"/>
+        <line num="213" count="0" type="stmt"/>
         <line num="214" count="0" type="stmt"/>
+        <line num="217" count="0" type="stmt"/>
+        <line num="218" count="0" type="stmt"/>
         <line num="219" count="0" type="stmt"/>
+        <line num="223" count="6" type="stmt"/>
+        <line num="224" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="225" count="0" type="stmt"/>
+        <line num="226" count="0" type="stmt"/>
+        <line num="227" count="0" type="stmt"/>
         <line num="228" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
         <line num="234" count="0" type="stmt"/>
-        <line num="240" count="0" type="stmt"/>
-        <line num="250" count="0" type="stmt"/>
+        <line num="237" count="0" type="stmt"/>
+        <line num="239" count="0" type="stmt"/>
+        <line num="244" count="6" type="stmt"/>
+        <line num="259" count="0" type="stmt"/>
+        <line num="275" count="0" type="stmt"/>
+        <line num="284" count="0" type="stmt"/>
+        <line num="294" count="0" type="stmt"/>
+        <line num="303" count="1" type="stmt"/>
       </file>
-      <file name="ThemePicker.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\SettingsScreen\ThemePicker.js">
-        <metrics statements="13" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+      <file name="ColorPicker.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\SettingsScreen\ColorPicker.js">
+        <metrics statements="32" coveredstatements="23" conditionals="48" coveredconditionals="40" methods="8" coveredmethods="5"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="28" count="7" type="stmt"/>
+        <line num="30" count="7" type="stmt"/>
+        <line num="32" count="7" type="stmt"/>
+        <line num="33" count="7" type="stmt"/>
+        <line num="35" count="7" type="stmt"/>
+        <line num="36" count="7" type="stmt"/>
+        <line num="40" count="7" type="stmt"/>
+        <line num="44" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="47" count="0" type="cond" truecount="2" falsecount="2"/>
+        <line num="70" count="70" type="cond" truecount="2" falsecount="0"/>
+        <line num="71" count="70" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="70" type="stmt"/>
+        <line num="77" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="78" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+      </file>
+      <file name="ResetColorTheme.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\SettingsScreen\ResetColorTheme.js">
+        <metrics statements="19" coveredstatements="10" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="1"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="22" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="6" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="49" count="6" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+      </file>
+      <file name="SettingsScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\SettingsScreen\SettingsScreen.js">
+        <metrics statements="21" coveredstatements="12" conditionals="12" coveredconditionals="5" methods="3" coveredmethods="1"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="26" count="6" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="50" count="6" type="stmt"/>
+        <line num="51" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="53" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="54" count="6" type="stmt"/>
+        <line num="55" count="6" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+      </file>
+      <file name="ThemePicker.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\SettingsScreen\ThemePicker.js">
+        <metrics statements="15" coveredstatements="15" conditionals="10" coveredconditionals="5" methods="3" coveredmethods="3"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="23" count="6" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="42" count="6" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.StatisticsScreen">
+    <package name="Ultimate-Tic-Tac-Toe.src.StatisticsScreen">
       <metrics statements="77" coveredstatements="0" conditionals="44" coveredconditionals="0" methods="25" coveredmethods="0"/>
-      <file name="ReplayScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\StatisticsScreen\ReplayScreen.js">
+      <file name="ReplayScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\StatisticsScreen\ReplayScreen.js">
         <metrics statements="24" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
@@ -717,7 +796,7 @@
         <line num="65" count="0" type="stmt"/>
         <line num="81" count="0" type="stmt"/>
       </file>
-      <file name="StatisticsScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\StatisticsScreen\StatisticsScreen.js">
+      <file name="StatisticsScreen.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\StatisticsScreen\StatisticsScreen.js">
         <metrics statements="53" coveredstatements="0" conditionals="38" coveredconditionals="0" methods="18" coveredmethods="0"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
@@ -774,47 +853,33 @@
         <line num="214" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.plugins">
-      <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="withDisableForcedDarkModeAndroid.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\plugins\withDisableForcedDarkModeAndroid.js">
-        <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-      </file>
-    </package>
-    <package name="Ultimate-Tic-Tac-Toe.styles.colorsPalettes">
+    <package name="Ultimate-Tic-Tac-Toe.src.styles.colorsPalettes">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="ColorsPalette.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\styles\colorsPalettes\ColorsPalette.js">
+      <file name="ColorsPalette.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\styles\colorsPalettes\ColorsPalette.js">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="ColorsPaletteSoft.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\styles\colorsPalettes\ColorsPaletteSoft.js">
+      <file name="ColorsPaletteSoft.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\styles\colorsPalettes\ColorsPaletteSoft.js">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.styles.contexts">
+    <package name="Ultimate-Tic-Tac-Toe.src.styles.contexts">
       <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="ColorContext.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\styles\contexts\ColorContext.js">
+      <file name="ColorContext.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\styles\contexts\ColorContext.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
-      <file name="ThemeContext.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\styles\contexts\ThemeContext.js">
+      <file name="ThemeContext.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\styles\contexts\ThemeContext.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="Ultimate-Tic-Tac-Toe.styles.themes">
+    <package name="Ultimate-Tic-Tac-Toe.src.styles.themes">
       <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="MyDarkTheme.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\styles\themes\MyDarkTheme.js">
+      <file name="MyDarkTheme.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\styles\themes\MyDarkTheme.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
       </file>
-      <file name="MyLightTheme.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\styles\themes\MyLightTheme.js">
+      <file name="MyLightTheme.js" path="C:\Users\jasm2\Documents\3er anno\Polimi\Mobile Applications\Ultimate Tic Tac Toe\Ultimate-Tic-Tac-Toe\src\styles\themes\MyLightTheme.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
       </file>

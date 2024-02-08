@@ -19,7 +19,6 @@ const TutorialScreen = ({navigation}) => {
   const {width} = useWindowDimensions();
   const fontSize = width < 750? 15:30;
 
-  const [fontsLoaded, setFontsLoaded] = useState(false);
   const {colors} = useTheme();
   const {valueX, valueO} = useContext(ColorContext);
 

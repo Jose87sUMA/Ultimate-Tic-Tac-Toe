@@ -16,23 +16,15 @@ import ColorPicker from './ColorPicker';
 import ThemePicker from './ThemePicker';
 import ResetColorTheme from './ResetColorTheme';
 import AuthenticationSection from './AuthenticationSection';
-import * as Font from 'expo-font';
 
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette';
 import ColorsPaletteSoft from '../styles/colorsPalettes/ColorsPaletteSoft';
 
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('../assets/fonts/Acme.ttf'), 
-  });
-};
-
 const SettingsScreen = ({navigation}) => {
   const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
   const{valueO, valueX} = useContext(ColorContext);
-
 
   const toggleSwitch = () => {
     const changedTheme = theme == 'light'? 'dark':'light';
