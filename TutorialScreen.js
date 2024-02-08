@@ -1,8 +1,6 @@
 import React, {useContext, useState, useRef, useEffect} from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Modal, TouchableOpacity, useWindowDimensions } from 'react-native';
 import RBSheet from "react-native-raw-bottom-sheet";
-import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
-import * as Font from 'expo-font';
 import { useTheme } from '@react-navigation/native';
 import * as Progress from 'react-native-progress';
 
@@ -16,11 +14,7 @@ import { ColorContext } from './styles/contexts/ColorContext.js';
 import ColorsPalette from './styles/colorsPalettes/ColorsPalette.js';
 import ColorsPaletteSoft from './styles/colorsPalettes/ColorsPaletteSoft.js'; 
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-    Acme: require('./assets/fonts/Acme.ttf'), 
-  });
-};
+
 const TutorialScreen = ({navigation}) => {
   const {width} = useWindowDimensions();
   const fontSize = width < 750? 15:30;
@@ -56,20 +50,8 @@ const TutorialScreen = ({navigation}) => {
   ];
 
   useEffect(() => {
-
-    const loadAsync = async () => {
-      await loadFonts();
-      setFontsLoaded(true);
-      refRBSheet.current.open();
-    };
-
-    loadAsync();
-
+    refRBSheet.current.open();
   }, []);
-  
-  if (!fontsLoaded) {
-    return null; // You can render a loading component or return null until the fonts are loaded
-  }
 
   const handleNext = () => {
 
