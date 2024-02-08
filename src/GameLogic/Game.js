@@ -48,7 +48,7 @@ class Game {
         board[i] === board[i + 6] &&
         board[i] !== ' '
       ) {
-        return board[i * 3];
+        return board[i];
       }
     }
 
@@ -152,7 +152,7 @@ class Game {
   getWinner() {
     const winner = this.checkWinnerBoard(this.winnerBoard);
     if(this.isTerminal())
-      return this.checkWinnerBoard(this.winnerBoard) === null ? ' ': winner;
+      return winner === null ? ' ': winner;
     else
       return null;
   }
