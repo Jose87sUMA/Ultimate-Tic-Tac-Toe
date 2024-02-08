@@ -70,7 +70,7 @@ const GamePlayScreen = ({route, navigation}) => {
       const getGameFromStorage = async () => {
         try {
           const storedGame = await AsyncStorage.getItem('game');
-          const parsedGame = storedGame ? Game.fromState(JSON.parse(storedGame)) : null;
+          const parsedGame = storedGame ? Game.fromState(JSON.parse(storedGame)) : new Game(' ');
           setGame(parsedGame);
         } catch (error) {
           console.error('Error retrieving game from AsyncStorage:', error);
