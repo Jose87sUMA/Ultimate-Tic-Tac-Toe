@@ -30,12 +30,19 @@ const loadFonts = async () => {
 
 const AuthenticationSection = (props) => {
   const {colors} = useTheme();
-  const { setTheme, theme } = useContext(ThemeContext);
-  const{valueO, valueX} = useContext(ColorContext);
   const [user, setUser] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+ 
+  const {width} = useWindowDimensions();
+  const smallSize = width < 750? 10:20;
+  const smallBoxHeight = width < 750? 50: 100;
+  const inputWidth = width*0.7;
+  const buttonSize = width*0.5;
+  const headerFontSize =  width < 750? 30:60;
+  const fontSize =  width < 750? 20:40;
 
 
   // Check if the user is authenticated
@@ -52,8 +59,19 @@ const AuthenticationSection = (props) => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
       setModalVisible(false);
+      alert('Loged in ' + email);
     } catch (error) {
+      
       console.error('Error authenticating user:', error.message);
+      if(error.message.includes('invalid-email')){
+        alert('Invalid Email');
+      }else  if(error.message.includes('missing-password')){
+        alert('Missing Password');
+      }else if(error.message.includes('invalid-credential')){
+          alert('User not found. Password or email incorrect');
+      }else{
+          alert('Unexpected error ocurred');
+      }
       Sentry.captureException('Error authenticating user:' + error.message);
     }
   };
@@ -65,6 +83,16 @@ const AuthenticationSection = (props) => {
       setModalVisible(false);
     } catch (error) {
       console.error('Error registering user:', error.message);
+      if(error.message.includes('invalid-email')){
+        alert('Invalid Email');
+      }else  if(error.message.includes('missing-password')){
+        alert('Missing Password');
+      }else if(error.message.includes('at least')){
+          alert('Password must have at least six characters');
+      }else{
+          alert('Unexpected error ocurred');
+      }
+      
       Sentry.captureException('Error registering user:', error.message);
     }
   };
@@ -76,6 +104,10 @@ const AuthenticationSection = (props) => {
     }
   
     const finishedGames = await AsyncStorage.getItem('finishedGames');
+    if(finishedGames == null){
+      alert('No games to save');
+      return;
+    }
   
     try {
       // Replace 'finishedGames' with the actual name of your collection
@@ -117,9 +149,14 @@ const AuthenticationSection = (props) => {
       }
 
       console.log('Game saved to cloud successfully!');
+      alert('Games saved successfully');
     } catch (error) {
       console.error('Error saving game to cloud:', error.message);
       Sentry.captureException('Error saving game to cloud:', error.message);
+      
+      alert('Unexpected error occurred');
+      
+      
     }
     
   };
@@ -138,13 +175,16 @@ const AuthenticationSection = (props) => {
       querySnapshot.forEach((doc) => {
         if(doc.data().finishedGamesJSON != null) {
           AsyncStorage.setItem('finishedGames', doc.data().finishedGamesJSON);
+          alert('Downloaded games successfully');
         }
         else {
           AsyncStorage.removeItem('finishedGames');
+          alert('No games in the cloud');
         }
       });
     } catch (error) {
       console.error('Error syncing games from cloud:', error.message);
+      alert('Error while retrieving games from cloud');
       Sentry.captureException('Error syncing game to cloud:', error.message);
     }
     
@@ -166,10 +206,25 @@ const AuthenticationSection = (props) => {
       await setDoc(doc(gamesRef, docId), {
         finishedGamesJSON: null,
       }, { merge: true });
+      alert('Deleted games successfully');
     }
     catch (error) {
       console.error('Error deleting games from cloud:', error.message);
+      alert('Unexpected error');
       Sentry.captureException('Error deleting games to cloud:', error.message);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await auth.signOut();
+      setUser(null);
+      alert('Loging out completed');
+      // Additional cleanup or navigation logic if needed
+    } catch (error) {
+      console.error('Error logging out user:', error.message);
+      alert('Error logging out user. Please try again.');
+      Sentry.captureException('Error logging out user:', error.message);
     }
   };
 
@@ -193,51 +248,59 @@ const AuthenticationSection = (props) => {
 
   }
 
-  const {width} = useWindowDimensions();
-  const fontSize = width < 750? 20:40;
-  const intermidiateFontSize = width < 750? 25:50;
-  const headerFontSize =  width < 750? 50:100;
-  const bigWidth = width >= 750;
+ 
   return (
    
   <SafeAreaView style={[styles.container, props.styleContainer]}>
   <Text style={[props.styleText, styles.personaliseText]}>Cloud Connection</Text> 
   
       {user ? (
-            <View style={styles.cloudButtonsContainer}>
-                <ButtonComponent text="Save to Cloud" onPress={saveToCloud} style = {[props.grayButtonStyle,  {width: '100%', height: '15%'}]}/> 
-                <ButtonComponent text="Sync from Cloud" onPress={syncFromCloud}  style = {[props.grayButtonStyle,  {width: '100%', height: '15%'}]}/> 
-                <ButtonComponent text="Delete Games from Cloud"onPress={deleteFromCloud} style = {[props.grayButtonStyle,  {width: '100%', height: '15%'}]}/> 
-                <ButtonComponent text="Logout" onPress={() => setUser(null)} style = {[props.grayButtonStyle, {width: '100%', height: '15%'}]}/> 
+            <View style={[styles.cloudButtonsContainer, {height: smallBoxHeight*4}]}>
+                <ButtonComponent text="Save to Cloud" onPress={saveToCloud} style = {[props.grayButtonStyle,  {width: '100%', height: '15%'} ]} styleText = {{fontSize: smallSize}}/> 
+                <ButtonComponent text="Sync from Cloud" onPress={syncFromCloud}  style = {[props.grayButtonStyle,  {width: '100%', height: '15%'}]} styleText = {{fontSize: smallSize}}/> 
+                <ButtonComponent text="Delete Games from Cloud"onPress={deleteFromCloud} style = {[props.grayButtonStyle,  {width: '100%', height: '15%'}]} styleText = {{fontSize: smallSize}}/> 
+                <ButtonComponent text="Logout" onPress={logout} style = {[props.grayButtonStyle, {width: '100%', height: '15%'}]} styleText = {{fontSize: smallSize}}/> 
             </View>
 
         ) : (
-            <View style={[styles.cloudButtonsContainer, {height: 50}]}>
-                <ButtonComponent text="Login/Register" onPress={() => setModalVisible(true)} style = {[props.grayButtonStyle]}/> 
+            <View style={[styles.cloudButtonsContainer, {height: smallBoxHeight}]}>
+                <ButtonComponent text="Login/Register" onPress={() => setModalVisible(true)} style = {[props.grayButtonStyle,  {width: '100%', height: '60%'}]} styleText = {{fontSize: smallSize}}/> 
             </View>
           
       )}
  
 
       <Modal visible={isModalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Login or Register</Text>
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            secureTextEntry
-            style={styles.input}
-          />
-          <ButtonComponent text="Login" onPress={authenticateUser} style = {[props.grayButtonStyle]}/> 
-          <ButtonComponent text="Register" onPress={registerUser} style = {[props.grayButtonStyle]}/> 
-          <ButtonComponent text="Cancel" onPress={() => setModalVisible(false)} style = {[props.grayButtonStyle]}/> 
+        <View style={{...styles.modalContainer, backgroundColor: colors.background}}>
+          <View style = {{flex:1, justifyContent: 'flex-end'}}>
+            <Text style={{...styles.modalTitle, fontSize: headerFontSize, color: colors.text}}>Login or Register</Text>
+          </View>
+          <View style = {{flex:1, justifyContent: 'center'}}>
+            <TextInput
+             placeholder="Email"
+             value={email}
+             
+             onChangeText={(text) => setEmail(text)}
+             placeholderTextColor={colors.text}
+             style={{...styles.input, width: inputWidth, fontSize: fontSize, color:colors.text}}
+            />
+          
+         
+           <TextInput
+              placeholder="Password"
+             value={password}
+             onChangeText={(text) => setPassword(text)}
+             secureTextEntry
+             placeholderTextColor={colors.text}
+             style={{...styles.input, width: inputWidth,  fontSize: fontSize, color: colors.text }}
+            />
+          </View>
+          <View style = {{flex:1, justifyContent: 'space-evenly', marginBottom: '5%'}}>
+            
+            <ButtonComponent text="Login" onPress={authenticateUser} style = {[{width: buttonSize, height: '20%'}, props.grayButtonStyle]} styleText = {{fontSize: fontSize}}/> 
+            <ButtonComponent text="Register" onPress={registerUser} style = {[{width: buttonSize, height: '20%'}, props.grayButtonStyle]} styleText = {{fontSize: fontSize}}/> 
+            <ButtonComponent text="Cancel" onPress={() => setModalVisible(false)} style = {[{width: buttonSize, height: '20%'}, props.grayButtonStyle]} styleText = {{fontSize: fontSize}}/> 
+          </View>
         </View>
       </Modal>  
   </SafeAreaView>
@@ -250,7 +313,7 @@ const styles = StyleSheet.create({
 
     },
     text:{
-
+       
     },
   cloudButtonsContainer: {
    
@@ -263,8 +326,6 @@ const styles = StyleSheet.create({
     //borderWidth: 5,
     height: 200,
     
-  
-   
   },
   modalContainer: {
     flex: 1,
@@ -274,15 +335,19 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 24,
     marginBottom: 20,
+    fontFamily: 'Acme'
   },
   input: {
-    height: 40,
+    height: '20%',
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
-    width: '80%',
+    width: 200,
   },
+  button:{
+    width: 200,
+  }
 });
 
 export default AuthenticationSection;

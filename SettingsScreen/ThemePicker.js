@@ -1,5 +1,5 @@
 import {React, useState, useEffect, useContext} from 'react';
-import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme, Appearance } from 'react-native';
+import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, useWindowDimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
@@ -16,6 +16,8 @@ const ThemePicker = (props) => {
   const {colors} = useTheme();
   const { setTheme, theme } = useContext(ThemeContext);
   const{valueO, valueX} = useContext(ColorContext);
+  const {width} = useWindowDimensions();
+  const fontSize = width < 750? 20:40;
 
 
   const toggleSwitch = () => {
@@ -47,7 +49,7 @@ const ThemePicker = (props) => {
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={theme == 'dark'? true: false}
-          style={{ transform: [{ scaleX: 1}, { scaleY:   1}] }}
+          style={width < 750?{ transform: [{ scaleX: 1}, { scaleY:   1}] }: { transform: [{ scaleX: 1.5}, { scaleY:   1.5}] }}
           />
       </View>
     </View>

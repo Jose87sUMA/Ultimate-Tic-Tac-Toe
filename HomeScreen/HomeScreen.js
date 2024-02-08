@@ -30,7 +30,7 @@ const HomeScreen = ({navigation}) => {
   const headerFontSize =  width < 750? 60:120;
   
   const fontSize = width < 750? 20:40;
-  const fontSmall = width < 750? 10:30;
+  const fontSmall = width < 750? 10:20;
 
   const toggleSwitch = () => setAIEnabled(previousState => !previousState);
   

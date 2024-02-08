@@ -1,5 +1,5 @@
 import {React, useState, useEffect, useContext} from 'react';
-import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useColorScheme, Appearance, TouchableOpacity } from 'react-native';
+import { Switch, SafeAreaView, View, StyleSheet, StatusBar,Image, Text, Button, useWindowDimensions, Appearance, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '@react-navigation/native';
 
@@ -18,7 +18,8 @@ const ResetColorTheme = (props) => {
   const { setTheme, theme } = useContext(ThemeContext);
   const{valueO, setValueO, setValueX, valueX} = useContext(ColorContext);
   const defaultColorScheme = Appearance.getColorScheme();
-  console.log('This is it ' + defaultColorScheme);
+  const {width} = useWindowDimensions();
+  const fontSize = width < 750? 10:20;
 
   const onPressButton = () => {
     setTheme(defaultColorScheme);
@@ -51,7 +52,7 @@ const ResetColorTheme = (props) => {
         <Text style={[styles.text, props.styleText]}>Default Settings</Text> 
        
         <TouchableOpacity  style={[styles.button, props.grayButtonStyle]} onPress = {onPressButton}>
-            <Text style ={styles.buttonText}>Revert</Text>
+            <Text style ={{...styles.buttonText, fontSize: fontSize}}>Revert</Text>
         </TouchableOpacity>
         
       </View>

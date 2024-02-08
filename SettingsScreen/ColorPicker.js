@@ -1,4 +1,4 @@
-import {React, useContext, useState, useRef, useEffect} from 'react';
+import {React, useContext, useState, useRef,} from 'react';
 import {
   StyleSheet,
   View,
@@ -33,7 +33,7 @@ export default function ColorPicker(props) {
   const sheet = useRef();
 
   const {height, width, scale, fontScale} = useWindowDimensions();
-  const bigWidth = width >= 600;
+  const bigWidth = width >= 750;
 
 
 
@@ -41,10 +41,10 @@ export default function ColorPicker(props) {
     <SafeAreaView style={[styles.container, props.styleContainer]}>
         <Text style={[props.styleText, styles.personaliseText]}>Personalise colors</Text> 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueX], borderColor:  colors.text}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
+          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueX], borderColor:  colors.text, height: bigWidth? 140: 70, width: bigWidth? 140: 70}]} onPress={() => {setEditing('X'); sheet.current.open() }} >
             <Text style = {styles.btnText}>X</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueO], borderColor:  colors.text}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
+          <TouchableOpacity style={[styles.buttonSelColor, {backgroundColor: ColorsPalette[valueO], borderColor:  colors.text, height: bigWidth? 140: 70, width: bigWidth? 140: 70}]} onPress={() => {setEditing('O'); sheet.current.open() }} >
             <Text style = {styles.btnText}>O</Text>
           </TouchableOpacity>
         </View>

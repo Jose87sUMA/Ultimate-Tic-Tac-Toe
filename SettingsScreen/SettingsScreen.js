@@ -33,6 +33,7 @@ const SettingsScreen = ({navigation}) => {
   const { setTheme, theme } = useContext(ThemeContext);
   const{valueO, valueX} = useContext(ColorContext);
 
+
   const toggleSwitch = () => {
     const changedTheme = theme == 'light'? 'dark':'light';
     setTheme(changedTheme);
@@ -53,6 +54,7 @@ const SettingsScreen = ({navigation}) => {
 
   }
 
+
   const {width} = useWindowDimensions();
   const fontSize = width < 750? 20:40;
   const intermidiateFontSize = width < 750? 25:50;
@@ -67,12 +69,10 @@ const SettingsScreen = ({navigation}) => {
     <View style={{...styles.separator}} />
     <View style ={styles.containerInset}>
       <ScrollView>
-      <ThemePicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer = {{...styles.boxOptions, backgroundColor: colors.border}}></ThemePicker> 
-      <ColorPicker styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}} bi></ColorPicker> 
-      <ResetColorTheme styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}} grayButtonStyle={{backgroundColor: theme === 'dark' ? '#767577': '#606060', }}></ResetColorTheme> 
-
-
-      <AuthenticationSection styleText = {{...styles.textOptions, color: colors.text}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border, }} grayButtonStyle={{backgroundColor: theme === 'dark' ? '#767577': '#606060', }}></AuthenticationSection>
+      <ThemePicker styleText = {{...styles.textOptions, color: colors.text, fontSize: intermidiateFontSize}} styleContainer = {{...styles.boxOptions, backgroundColor: colors.border}}></ThemePicker> 
+      <ColorPicker styleText = {{...styles.textOptions, color: colors.text, fontSize: intermidiateFontSize}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}} bi></ColorPicker> 
+      <ResetColorTheme styleText = {{...styles.textOptions, color: colors.text, fontSize: intermidiateFontSize}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border}} grayButtonStyle={{backgroundColor: theme === 'dark' ? '#767577': '#606060', }}></ResetColorTheme> 
+      <AuthenticationSection styleText = {{...styles.textOptions, color: colors.text, fontSize: intermidiateFontSize}} styleContainer= {{...styles.boxOptions, backgroundColor: colors.border, }} grayButtonStyle={{backgroundColor: theme === 'dark' ? '#767577': '#606060', }}></AuthenticationSection>
      </ScrollView>
      
     </View>    
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingVertical: '5%',
     backgroundColor: '#B8DAFF',
-    borderWidth: 1,
+    //borderWidth: 1,
     borderRadius: 9,
     alignSelf: 'center'
     
