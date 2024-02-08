@@ -144,9 +144,7 @@ const AuthenticationSection = (props) => {
     } catch (error) {
       console.error('Error saving game to cloud:', error.message);
       Sentry.Native.captureException('Error saving game to cloud:', error.message);
-      
       Alert.alert('Unexpected error occurred');
-    
     }
     
   };
@@ -217,27 +215,6 @@ const AuthenticationSection = (props) => {
       Sentry.captureException('Error logging out user:', error.message);
     }
   };
-
-  const toggleSwitch = () => {
-    const changedTheme = theme == 'light'? 'dark':'light';
-    setTheme(changedTheme);
-    _storeData = async () => {
-         try {
-          await AsyncStorage.setItem(
-            'THEME',
-            JSON.stringify(changedTheme),
-          )
-        } catch (error) {
-          console.error('Error saving theme to local storage:', error.message);
-          Sentry.Native.captureException('Error saving theme to local storage:', error.message);
-        }
-
-    Appearance.setColorScheme(changedTheme);
-    }
-    _storeData();
-
-  }
-
  
   return (
    

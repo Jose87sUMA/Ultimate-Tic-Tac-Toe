@@ -23,7 +23,6 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-
 const NavigationLogic = () => {
   //const scheme = useColorScheme();
   

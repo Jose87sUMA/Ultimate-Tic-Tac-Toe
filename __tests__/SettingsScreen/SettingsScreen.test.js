@@ -103,6 +103,10 @@ jest.spyOn(JSON, 'parse').mockImplementation((jsonString) => {
 fakeNavigation = {navigate: jest.fn()};
 describe("SettingsScreen", () => {
 
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('renders correctly', async () => {
         const { getByText } = render(<SettingsScreen navigation={{}} />);
         expect(getByText('Settings')).toBeTruthy();
@@ -262,5 +266,40 @@ describe("SettingsScreen", () => {
         expect(require('firebase/firestore').query).toHaveBeenCalledWith('gamesRef', require('firebase/firestore').where("uid", "==", "mockedUser"));
         expect(require('firebase/firestore').getDocs).toHaveBeenCalledWith('gamesQuery');
         expect(require('firebase/firestore').setDoc).toHaveBeenCalledWith(require('firebase/firestore').doc('gamesRef', '3'), {finishedGamesJSON: JSON.stringify(games),}, { merge: true });
+    });
+
+    it ('calls syncFromCloud when sync from cloud button is pressed', async () => {
+        const { getByText, getByTestId } = render(<SettingsScreen navigation={fakeNavigation} />);
+        await act(async () => {
+            fireEvent.press(getByText('Login/Register'));
+            await new Promise(resolve => setTimeout(resolve, 500));
+            fireEvent.changeText(getByTestId('emailInput'), 'email@email.com')
+            fireEvent.changeText(getByTestId('passwordInput'), 'password')  
+            fireEvent.press(getByText('Login'))
+            await new Promise(resolve => setTimeout(resolve, 500))
+            fireEvent.press(getByText('Sync from Cloud'))
+        });
+        expect(require('firebase/firestore').collection).toHaveBeenCalledWith(require('../../src/Firebase/firebaseConfig').firestore, 'finishedGames');
+        expect(require('firebase/firestore').query).toHaveBeenCalledWith('gamesRef', require('firebase/firestore').where("uid", "==", "mockedUser"));
+        expect(require('firebase/firestore').getDocs).toHaveBeenCalledWith('gamesQuery');
+        expect(AsyncStorage.setItem).toHaveBeenCalledWith('finishedGames', "gameJSON");
+
+    });
+
+    it('calls deleteGamesFromCloud when delete games from cloud button is pressed', async () => {
+        const { getByText, getByTestId } = render(<SettingsScreen navigation={fakeNavigation} />);
+        await act(async () => {
+            fireEvent.press(getByText('Login/Register'));
+            await new Promise(resolve => setTimeout(resolve, 500));
+            fireEvent.changeText(getByTestId('emailInput'), 'email@email.com')
+            fireEvent.changeText(getByTestId('passwordInput'), 'password')  
+            fireEvent.press(getByText('Login'))
+            await new Promise(resolve => setTimeout(resolve, 500))
+            fireEvent.press(getByText('Delete Games from Cloud'))
+        });
+        expect(require('firebase/firestore').collection).toHaveBeenCalledWith(require('../../src/Firebase/firebaseConfig').firestore, 'finishedGames');
+        expect(require('firebase/firestore').query).toHaveBeenCalledWith('gamesRef', require('firebase/firestore').where("uid", "==", "mockedUser"));
+        expect(require('firebase/firestore').getDocs).toHaveBeenCalledWith('gamesQuery');
+        expect(require('firebase/firestore').setDoc).toHaveBeenCalledWith(require('firebase/firestore').doc('gamesRef', '3'), {finishedGamesJSON: null,}, { merge: true });
     });
 });
