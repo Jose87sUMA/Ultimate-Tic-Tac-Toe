@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
 import { Modal, View, Text, StyleSheet, useWindowDimensions} from 'react-native';
-import AwesomeButton, { ThemedButton } from "react-native-really-awesome-button";
 import {ColorContext } from '../styles/contexts/ColorContext.js';
 import {useTheme} from '@react-navigation/native'
 import ColorsPalette from '../styles/colorsPalettes/ColorsPalette.js';
