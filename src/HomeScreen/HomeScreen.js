@@ -56,11 +56,11 @@ const HomeScreen = ({navigation}) => {
               {AIEnabled && (
                 <View style={[styles.modalRow]}>
                   <Text style={[styles.modalText, {color: colors.text, fontSize: fontSize}]}>AI Symbol:</Text>
-                  <Button
-                    title={AISymbol}
-                    style={{backgroundColor: colors.background, borderColor: colors.text}}
-                    onPress={() => setAISymbol(AISymbol === 'O' ? 'X' : 'O')}
-                  />
+                  <TouchableOpacity
+                    style={{backgroundColor: colors.background}}
+                    onPress={() => setAISymbol(AISymbol === 'O' ? 'X' : 'O')}>
+                    <Text style={{fontSize: fontSize, fontWeight: 'bold', color: AISymbol === 'O' ? ColorsPalette[valueX] : ColorsPalette[valueO]}}>{AISymbol}</Text>
+                  </TouchableOpacity>
                 </View>
               )}
               <ButtonComponent
